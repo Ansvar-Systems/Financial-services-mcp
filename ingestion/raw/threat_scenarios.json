@@ -1,0 +1,819 @@
+[
+  {
+    "id": "th-core-ledger-manipulation",
+    "name": "Core ledger manipulation",
+    "category": "core-banking",
+    "description": "Unauthorized balance or posting changes in core banking systems.",
+    "attack_narrative": "Attacker gains privileged access to posting APIs, submits fraudulent reversal and adjustment entries, then suppresses reconciliation alerts.",
+    "mitre_mapping": [
+      "T1078",
+      "T1565.001",
+      "T1119"
+    ],
+    "affected_patterns": [
+      "fs-core-banking"
+    ],
+    "affected_data_categories": [
+      "dc-account-data",
+      "dc-npi"
+    ],
+    "likelihood_factors": [
+      "high-value target",
+      "legacy privileged workflows"
+    ],
+    "impact_dimensions": {
+      "patient_safety": "none",
+      "financial": "severe",
+      "regulatory": "high",
+      "reputational": "high"
+    },
+    "regulation_refs": [
+      {
+        "regulation_id": "SOX",
+        "section": "404",
+        "foundation_mcp": "us-regulations"
+      },
+      {
+        "regulation_id": "DORA",
+        "article": "9",
+        "foundation_mcp": "eu-regulations"
+      }
+    ],
+    "control_refs": [
+      "SCF.AC-01",
+      "SCF.CM-05",
+      "SCF.AU-02"
+    ],
+    "detection_indicators": [
+      "anomalous privileged posting patterns",
+      "reconciliation drift spikes"
+    ],
+    "historical_incidents": [
+      "Financial statement control failures involving privileged posting abuse"
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "th-account-takeover-scale",
+    "name": "Account takeover at scale",
+    "category": "core-banking",
+    "description": "Credential stuffing and session hijack campaigns on digital banking portals.",
+    "attack_narrative": "Adversaries automate login attempts, bypass weak MFA enrollment, and trigger payout fraud before anti-fraud controls activate.",
+    "mitre_mapping": [
+      "T1110.004",
+      "T1539"
+    ],
+    "affected_patterns": [
+      "fs-core-banking",
+      "fs-open-banking"
+    ],
+    "affected_data_categories": [
+      "dc-account-data",
+      "dc-open-banking",
+      "dc-biometric"
+    ],
+    "likelihood_factors": [
+      "high credential reuse rates",
+      "bot-enabled campaigns"
+    ],
+    "impact_dimensions": {
+      "financial": "high",
+      "regulatory": "high",
+      "reputational": "high"
+    },
+    "regulation_refs": [
+      {
+        "regulation_id": "PSD2",
+        "article": "97",
+        "foundation_mcp": "eu-regulations"
+      },
+      {
+        "regulation_id": "GLBA",
+        "section": "501(b)",
+        "foundation_mcp": "us-regulations"
+      }
+    ],
+    "control_refs": [
+      "SCF.AC-01",
+      "SCF.NW-06",
+      "SCF.IR-03"
+    ],
+    "detection_indicators": [
+      "credential stuffing spike",
+      "session token anomalies"
+    ],
+    "historical_incidents": [
+      "Mass online banking ATO campaigns"
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "th-cnp-fraud",
+    "name": "Card-not-present fraud",
+    "category": "payments",
+    "description": "Fraudulent remote card transactions exploiting weak controls in ecommerce payment flows.",
+    "attack_narrative": "Attackers test card lists and abuse poor challenge rules to authorize stolen cards.",
+    "mitre_mapping": [
+      "T1656",
+      "T1078"
+    ],
+    "affected_patterns": [
+      "fs-payments",
+      "fs-instant-pay"
+    ],
+    "affected_data_categories": [
+      "dc-card-data"
+    ],
+    "likelihood_factors": [
+      "high automation",
+      "stolen data market availability"
+    ],
+    "impact_dimensions": {
+      "financial": "high",
+      "regulatory": "medium",
+      "reputational": "medium"
+    },
+    "regulation_refs": [
+      {
+        "regulation_id": "PCI_DSS_4_0",
+        "clause": "Req 6",
+        "foundation_mcp": "security-controls"
+      },
+      {
+        "regulation_id": "PCI_DSS_4_0",
+        "clause": "Req 11",
+        "foundation_mcp": "security-controls"
+      }
+    ],
+    "control_refs": [
+      "SCF.SD-03",
+      "SCF.TV-01",
+      "SCF.AU-02"
+    ],
+    "detection_indicators": [
+      "velocity anomalies",
+      "BIN attack signatures"
+    ],
+    "historical_incidents": [
+      "Large-scale CNP fraud incidents in ecommerce"
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "th-swift-credential-theft",
+    "name": "SWIFT operator credential theft",
+    "category": "swift",
+    "description": "Compromise of SWIFT Alliance operator credentials leading to fraudulent payment instruction.",
+    "attack_narrative": "Adversary compromises operator endpoint and message workflows to submit unauthorized MT messages with delayed detection.",
+    "mitre_mapping": [
+      "T1078",
+      "T1552",
+      "T1565.001"
+    ],
+    "affected_patterns": [
+      "fs-swift"
+    ],
+    "affected_data_categories": [
+      "dc-swift",
+      "dc-account-data"
+    ],
+    "likelihood_factors": [
+      "targeted organized crime",
+      "legacy workstation hardening gaps"
+    ],
+    "impact_dimensions": {
+      "financial": "severe",
+      "regulatory": "high",
+      "reputational": "high"
+    },
+    "regulation_refs": [
+      {
+        "regulation_id": "SWIFT_CSP",
+        "clause": "Mandatory Controls",
+        "foundation_mcp": "security-controls"
+      },
+      {
+        "regulation_id": "DORA",
+        "article": "9",
+        "foundation_mcp": "eu-regulations"
+      }
+    ],
+    "control_refs": [
+      "SCF.AC-01",
+      "SCF.AU-02",
+      "SCF.NW-06"
+    ],
+    "detection_indicators": [
+      "out-of-hours release actions",
+      "message pattern anomalies"
+    ],
+    "historical_incidents": [
+      "Bangladesh Bank-style SWIFT fraud pattern"
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "th-openbanking-tpp-impersonation",
+    "name": "TPP impersonation",
+    "category": "open-banking",
+    "description": "Fraudulent third-party provider credentials used to access AIS/PIS APIs.",
+    "attack_narrative": "Attacker forges or steals TPP credentials and manipulates consent scope for unauthorized access.",
+    "mitre_mapping": [
+      "T1586",
+      "T1550",
+      "T1190"
+    ],
+    "affected_patterns": [
+      "fs-open-banking"
+    ],
+    "affected_data_categories": [
+      "dc-open-banking",
+      "dc-account-data"
+    ],
+    "likelihood_factors": [
+      "certificate lifecycle gaps",
+      "API trust boundary complexity"
+    ],
+    "impact_dimensions": {
+      "financial": "high",
+      "regulatory": "high",
+      "reputational": "high"
+    },
+    "regulation_refs": [
+      {
+        "regulation_id": "PSD2",
+        "article": "97",
+        "foundation_mcp": "eu-regulations"
+      },
+      {
+        "regulation_id": "eIDAS",
+        "article": "24",
+        "foundation_mcp": "eu-regulations"
+      }
+    ],
+    "control_refs": [
+      "SCF.AC-01",
+      "SCF.CM-05",
+      "SCF.NW-06"
+    ],
+    "detection_indicators": [
+      "unexpected TPP certificate fingerprints",
+      "scope escalation anomalies"
+    ],
+    "historical_incidents": [
+      "API ecosystem impersonation incidents in fintech integrations"
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "th-sca-bypass-downgrade",
+    "name": "SCA bypass and downgrade attack",
+    "category": "open-banking",
+    "description": "Manipulation of payment auth flow to bypass strong customer authentication.",
+    "attack_narrative": "Attacker forces fallback methods and exploits weak challenge routing to execute unauthorized payments.",
+    "mitre_mapping": [
+      "T1111",
+      "T1556"
+    ],
+    "affected_patterns": [
+      "fs-open-banking",
+      "fs-payments"
+    ],
+    "affected_data_categories": [
+      "dc-account-data",
+      "dc-open-banking"
+    ],
+    "likelihood_factors": [
+      "complex fallback logic",
+      "legacy auth interoperability"
+    ],
+    "impact_dimensions": {
+      "financial": "high",
+      "regulatory": "high",
+      "reputational": "medium"
+    },
+    "regulation_refs": [
+      {
+        "regulation_id": "PSD2_RTS_SCA",
+        "article": "4",
+        "foundation_mcp": "eu-regulations"
+      }
+    ],
+    "control_refs": [
+      "SCF.AC-01",
+      "SCF.TV-01"
+    ],
+    "detection_indicators": [
+      "unexpected low-assurance auth completions"
+    ],
+    "historical_incidents": [
+      "Payment auth downgrade abuse"
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "th-trading-algo-tampering",
+    "name": "Trading algorithm parameter tampering",
+    "category": "trading",
+    "description": "Unauthorized changes to strategy parameters resulting in market abuse or losses.",
+    "attack_narrative": "Insider or attacker modifies order limits/latency controls to trigger manipulative behavior.",
+    "mitre_mapping": [
+      "T1565.001",
+      "T1078"
+    ],
+    "affected_patterns": [
+      "fs-trading"
+    ],
+    "affected_data_categories": [
+      "dc-trading"
+    ],
+    "likelihood_factors": [
+      "high privileged concentration",
+      "change management bypass"
+    ],
+    "impact_dimensions": {
+      "financial": "high",
+      "regulatory": "high",
+      "reputational": "high"
+    },
+    "regulation_refs": [
+      {
+        "regulation_id": "MiFID_II",
+        "article": "17",
+        "foundation_mcp": "eu-regulations"
+      },
+      {
+        "regulation_id": "SOX",
+        "section": "404",
+        "foundation_mcp": "us-regulations"
+      }
+    ],
+    "control_refs": [
+      "SCF.CM-05",
+      "SCF.AU-02",
+      "SCF.GV-04"
+    ],
+    "detection_indicators": [
+      "unauthorized parameter diffs",
+      "anomalous order burst patterns"
+    ],
+    "historical_incidents": [
+      "Algorithmic trading control failures"
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "th-market-data-poisoning",
+    "name": "Market data feed poisoning",
+    "category": "trading",
+    "description": "Tampering with market data inputs used by trading engines.",
+    "attack_narrative": "Compromised feed handlers inject manipulated pricing signals to influence automated execution.",
+    "mitre_mapping": [
+      "T1565.001",
+      "T1195"
+    ],
+    "affected_patterns": [
+      "fs-trading"
+    ],
+    "affected_data_categories": [
+      "dc-trading"
+    ],
+    "likelihood_factors": [
+      "third-party dependencies",
+      "high velocity automation"
+    ],
+    "impact_dimensions": {
+      "financial": "high",
+      "regulatory": "medium",
+      "reputational": "high"
+    },
+    "regulation_refs": [
+      {
+        "regulation_id": "MiFID_II",
+        "article": "16",
+        "foundation_mcp": "eu-regulations"
+      }
+    ],
+    "control_refs": [
+      "SCF.CM-05",
+      "SCF.NW-06"
+    ],
+    "detection_indicators": [
+      "feed checksum mismatches",
+      "venue divergence alerts"
+    ],
+    "historical_incidents": [
+      "Feed anomalies impacting algo execution"
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "th-hot-wallet-key-extraction",
+    "name": "Hot wallet key extraction",
+    "category": "digital-assets",
+    "description": "Compromise of online custody keys enabling unauthorized transfer of digital assets.",
+    "attack_narrative": "Attackers exploit wallet infrastructure to access signing material and drain custodial accounts.",
+    "mitre_mapping": [
+      "T1552",
+      "T1027",
+      "T1078"
+    ],
+    "affected_patterns": [
+      "fs-digital-assets"
+    ],
+    "affected_data_categories": [
+      "dc-digital-asset"
+    ],
+    "likelihood_factors": [
+      "high attacker incentive",
+      "operational key management complexity"
+    ],
+    "impact_dimensions": {
+      "financial": "severe",
+      "regulatory": "high",
+      "reputational": "high"
+    },
+    "regulation_refs": [
+      {
+        "regulation_id": "MiCA",
+        "article": "63",
+        "foundation_mcp": "eu-regulations"
+      },
+      {
+        "regulation_id": "BSA",
+        "section": "5318(h)",
+        "foundation_mcp": "us-regulations"
+      }
+    ],
+    "control_refs": [
+      "SCF.KM-01",
+      "SCF.AC-01",
+      "SCF.IR-03"
+    ],
+    "detection_indicators": [
+      "abnormal signing velocity",
+      "unexpected key export attempts"
+    ],
+    "historical_incidents": [
+      "Exchange wallet compromise events"
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "th-aml-rule-evasion",
+    "name": "Transaction monitoring rule evasion",
+    "category": "aml",
+    "description": "Structuring and synthetic identity tactics to avoid AML controls.",
+    "attack_narrative": "Bad actors split transfers and manipulate onboarding information to remain below alert thresholds.",
+    "mitre_mapping": [
+      "T1036",
+      "T1078"
+    ],
+    "affected_patterns": [
+      "fs-aml",
+      "fs-core-banking"
+    ],
+    "affected_data_categories": [
+      "dc-kyc-aml",
+      "dc-account-data"
+    ],
+    "likelihood_factors": [
+      "high transaction volume",
+      "static threshold rules"
+    ],
+    "impact_dimensions": {
+      "financial": "high",
+      "regulatory": "high",
+      "reputational": "high"
+    },
+    "regulation_refs": [
+      {
+        "regulation_id": "AMLD5",
+        "article": "33",
+        "foundation_mcp": "eu-regulations"
+      },
+      {
+        "regulation_id": "BSA",
+        "section": "5318",
+        "foundation_mcp": "us-regulations"
+      }
+    ],
+    "control_refs": [
+      "SCF.GV-04",
+      "SCF.AU-02",
+      "SCF.IR-03"
+    ],
+    "detection_indicators": [
+      "rapidly repeated low-value transfer chains",
+      "identity mismatch patterns"
+    ],
+    "historical_incidents": [
+      "Regulatory enforcement for ineffective AML monitoring"
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "th-reg-report-manipulation",
+    "name": "Regulatory reporting manipulation",
+    "category": "regtech",
+    "description": "Intentional or accidental tampering of supervisory submissions.",
+    "attack_narrative": "Adversary modifies XBRL pipeline transformations or suppresses reconciliation errors before filing.",
+    "mitre_mapping": [
+      "T1565.001",
+      "T1119"
+    ],
+    "affected_patterns": [
+      "fs-regtech"
+    ],
+    "affected_data_categories": [
+      "dc-account-data",
+      "dc-trading",
+      "dc-insurance"
+    ],
+    "likelihood_factors": [
+      "manual intervention points",
+      "tight filing deadlines"
+    ],
+    "impact_dimensions": {
+      "financial": "medium",
+      "regulatory": "high",
+      "reputational": "high"
+    },
+    "regulation_refs": [
+      {
+        "regulation_id": "SOX",
+        "section": "302",
+        "foundation_mcp": "us-regulations"
+      }
+    ],
+    "control_refs": [
+      "SCF.AU-02",
+      "SCF.CM-05"
+    ],
+    "detection_indicators": [
+      "late-stage adjustment spikes",
+      "broken lineage records"
+    ],
+    "historical_incidents": [
+      "Regulatory fines for inaccurate reporting"
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "th-instant-payment-app-fraud",
+    "name": "Authorized push payment fraud at instant rails",
+    "category": "payments",
+    "description": "Social-engineering and mule-account techniques used to induce real-time irrevocable payments to attacker-controlled beneficiaries.",
+    "attack_narrative": "Attackers compromise trust channels, manipulate payee confidence checks, and trigger high-velocity transfers before fraud controls escalate.",
+    "mitre_mapping": [
+      "T1566",
+      "T1078",
+      "T1656"
+    ],
+    "affected_patterns": [
+      "fs-instant-pay",
+      "fs-payments"
+    ],
+    "affected_data_categories": [
+      "dc-account-data",
+      "dc-npi",
+      "dc-open-banking"
+    ],
+    "likelihood_factors": [
+      "customer social engineering exposure",
+      "weak new-payee risk controls",
+      "instant settlement irreversibility"
+    ],
+    "impact_dimensions": {
+      "patient_safety": "none",
+      "financial": "severe",
+      "regulatory": "high",
+      "reputational": "high"
+    },
+    "regulation_refs": [
+      {
+        "regulation_id": "PSD2",
+        "article": "97",
+        "foundation_mcp": "eu-regulations"
+      },
+      {
+        "regulation_id": "GLBA",
+        "section": "501(b)",
+        "foundation_mcp": "us-regulations"
+      }
+    ],
+    "control_refs": [
+      "SCF.AC-01",
+      "SCF.AU-02",
+      "SCF.IR-03",
+      "SCF.GV-04",
+      "SCF.FD-01"
+    ],
+    "detection_indicators": [
+      "new-payee transfer bursts from mature accounts",
+      "session device mismatch with first-time beneficiary",
+      "sudden outbound velocity after account profile change"
+    ],
+    "historical_incidents": [
+      "Escalation of APP and mule-account fraud across instant payment programs"
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "th-cloud-control-plane-compromise",
+    "name": "Cloud control plane compromise in financial workloads",
+    "category": "core-banking",
+    "description": "Compromise of cloud identity/control plane leads to broad disruption or unauthorized access across core financial services.",
+    "attack_narrative": "Adversary obtains high-privilege cloud credentials, alters network/security policy, and disrupts or exfiltrates multi-service financial workloads.",
+    "mitre_mapping": [
+      "T1078",
+      "T1098",
+      "T1485"
+    ],
+    "affected_patterns": [
+      "fs-core-banking",
+      "fs-payments",
+      "fs-regtech"
+    ],
+    "affected_data_categories": [
+      "dc-account-data",
+      "dc-npi",
+      "dc-swift"
+    ],
+    "likelihood_factors": [
+      "concentrated cloud dependency",
+      "excessive privileged roles",
+      "incomplete break-glass governance"
+    ],
+    "impact_dimensions": {
+      "patient_safety": "none",
+      "financial": "severe",
+      "regulatory": "high",
+      "reputational": "high"
+    },
+    "regulation_refs": [
+      {
+        "regulation_id": "DORA",
+        "article": "28",
+        "foundation_mcp": "eu-regulations"
+      },
+      {
+        "regulation_id": "NIS2",
+        "article": "21",
+        "foundation_mcp": "eu-regulations"
+      },
+      {
+        "regulation_id": "NYDFS_CYBER_500",
+        "section": "500.11",
+        "foundation_mcp": "us-regulations"
+      }
+    ],
+    "control_refs": [
+      "SCF.AC-01",
+      "SCF.NW-06",
+      "SCF.CM-05",
+      "SCF.IR-03",
+      "SCF.TP-02",
+      "SCF.BC-02"
+    ],
+    "detection_indicators": [
+      "privilege escalation in cloud IAM root/organization accounts",
+      "security group or firewall policy drift on critical services",
+      "cross-region service outage correlated to unauthorized config changes"
+    ],
+    "historical_incidents": [
+      "Large-scale cloud IAM and control plane incidents affecting financial service availability"
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "th-sanctions-screening-evasion",
+    "name": "Sanctions screening evasion via nested counterparties",
+    "category": "aml",
+    "description": "Adversaries hide sanctioned ownership or payment origin through nested entities and routing intermediaries.",
+    "attack_narrative": "Attackers fragment counterparties and transaction attributes to evade static screening rules and exploit weak ongoing due diligence.",
+    "mitre_mapping": [
+      "T1036",
+      "T1027",
+      "T1074"
+    ],
+    "affected_patterns": [
+      "fs-aml",
+      "fs-swift",
+      "fs-digital-assets"
+    ],
+    "affected_data_categories": [
+      "dc-kyc-aml",
+      "dc-swift",
+      "dc-digital-asset"
+    ],
+    "likelihood_factors": [
+      "opaque beneficial ownership chains",
+      "limited enrichment coverage",
+      "manual review bottlenecks"
+    ],
+    "impact_dimensions": {
+      "patient_safety": "none",
+      "financial": "high",
+      "regulatory": "severe",
+      "reputational": "high"
+    },
+    "regulation_refs": [
+      {
+        "regulation_id": "OFAC",
+        "section": "SDN screening",
+        "foundation_mcp": "us-regulations"
+      },
+      {
+        "regulation_id": "BSA",
+        "section": "5318(h)",
+        "foundation_mcp": "us-regulations"
+      },
+      {
+        "regulation_id": "AMLD6",
+        "article": "7",
+        "foundation_mcp": "eu-regulations"
+      }
+    ],
+    "control_refs": [
+      "SCF.GV-04",
+      "SCF.AU-02",
+      "SCF.IR-03",
+      "SCF.DS-02",
+      "SCF.SC-04"
+    ],
+    "detection_indicators": [
+      "repeated near-match sanctions hits with rapid beneficiary changes",
+      "counterparty ownership changes shortly before high-risk transfers",
+      "nested correspondent routing with inconsistent originator data"
+    ],
+    "historical_incidents": [
+      "Enforcement actions tied to weak sanctions and correspondent banking controls"
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "th-ml-model-poisoning-lending",
+    "name": "Model poisoning and drift in credit decisioning",
+    "category": "digital-lending",
+    "description": "Manipulated or degraded model inputs/feedback loops distort credit decisions and fairness outcomes.",
+    "attack_narrative": "Attacker injects crafted application attributes and feedback artifacts, causing model drift and potentially discriminatory lending outcomes.",
+    "mitre_mapping": [
+      "T1565",
+      "T1027",
+      "T1499"
+    ],
+    "affected_patterns": [
+      "fs-digital-lending"
+    ],
+    "affected_data_categories": [
+      "dc-credit",
+      "dc-npi",
+      "dc-biometric"
+    ],
+    "likelihood_factors": [
+      "high automation in underwriting",
+      "limited model monitoring depth",
+      "insufficient challenger model validation"
+    ],
+    "impact_dimensions": {
+      "patient_safety": "none",
+      "financial": "high",
+      "regulatory": "severe",
+      "reputational": "high"
+    },
+    "regulation_refs": [
+      {
+        "regulation_id": "ECOA",
+        "section": "701",
+        "foundation_mcp": "us-regulations"
+      },
+      {
+        "regulation_id": "FCRA",
+        "section": "607",
+        "foundation_mcp": "us-regulations"
+      },
+      {
+        "regulation_id": "GDPR",
+        "article": "22",
+        "foundation_mcp": "eu-regulations"
+      }
+    ],
+    "control_refs": [
+      "SCF.GV-04",
+      "SCF.SD-03",
+      "SCF.CM-05",
+      "SCF.AU-02",
+      "SCF.AI-01"
+    ],
+    "detection_indicators": [
+      "sudden feature-distribution divergence in accepted vs rejected applications",
+      "abnormal adverse-action reason code concentration",
+      "unexpected credit loss increase by protected-class proxy segments"
+    ],
+    "historical_incidents": [
+      "Regulatory focus on explainability and fairness breakdowns in digital lending models"
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  }
+]

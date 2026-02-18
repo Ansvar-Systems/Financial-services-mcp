@@ -1,0 +1,31 @@
+{
+  "name": "@ansvar/financial-services-mcp",
+  "version": "1.0.0",
+  "description": "Financial Services Domain MCP for architecture, data, threat, standards, and applicability intelligence.",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js",
+    "ingest": "node scripts/ingest/build-dataset.mjs",
+    "ingest:bootstrap": "node scripts/ingest/bootstrap-from-code.mjs",
+    "ingest:verify-sources": "node scripts/ingest/refresh-source-health.mjs",
+    "check:drift": "node scripts/ingest/check-drift.mjs",
+    "audit:production": "node scripts/qa/mcp-production-audit.mjs",
+    "check:data": "node scripts/qa/data-integrity.mjs",
+    "test": "node --test --test-concurrency=1",
+    "check": "node src/index.js --check"
+  },
+  "keywords": [
+    "mcp",
+    "financial-services",
+    "dora",
+    "pci-dss",
+    "cybersecurity"
+  ],
+  "author": "Ansvar Systems Engineering",
+  "license": "MIT",
+  "engines": {
+    "node": ">=25.0.0"
+  }
+}

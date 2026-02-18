@@ -1,0 +1,592 @@
+[
+  {
+    "id": "dc-npi",
+    "name": "NPI",
+    "description": "Nonpublic personal information under GLBA.",
+    "boundary_conditions": "Includes personally identifiable customer financial information and inferences.",
+    "jurisdiction_protections": {
+      "US": {
+        "regime": [
+          "GLBA"
+        ],
+        "tier": "high",
+        "controls": [
+          "SCF.AC-01",
+          "SCF.DS-02",
+          "SCF.DP-03"
+        ]
+      },
+      "US-CA": {
+        "regime": [
+          "GLBA",
+          "CCPA"
+        ],
+        "tier": "high",
+        "controls": [
+          "SCF.AC-01",
+          "SCF.DS-02",
+          "SCF.DP-03"
+        ]
+      },
+      "EU": {
+        "regime": [
+          "GDPR"
+        ],
+        "tier": "high",
+        "controls": [
+          "SCF.AC-01",
+          "SCF.DS-02"
+        ]
+      }
+    },
+    "deidentification_requirements": [
+      "Tokenization for analytics",
+      "Mask direct identifiers before sharing"
+    ],
+    "cross_border_constraints": [
+      "SCCs for EU to third-country transfers",
+      "Vendor contractual privacy controls"
+    ],
+    "regulation_refs": [
+      {
+        "regulation_id": "GLBA",
+        "section": "501(b)",
+        "foundation_mcp": "us-regulations"
+      },
+      {
+        "regulation_id": "GDPR",
+        "article": "6",
+        "foundation_mcp": "eu-regulations"
+      }
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "dc-card-data",
+    "name": "Payment card data",
+    "description": "PAN, CVV, track data, and PIN-related elements.",
+    "boundary_conditions": "Any system storing, processing, or transmitting PAN is in scope.",
+    "jurisdiction_protections": {
+      "US": {
+        "regime": [
+          "PCI_DSS"
+        ],
+        "tier": "critical",
+        "controls": [
+          "SCF.CR-03",
+          "SCF.EN-01",
+          "SCF.NW-06"
+        ]
+      },
+      "DE": {
+        "regime": [
+          "PCI_DSS",
+          "GDPR",
+          "BDSG"
+        ],
+        "tier": "critical",
+        "controls": [
+          "SCF.CR-03",
+          "SCF.EN-01",
+          "SCF.NW-06"
+        ]
+      },
+      "EU": {
+        "regime": [
+          "PCI_DSS",
+          "GDPR"
+        ],
+        "tier": "critical",
+        "controls": [
+          "SCF.CR-03",
+          "SCF.EN-01",
+          "SCF.NW-06"
+        ]
+      }
+    },
+    "deidentification_requirements": [
+      "PAN truncation",
+      "Tokenization",
+      "Do not store CVV after authorization"
+    ],
+    "cross_border_constraints": [
+      "Card network localization rules",
+      "GDPR transfer mechanisms"
+    ],
+    "regulation_refs": [
+      {
+        "regulation_id": "PCI_DSS_4_0",
+        "clause": "Req 3",
+        "foundation_mcp": "security-controls"
+      },
+      {
+        "regulation_id": "GDPR",
+        "article": "32",
+        "foundation_mcp": "eu-regulations"
+      }
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "dc-account-data",
+    "name": "Account data",
+    "description": "Account numbers, balances, statements, and transaction histories.",
+    "boundary_conditions": "Includes current account, card account, and custody account records.",
+    "jurisdiction_protections": {
+      "US": {
+        "regime": [
+          "GLBA"
+        ],
+        "tier": "high",
+        "controls": [
+          "SCF.AC-01",
+          "SCF.DS-02"
+        ]
+      },
+      "EU": {
+        "regime": [
+          "GDPR",
+          "PSD2"
+        ],
+        "tier": "high",
+        "controls": [
+          "SCF.AC-01",
+          "SCF.DS-02",
+          "SCF.AU-02"
+        ]
+      }
+    },
+    "deidentification_requirements": [
+      "Aggregate or hash account identifiers for analytics"
+    ],
+    "cross_border_constraints": [
+      "Bank secrecy overlays may restrict transfers"
+    ],
+    "regulation_refs": [
+      {
+        "regulation_id": "GLBA",
+        "section": "501",
+        "foundation_mcp": "us-regulations"
+      },
+      {
+        "regulation_id": "PSD2",
+        "article": "66",
+        "foundation_mcp": "eu-regulations"
+      }
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "dc-trading",
+    "name": "Trading data",
+    "description": "Order flow, positions, execution and market data records.",
+    "boundary_conditions": "Includes algo parameters where they influence client execution.",
+    "jurisdiction_protections": {
+      "US": {
+        "regime": [
+          "REG_NMS"
+        ],
+        "tier": "high",
+        "controls": [
+          "SCF.AU-02",
+          "SCF.CM-05"
+        ]
+      },
+      "EU": {
+        "regime": [
+          "MiFID_II",
+          "MAR"
+        ],
+        "tier": "high",
+        "controls": [
+          "SCF.AU-02",
+          "SCF.CM-05"
+        ]
+      }
+    },
+    "deidentification_requirements": [
+      "Mask counterparties in non-regulatory analytics"
+    ],
+    "cross_border_constraints": [
+      "Local market abuse reporting obligations persist"
+    ],
+    "regulation_refs": [
+      {
+        "regulation_id": "MiFID_II",
+        "article": "16",
+        "foundation_mcp": "eu-regulations"
+      },
+      {
+        "regulation_id": "MAR",
+        "article": "12",
+        "foundation_mcp": "eu-regulations"
+      }
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "dc-kyc-aml",
+    "name": "KYC/AML data",
+    "description": "Identity evidence, beneficial ownership, sanctions and PEP screening information.",
+    "boundary_conditions": "Includes verification artifacts and monitoring outcomes.",
+    "jurisdiction_protections": {
+      "US": {
+        "regime": [
+          "BSA_AML",
+          "OFAC"
+        ],
+        "tier": "critical",
+        "controls": [
+          "SCF.AC-01",
+          "SCF.DS-02",
+          "SCF.IR-03"
+        ]
+      },
+      "EU": {
+        "regime": [
+          "AMLD5",
+          "AMLD6"
+        ],
+        "tier": "critical",
+        "controls": [
+          "SCF.AC-01",
+          "SCF.DS-02",
+          "SCF.IR-03"
+        ]
+      }
+    },
+    "deidentification_requirements": [
+      "Data minimization for model training",
+      "Retention per AML mandates"
+    ],
+    "cross_border_constraints": [
+      "Travel rule obligations for virtual asset service providers"
+    ],
+    "regulation_refs": [
+      {
+        "regulation_id": "AMLD5",
+        "article": "13",
+        "foundation_mcp": "eu-regulations"
+      },
+      {
+        "regulation_id": "BSA",
+        "section": "5318",
+        "foundation_mcp": "us-regulations"
+      }
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "dc-credit",
+    "name": "Credit data",
+    "description": "Credit history, bureau scores, and underwriting data.",
+    "boundary_conditions": "Includes AI-driven decision features and adverse action rationale.",
+    "jurisdiction_protections": {
+      "US": {
+        "regime": [
+          "FCRA",
+          "ECOA"
+        ],
+        "tier": "high",
+        "controls": [
+          "SCF.AC-01",
+          "SCF.DS-02",
+          "SCF.GV-04"
+        ]
+      },
+      "US-CA": {
+        "regime": [
+          "FCRA",
+          "ECOA",
+          "CCPA"
+        ],
+        "tier": "high",
+        "controls": [
+          "SCF.AC-01",
+          "SCF.DS-02",
+          "SCF.GV-04"
+        ]
+      },
+      "EU": {
+        "regime": [
+          "GDPR"
+        ],
+        "tier": "high",
+        "controls": [
+          "SCF.AC-01",
+          "SCF.DS-02",
+          "SCF.GV-04"
+        ]
+      }
+    },
+    "deidentification_requirements": [
+      "Bias testing data should be pseudonymized where possible"
+    ],
+    "cross_border_constraints": [
+      "Automated decision transparency duties vary by jurisdiction"
+    ],
+    "regulation_refs": [
+      {
+        "regulation_id": "FCRA",
+        "section": "604",
+        "foundation_mcp": "us-regulations"
+      },
+      {
+        "regulation_id": "GDPR",
+        "article": "22",
+        "foundation_mcp": "eu-regulations"
+      }
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "dc-insurance",
+    "name": "Insurance data",
+    "description": "Policy, underwriting, claims, and actuarial datasets.",
+    "boundary_conditions": "May include special-category personal data in health lines.",
+    "jurisdiction_protections": {
+      "US": {
+        "regime": [
+          "STATE_INSURANCE"
+        ],
+        "tier": "high",
+        "controls": [
+          "SCF.AC-01",
+          "SCF.DS-02"
+        ]
+      },
+      "EU": {
+        "regime": [
+          "Solvency_II",
+          "GDPR"
+        ],
+        "tier": "high",
+        "controls": [
+          "SCF.AC-01",
+          "SCF.DS-02"
+        ]
+      },
+      "NL": {
+        "regime": [
+          "Solvency_II",
+          "GDPR"
+        ],
+        "tier": "high",
+        "controls": [
+          "SCF.AC-01",
+          "SCF.DS-02"
+        ]
+      }
+    },
+    "deidentification_requirements": [
+      "Claims analytics should de-identify beneficiaries when feasible"
+    ],
+    "cross_border_constraints": [
+      "Reinsurance transfer requires contract and privacy controls"
+    ],
+    "regulation_refs": [
+      {
+        "regulation_id": "Solvency_II",
+        "article": "41",
+        "foundation_mcp": "eu-regulations"
+      }
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "dc-digital-asset",
+    "name": "Digital asset data",
+    "description": "Wallet addresses, custody keys metadata, and ledger transactions.",
+    "boundary_conditions": "Private keys are treated as critical secrets, not personal data alone.",
+    "jurisdiction_protections": {
+      "EU": {
+        "regime": [
+          "MiCA",
+          "AMLD5"
+        ],
+        "tier": "critical",
+        "controls": [
+          "SCF.CR-03",
+          "SCF.KM-01",
+          "SCF.IR-03"
+        ]
+      },
+      "US": {
+        "regime": [
+          "STATE_MTL",
+          "BSA_AML"
+        ],
+        "tier": "critical",
+        "controls": [
+          "SCF.CR-03",
+          "SCF.KM-01",
+          "SCF.IR-03"
+        ]
+      }
+    },
+    "deidentification_requirements": [
+      "On-chain analytics should limit direct identity linkage"
+    ],
+    "cross_border_constraints": [
+      "Travel Rule applies for qualifying transfers"
+    ],
+    "regulation_refs": [
+      {
+        "regulation_id": "MiCA",
+        "article": "63",
+        "foundation_mcp": "eu-regulations"
+      }
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "dc-swift",
+    "name": "SWIFT messaging",
+    "description": "MT/MX payment and correspondent banking messages.",
+    "boundary_conditions": "Includes FIN, FileAct, and message metadata retained for screening.",
+    "jurisdiction_protections": {
+      "US": {
+        "regime": [
+          "SWIFT_CSP",
+          "OFAC"
+        ],
+        "tier": "critical",
+        "controls": [
+          "SCF.AC-01",
+          "SCF.AU-02",
+          "SCF.NW-06"
+        ]
+      },
+      "EU": {
+        "regime": [
+          "SWIFT_CSP",
+          "AMLD"
+        ],
+        "tier": "critical",
+        "controls": [
+          "SCF.AC-01",
+          "SCF.AU-02",
+          "SCF.NW-06"
+        ]
+      }
+    },
+    "deidentification_requirements": [
+      "Sanctions and AML records must preserve forensic traceability"
+    ],
+    "cross_border_constraints": [
+      "Cross-border correspondent chains require sanctions and AML checks"
+    ],
+    "regulation_refs": [
+      {
+        "regulation_id": "SWIFT_CSP",
+        "clause": "Mandatory Controls",
+        "foundation_mcp": "security-controls"
+      }
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "dc-open-banking",
+    "name": "Open banking data",
+    "description": "API account/transaction data and consent records for AIS/PIS.",
+    "boundary_conditions": "Includes customer consents, token scopes, and TPP registration details.",
+    "jurisdiction_protections": {
+      "EU": {
+        "regime": [
+          "PSD2",
+          "GDPR"
+        ],
+        "tier": "high",
+        "controls": [
+          "SCF.AC-01",
+          "SCF.NW-06",
+          "SCF.DS-02"
+        ]
+      },
+      "US": {
+        "regime": [
+          "FDX"
+        ],
+        "tier": "medium",
+        "controls": [
+          "SCF.AC-01",
+          "SCF.NW-06"
+        ]
+      }
+    },
+    "deidentification_requirements": [
+      "Remove customer identifiers for product analytics"
+    ],
+    "cross_border_constraints": [
+      "Cross-border TPP calls require contractual and consent safeguards"
+    ],
+    "regulation_refs": [
+      {
+        "regulation_id": "PSD2",
+        "article": "97",
+        "foundation_mcp": "eu-regulations"
+      }
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "dc-biometric",
+    "name": "Biometric auth data",
+    "description": "Facial, voice, and behavioral biometrics for authentication.",
+    "boundary_conditions": "Template storage and replay risks require enhanced safeguards.",
+    "jurisdiction_protections": {
+      "EU": {
+        "regime": [
+          "GDPR_ART_9"
+        ],
+        "tier": "critical",
+        "controls": [
+          "SCF.EN-01",
+          "SCF.AC-01",
+          "SCF.DS-02"
+        ]
+      },
+      "US-IL": {
+        "regime": [
+          "BIPA"
+        ],
+        "tier": "critical",
+        "controls": [
+          "SCF.EN-01",
+          "SCF.AC-01",
+          "SCF.DS-02"
+        ]
+      },
+      "US-CA": {
+        "regime": [
+          "CCPA"
+        ],
+        "tier": "high",
+        "controls": [
+          "SCF.EN-01",
+          "SCF.AC-01"
+        ]
+      }
+    },
+    "deidentification_requirements": [
+      "Store only encrypted templates",
+      "No raw biometric export"
+    ],
+    "cross_border_constraints": [
+      "Explicit consent and local labor law constraints may apply"
+    ],
+    "regulation_refs": [
+      {
+        "regulation_id": "GDPR",
+        "article": "9",
+        "foundation_mcp": "eu-regulations"
+      },
+      {
+        "regulation_id": "BIPA",
+        "section": "15",
+        "foundation_mcp": "us-regulations"
+      }
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  }
+]

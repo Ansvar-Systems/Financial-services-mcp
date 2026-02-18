@@ -1,0 +1,242 @@
+{
+  "checked_at": "2026-02-18T06:59:47.264Z",
+  "sources_checked": 26,
+  "ok": 0,
+  "failed": 26,
+  "checks": [
+    {
+      "id": "src-bafin",
+      "name": "BaFin",
+      "source_url": "https://www.bafin.de/",
+      "status": "network_error",
+      "http_status": null,
+      "title": null,
+      "error": "fetch failed"
+    },
+    {
+      "id": "src-eba",
+      "name": "European Banking Authority",
+      "source_url": "https://www.eba.europa.eu/",
+      "status": "network_error",
+      "http_status": null,
+      "title": null,
+      "error": "fetch failed"
+    },
+    {
+      "id": "src-eiopa",
+      "name": "European Insurance and Occupational Pensions Authority",
+      "source_url": "https://www.eiopa.europa.eu/",
+      "status": "network_error",
+      "http_status": null,
+      "title": null,
+      "error": "fetch failed"
+    },
+    {
+      "id": "src-esma",
+      "name": "European Securities and Markets Authority",
+      "source_url": "https://www.esma.europa.eu/",
+      "status": "network_error",
+      "http_status": null,
+      "title": null,
+      "error": "fetch failed"
+    },
+    {
+      "id": "src-fs-isac",
+      "name": "FS-ISAC",
+      "source_url": "https://www.fsisac.com/",
+      "status": "network_error",
+      "http_status": null,
+      "title": null,
+      "error": "fetch failed"
+    },
+    {
+      "id": "src-nist",
+      "name": "NIST",
+      "source_url": "https://www.nist.gov/",
+      "status": "network_error",
+      "http_status": null,
+      "title": null,
+      "error": "fetch failed"
+    },
+    {
+      "id": "src-pci-ssc",
+      "name": "PCI Security Standards Council",
+      "source_url": "https://www.pcisecuritystandards.org/",
+      "status": "network_error",
+      "http_status": null,
+      "title": null,
+      "error": "fetch failed"
+    },
+    {
+      "id": "src-reg-amld5",
+      "name": "AMLD5",
+      "source_url": "https://eur-lex.europa.eu/eli/dir/2018/843/oj",
+      "status": "network_error",
+      "http_status": null,
+      "title": null,
+      "error": "fetch failed"
+    },
+    {
+      "id": "src-reg-amld6",
+      "name": "AMLD6",
+      "source_url": "https://eur-lex.europa.eu/eli/dir/2018/1673/oj",
+      "status": "network_error",
+      "http_status": null,
+      "title": null,
+      "error": "fetch failed"
+    },
+    {
+      "id": "src-reg-bsa",
+      "name": "BSA",
+      "source_url": "https://www.fincen.gov/resources/statutes-regulations/bank-secrecy-act",
+      "status": "network_error",
+      "http_status": null,
+      "title": null,
+      "error": "fetch failed"
+    },
+    {
+      "id": "src-reg-ccpa",
+      "name": "CCPA",
+      "source_url": "https://oag.ca.gov/privacy/ccpa",
+      "status": "network_error",
+      "http_status": null,
+      "title": null,
+      "error": "fetch failed"
+    },
+    {
+      "id": "src-reg-dora",
+      "name": "DORA",
+      "source_url": "https://eur-lex.europa.eu/eli/reg/2022/2554/oj",
+      "status": "network_error",
+      "http_status": null,
+      "title": null,
+      "error": "fetch failed"
+    },
+    {
+      "id": "src-reg-ecoa",
+      "name": "ECOA",
+      "source_url": "https://www.consumerfinance.gov/compliance/compliance-resources/other-applicable-requirements/equal-credit-opportunity-act/",
+      "status": "network_error",
+      "http_status": null,
+      "title": null,
+      "error": "fetch failed"
+    },
+    {
+      "id": "src-reg-fcra",
+      "name": "FCRA",
+      "source_url": "https://www.consumerfinance.gov/compliance/compliance-resources/other-applicable-requirements/fair-credit-reporting-act/",
+      "status": "network_error",
+      "http_status": null,
+      "title": null,
+      "error": "fetch failed"
+    },
+    {
+      "id": "src-reg-gdpr",
+      "name": "GDPR",
+      "source_url": "https://eur-lex.europa.eu/eli/reg/2016/679/oj",
+      "status": "network_error",
+      "http_status": null,
+      "title": null,
+      "error": "fetch failed"
+    },
+    {
+      "id": "src-reg-glba",
+      "name": "GLBA",
+      "source_url": "https://www.govinfo.gov/app/details/PLAW-106publ102",
+      "status": "network_error",
+      "http_status": null,
+      "title": null,
+      "error": "fetch failed"
+    },
+    {
+      "id": "src-reg-mica",
+      "name": "MiCA",
+      "source_url": "https://eur-lex.europa.eu/eli/reg/2023/1114/oj",
+      "status": "network_error",
+      "http_status": null,
+      "title": null,
+      "error": "fetch failed"
+    },
+    {
+      "id": "src-reg-mifid-ii",
+      "name": "MiFID_II",
+      "source_url": "https://eur-lex.europa.eu/eli/dir/2014/65/oj",
+      "status": "network_error",
+      "http_status": null,
+      "title": null,
+      "error": "fetch failed"
+    },
+    {
+      "id": "src-reg-nis2",
+      "name": "NIS2",
+      "source_url": "https://eur-lex.europa.eu/eli/dir/2022/2555/oj",
+      "status": "network_error",
+      "http_status": null,
+      "title": null,
+      "error": "fetch failed"
+    },
+    {
+      "id": "src-reg-nydfs-cyber-500",
+      "name": "NYDFS_CYBER_500",
+      "source_url": "https://www.dfs.ny.gov/industry_guidance/cybersecurity",
+      "status": "network_error",
+      "http_status": null,
+      "title": null,
+      "error": "fetch failed"
+    },
+    {
+      "id": "src-reg-ofac",
+      "name": "OFAC",
+      "source_url": "https://ofac.treasury.gov/",
+      "status": "network_error",
+      "http_status": null,
+      "title": null,
+      "error": "fetch failed"
+    },
+    {
+      "id": "src-reg-psd2",
+      "name": "PSD2",
+      "source_url": "https://eur-lex.europa.eu/eli/dir/2015/2366/oj",
+      "status": "network_error",
+      "http_status": null,
+      "title": null,
+      "error": "fetch failed"
+    },
+    {
+      "id": "src-reg-solvency-ii",
+      "name": "Solvency_II",
+      "source_url": "https://eur-lex.europa.eu/eli/dir/2009/138/oj",
+      "status": "network_error",
+      "http_status": null,
+      "title": null,
+      "error": "fetch failed"
+    },
+    {
+      "id": "src-reg-sox",
+      "name": "SOX",
+      "source_url": "https://www.govinfo.gov/app/details/PLAW-107publ204",
+      "status": "network_error",
+      "http_status": null,
+      "title": null,
+      "error": "fetch failed"
+    },
+    {
+      "id": "src-swift",
+      "name": "SWIFT",
+      "source_url": "https://www.swift.com/your-needs/cyber-security/customer-security-programme-csp",
+      "status": "network_error",
+      "http_status": null,
+      "title": null,
+      "error": "fetch failed"
+    },
+    {
+      "id": "src-us-bank-regulators",
+      "name": "Federal Reserve / OCC / FDIC",
+      "source_url": "https://www.federalreserve.gov/",
+      "status": "network_error",
+      "http_status": null,
+      "title": null,
+      "error": "fetch failed"
+    }
+  ]
+}

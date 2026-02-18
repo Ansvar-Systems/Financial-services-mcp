@@ -1,0 +1,168 @@
+{
+  "eu": [
+    {
+      "id": "GDPR",
+      "type": "regulation",
+      "url": "https://eur-lex.europa.eu/eli/reg/2016/679/oj",
+      "publisher": "European Union"
+    },
+    {
+      "id": "DORA",
+      "type": "regulation",
+      "url": "https://eur-lex.europa.eu/eli/reg/2022/2554/oj",
+      "publisher": "European Union"
+    },
+    {
+      "id": "PSD2",
+      "type": "directive",
+      "url": "https://eur-lex.europa.eu/eli/dir/2015/2366/oj",
+      "publisher": "European Union"
+    },
+    {
+      "id": "PSD2_RTS_SCA",
+      "type": "rts",
+      "url": "https://eur-lex.europa.eu/eli/reg_del/2018/389/oj",
+      "publisher": "European Union"
+    },
+    {
+      "id": "eIDAS",
+      "type": "regulation",
+      "url": "https://eur-lex.europa.eu/eli/reg/2014/910/oj",
+      "publisher": "European Union"
+    },
+    {
+      "id": "MiCA",
+      "type": "regulation",
+      "url": "https://eur-lex.europa.eu/eli/reg/2023/1114/oj",
+      "publisher": "European Union"
+    },
+    {
+      "id": "NIS2",
+      "type": "directive",
+      "url": "https://eur-lex.europa.eu/eli/dir/2022/2555/oj",
+      "publisher": "European Union"
+    },
+    {
+      "id": "MiFID_II",
+      "type": "directive",
+      "url": "https://eur-lex.europa.eu/eli/dir/2014/65/oj",
+      "publisher": "European Union"
+    },
+    {
+      "id": "Solvency_II",
+      "type": "directive",
+      "url": "https://eur-lex.europa.eu/eli/dir/2009/138/oj",
+      "publisher": "European Union"
+    },
+    {
+      "id": "AMLD5",
+      "type": "directive",
+      "url": "https://eur-lex.europa.eu/eli/dir/2018/843/oj",
+      "publisher": "European Union"
+    },
+    {
+      "id": "AMLD6",
+      "type": "directive",
+      "url": "https://eur-lex.europa.eu/eli/dir/2018/1673/oj",
+      "publisher": "European Union"
+    },
+    {
+      "id": "MAR",
+      "type": "regulation",
+      "url": "https://eur-lex.europa.eu/eli/reg/2014/596/oj",
+      "publisher": "European Union"
+    },
+    {
+      "id": "BaFin_VAIT",
+      "type": "supervisory_guidance",
+      "url": "https://www.bafin.de/EN/Aufsicht/VersichererPensionsfonds/IT/it_node_en.html",
+      "publisher": "BaFin"
+    },
+    {
+      "id": "PSR",
+      "type": "uk_regulation",
+      "url": "https://www.legislation.gov.uk/uksi/2017/752/contents",
+      "publisher": "United Kingdom"
+    },
+    {
+      "id": "AMLD6_BSA",
+      "type": "composite_obligation",
+      "url": "https://eur-lex.europa.eu/eli/dir/2018/1673/oj",
+      "publisher": "European Union + FinCEN"
+    }
+  ],
+  "us": [
+    {
+      "id": "GLBA",
+      "type": "federal_statute",
+      "url": "https://www.govinfo.gov/app/details/PLAW-106publ102",
+      "publisher": "United States Congress"
+    },
+    {
+      "id": "SOX",
+      "type": "federal_statute",
+      "url": "https://www.govinfo.gov/app/details/PLAW-107publ204",
+      "publisher": "United States Congress"
+    },
+    {
+      "id": "BSA",
+      "type": "federal_statute",
+      "url": "https://www.fincen.gov/resources/statutes-regulations/bank-secrecy-act",
+      "publisher": "FinCEN"
+    },
+    {
+      "id": "OFAC",
+      "type": "federal_program",
+      "url": "https://ofac.treasury.gov/",
+      "publisher": "U.S. Department of the Treasury"
+    },
+    {
+      "id": "FCRA",
+      "type": "federal_statute",
+      "url": "https://www.consumerfinance.gov/compliance/compliance-resources/other-applicable-requirements/fair-credit-reporting-act/",
+      "publisher": "CFPB"
+    },
+    {
+      "id": "ECOA",
+      "type": "federal_statute",
+      "url": "https://www.consumerfinance.gov/compliance/compliance-resources/other-applicable-requirements/equal-credit-opportunity-act/",
+      "publisher": "CFPB"
+    },
+    {
+      "id": "NYDFS_CYBER_500",
+      "type": "state_regulation",
+      "url": "https://www.dfs.ny.gov/industry_guidance/cybersecurity",
+      "publisher": "NYDFS"
+    },
+    {
+      "id": "CCPA",
+      "type": "state_statute",
+      "url": "https://oag.ca.gov/privacy/ccpa",
+      "publisher": "State of California"
+    },
+    {
+      "id": "PCI_DSS_4_0",
+      "type": "industry_standard",
+      "url": "https://www.pcisecuritystandards.org/document_library?category=pcidss",
+      "publisher": "PCI SSC"
+    },
+    {
+      "id": "SWIFT_CSP",
+      "type": "industry_standard",
+      "url": "https://www.swift.com/your-needs/cyber-security/customer-security-programme-csp",
+      "publisher": "SWIFT"
+    },
+    {
+      "id": "STATE_BREACH_NOTIFICATION",
+      "type": "state_law_framework",
+      "url": "https://www.ncsl.org/technology-and-communication/security-breach-notification-laws",
+      "publisher": "NCSL (aggregate reference)"
+    },
+    {
+      "id": "BIPA",
+      "type": "state_statute",
+      "url": "https://www.ilga.gov/legislation/ilcs/ilcs3.asp?ActID=3004&ChapterID=57",
+      "publisher": "Illinois General Assembly"
+    }
+  ]
+}

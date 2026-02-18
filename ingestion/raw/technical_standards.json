@@ -1,0 +1,489 @@
+[
+  {
+    "id": "std-pci-dss-4-0",
+    "name": "PCI DSS 4.0",
+    "version": "4.0",
+    "publisher": "PCI SSC",
+    "scope": "Payment card data protection",
+    "key_clauses": [
+      "Req 3",
+      "Req 6",
+      "Req 8",
+      "Req 10",
+      "Req 11"
+    ],
+    "control_mappings": [
+      {
+        "framework": "scf",
+        "control_id": "SCF.CR-03"
+      },
+      {
+        "framework": "scf",
+        "control_id": "SCF.AC-01"
+      },
+      {
+        "framework": "scf",
+        "control_id": "SCF.AU-02"
+      }
+    ],
+    "regulation_mappings": [
+      {
+        "regulation_id": "PCI_DSS_4_0",
+        "clause": "Req 3"
+      }
+    ],
+    "implementation_guidance": "Constrain CDE scope, tokenize PAN, and enforce strong IAM with quarterly testing.",
+    "licensing_restrictions": "Public summary and requirements references only.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "std-swift-csp",
+    "name": "SWIFT CSP",
+    "version": "2026",
+    "publisher": "SWIFT",
+    "scope": "SWIFT messaging security controls and attestation",
+    "key_clauses": [
+      "Mandatory controls",
+      "Architecture A1-A4",
+      "Operator security"
+    ],
+    "control_mappings": [
+      {
+        "framework": "scf",
+        "control_id": "SCF.AC-01"
+      },
+      {
+        "framework": "scf",
+        "control_id": "SCF.NW-06"
+      },
+      {
+        "framework": "scf",
+        "control_id": "SCF.AU-02"
+      }
+    ],
+    "regulation_mappings": [
+      {
+        "regulation_id": "DORA",
+        "article": "9"
+      }
+    ],
+    "implementation_guidance": "Segregate operator roles, harden endpoints, and verify release workflow integrity.",
+    "licensing_restrictions": "Detailed control text is membership-restricted.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "std-iso-20022",
+    "name": "ISO 20022",
+    "version": "2019+",
+    "publisher": "ISO",
+    "scope": "Financial messaging data model and message definitions",
+    "key_clauses": [
+      "Message definitions",
+      "Business components",
+      "Validation constraints"
+    ],
+    "control_mappings": [
+      {
+        "framework": "scf",
+        "control_id": "SCF.DS-02"
+      },
+      {
+        "framework": "scf",
+        "control_id": "SCF.NW-06"
+      }
+    ],
+    "regulation_mappings": [
+      {
+        "regulation_id": "PSD2",
+        "article": "95"
+      }
+    ],
+    "implementation_guidance": "Apply schema validation and message signing controls at ingress and egress.",
+    "licensing_restrictions": "Standard text subject to ISO licensing.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "std-fdx-api",
+    "name": "FDX API",
+    "version": "6.x",
+    "publisher": "Financial Data Exchange",
+    "scope": "US open banking API interoperability",
+    "key_clauses": [
+      "Consent model",
+      "Token scope",
+      "Security profile"
+    ],
+    "control_mappings": [
+      {
+        "framework": "scf",
+        "control_id": "SCF.AC-01"
+      }
+    ],
+    "regulation_mappings": [
+      {
+        "regulation_id": "GLBA",
+        "section": "501(b)"
+      }
+    ],
+    "implementation_guidance": "Enforce least-privilege scopes and consent lifecycle tracking.",
+    "licensing_restrictions": "Specification access per FDX terms.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "std-berlin-group",
+    "name": "Berlin Group NextGenPSD2",
+    "version": "1.3+",
+    "publisher": "Berlin Group",
+    "scope": "EU PSD2 API profile for AIS/PIS",
+    "key_clauses": [
+      "AIS endpoints",
+      "PIS endpoints",
+      "consent resources"
+    ],
+    "control_mappings": [
+      {
+        "framework": "scf",
+        "control_id": "SCF.AC-01"
+      },
+      {
+        "framework": "scf",
+        "control_id": "SCF.NW-06"
+      }
+    ],
+    "regulation_mappings": [
+      {
+        "regulation_id": "PSD2",
+        "article": "97"
+      }
+    ],
+    "implementation_guidance": "Bind consent to customer auth and certificate identity, and monitor TPP scope usage.",
+    "licensing_restrictions": "Use profile summaries and references only.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "std-uk-open-banking",
+    "name": "UK Open Banking Standard",
+    "version": "3.1+",
+    "publisher": "OBIE",
+    "scope": "UK open banking API and security profile",
+    "key_clauses": [
+      "Read/Write APIs",
+      "Security profile",
+      "customer journey"
+    ],
+    "control_mappings": [
+      {
+        "framework": "scf",
+        "control_id": "SCF.AC-01"
+      }
+    ],
+    "regulation_mappings": [
+      {
+        "regulation_id": "PSR",
+        "article": "SCA"
+      }
+    ],
+    "implementation_guidance": "Maintain detached signatures and robust consent revocation handling.",
+    "licensing_restrictions": "Refer to OBIE publication terms.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "std-emv-3ds",
+    "name": "3DS 2.x / EMV 3DS",
+    "version": "2.3",
+    "publisher": "EMVCo",
+    "scope": "Strong customer authentication for card-not-present flows",
+    "key_clauses": [
+      "Challenge flows",
+      "Frictionless scoring",
+      "Authentication value"
+    ],
+    "control_mappings": [
+      {
+        "framework": "scf",
+        "control_id": "SCF.AC-01"
+      }
+    ],
+    "regulation_mappings": [
+      {
+        "regulation_id": "PSD2_RTS_SCA",
+        "article": "2"
+      }
+    ],
+    "implementation_guidance": "Use risk-based authentication with strict fallback controls.",
+    "licensing_restrictions": "Specification content under EMVCo terms.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "std-iso-27017-27018",
+    "name": "ISO 27017/27018",
+    "version": "2015/2019",
+    "publisher": "ISO",
+    "scope": "Cloud security and PII protection",
+    "key_clauses": [
+      "Cloud shared responsibility",
+      "PII processor controls"
+    ],
+    "control_mappings": [
+      {
+        "framework": "scf",
+        "control_id": "SCF.DS-02"
+      }
+    ],
+    "regulation_mappings": [
+      {
+        "regulation_id": "DORA",
+        "article": "28"
+      }
+    ],
+    "implementation_guidance": "Apply cloud-native access boundaries and processor assurance evidence.",
+    "licensing_restrictions": "Clause-level references only.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "std-nist-800-86",
+    "name": "NIST SP 800-86",
+    "version": "1.0",
+    "publisher": "NIST",
+    "scope": "Forensic techniques integration",
+    "key_clauses": [
+      "Collection",
+      "Examination",
+      "Analysis",
+      "Reporting"
+    ],
+    "control_mappings": [
+      {
+        "framework": "scf",
+        "control_id": "SCF.IR-03"
+      }
+    ],
+    "regulation_mappings": [
+      {
+        "regulation_id": "GLBA",
+        "section": "501(b)"
+      }
+    ],
+    "implementation_guidance": "Align fraud and breach investigations with forensic chain-of-custody.",
+    "licensing_restrictions": "Public domain.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "std-fix-protocol",
+    "name": "FIX Protocol",
+    "version": "5.0 SP2",
+    "publisher": "FIX Trading Community",
+    "scope": "Trading message exchange",
+    "key_clauses": [
+      "Session layer",
+      "application message types",
+      "recovery handling"
+    ],
+    "control_mappings": [
+      {
+        "framework": "scf",
+        "control_id": "SCF.NW-06"
+      }
+    ],
+    "regulation_mappings": [
+      {
+        "regulation_id": "MiFID_II",
+        "article": "17"
+      }
+    ],
+    "implementation_guidance": "Enforce signed sessions and strict sequence/duplication handling.",
+    "licensing_restrictions": "Use publicly available reference material.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "std-xbrl",
+    "name": "XBRL",
+    "version": "2.1",
+    "publisher": "XBRL International",
+    "scope": "Regulatory reporting data format",
+    "key_clauses": [
+      "taxonomy validation",
+      "instance integrity"
+    ],
+    "control_mappings": [
+      {
+        "framework": "scf",
+        "control_id": "SCF.AU-02"
+      }
+    ],
+    "regulation_mappings": [
+      {
+        "regulation_id": "SOX",
+        "section": "302"
+      }
+    ],
+    "implementation_guidance": "Use deterministic transformation pipelines and lineage checks.",
+    "licensing_restrictions": "Public specification.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "std-stix-taxii",
+    "name": "STIX/TAXII",
+    "version": "2.1",
+    "publisher": "OASIS",
+    "scope": "Threat intelligence sharing",
+    "key_clauses": [
+      "indicator model",
+      "collection APIs"
+    ],
+    "control_mappings": [
+      {
+        "framework": "scf",
+        "control_id": "SCF.IR-03"
+      }
+    ],
+    "regulation_mappings": [
+      {
+        "regulation_id": "DORA",
+        "article": "13"
+      }
+    ],
+    "implementation_guidance": "Integrate FS-ISAC feeds with detection engineering pipelines.",
+    "licensing_restrictions": "Open standard.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "std-fapi-2-0",
+    "name": "OpenID FAPI 2.0 Security Profile",
+    "version": "2.0",
+    "publisher": "OpenID Foundation",
+    "scope": "High-assurance API security profile for financial-grade open banking interfaces",
+    "key_clauses": [
+      "Sender-constrained tokens",
+      "PAR/JAR request integrity",
+      "JARM response signing"
+    ],
+    "control_mappings": [
+      {
+        "framework": "scf",
+        "control_id": "SCF.AC-01"
+      },
+      {
+        "framework": "scf",
+        "control_id": "SCF.NW-06"
+      },
+      {
+        "framework": "scf",
+        "control_id": "SCF.CR-03"
+      },
+      {
+        "framework": "scf",
+        "control_id": "SCF.FD-01"
+      }
+    ],
+    "regulation_mappings": [
+      {
+        "regulation_id": "PSD2_RTS_SCA",
+        "article": "97"
+      },
+      {
+        "regulation_id": "PSD2",
+        "article": "98"
+      }
+    ],
+    "implementation_guidance": "Use sender-constrained access tokens, signed requests/responses, and deterministic consent/transaction binding.",
+    "licensing_restrictions": "Open specification references.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "std-nist-csf-2-0",
+    "name": "NIST Cybersecurity Framework 2.0",
+    "version": "2.0",
+    "publisher": "NIST",
+    "scope": "Cybersecurity governance and outcome-based risk management for financial institutions",
+    "key_clauses": [
+      "Govern function",
+      "Identify-Protect-Detect-Respond-Recover outcomes"
+    ],
+    "control_mappings": [
+      {
+        "framework": "scf",
+        "control_id": "SCF.GV-04"
+      },
+      {
+        "framework": "scf",
+        "control_id": "SCF.IR-03"
+      },
+      {
+        "framework": "scf",
+        "control_id": "SCF.AU-02"
+      },
+      {
+        "framework": "scf",
+        "control_id": "SCF.TP-02"
+      },
+      {
+        "framework": "scf",
+        "control_id": "SCF.SC-04"
+      },
+      {
+        "framework": "scf",
+        "control_id": "SCF.AI-01"
+      }
+    ],
+    "regulation_mappings": [
+      {
+        "regulation_id": "GLBA",
+        "section": "501(b)"
+      },
+      {
+        "regulation_id": "NYDFS_CYBER_500",
+        "section": "500.03"
+      }
+    ],
+    "implementation_guidance": "Translate CSF outcomes into institution-level KRIs/KPIs and board reporting aligned to supervisory expectations.",
+    "licensing_restrictions": "Public domain.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "std-cpmi-iosco-cyber",
+    "name": "CPMI-IOSCO Cyber Guidance for FMIs",
+    "version": "2016+",
+    "publisher": "BIS CPMI / IOSCO",
+    "scope": "Cyber resilience expectations for payment, clearing, and settlement infrastructures",
+    "key_clauses": [
+      "Governance",
+      "Identification",
+      "Protection",
+      "Detection",
+      "Response and recovery",
+      "Testing"
+    ],
+    "control_mappings": [
+      {
+        "framework": "scf",
+        "control_id": "SCF.IR-03"
+      },
+      {
+        "framework": "scf",
+        "control_id": "SCF.TV-01"
+      },
+      {
+        "framework": "scf",
+        "control_id": "SCF.NW-06"
+      },
+      {
+        "framework": "scf",
+        "control_id": "SCF.BC-02"
+      }
+    ],
+    "regulation_mappings": [
+      {
+        "regulation_id": "DORA",
+        "article": "26"
+      },
+      {
+        "regulation_id": "MiFID_II",
+        "article": "17"
+      }
+    ],
+    "implementation_guidance": "Define impact tolerances, sector-wide scenario testing, and time-bound recovery objectives for critical payment services.",
+    "licensing_restrictions": "Public guidance.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  }
+]

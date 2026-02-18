@@ -1,0 +1,84 @@
+{
+  "breach notification": {
+    "EU": {
+      "obligation": "Notify supervisory authority within 72 hours for personal data breaches.",
+      "timeline": "72h",
+      "trigger": "Likely risk to rights and freedoms",
+      "source": "GDPR Art. 33"
+    },
+    "SE": {
+      "obligation": "GDPR breach reporting plus financial resilience incident reporting under DORA when applicable.",
+      "timeline": "72h + DORA staged reporting",
+      "trigger": "Data breach and significant ICT incident",
+      "source": "GDPR Art. 33 + DORA Art. 17"
+    },
+    "US-NY": {
+      "obligation": "Report qualifying cybersecurity events to NYDFS and satisfy state notice requirements.",
+      "timeline": "72h (NYDFS) + consumer notice without unreasonable delay",
+      "trigger": "material cybersecurity event / breach of private information",
+      "source": "23 NYCRR 500.17"
+    },
+    "US-CA": {
+      "obligation": "Notify affected residents for data breach incidents.",
+      "timeline": "without unreasonable delay",
+      "trigger": "breach of personal information",
+      "source": "Cal. Civ. Code 1798.82"
+    }
+  },
+  "dora vs nydfs incident reporting": {
+    "DORA": {
+      "obligation": "Classify ICT incidents and provide initial/intermediate/final reports to competent authority.",
+      "timeline": "staged timelines defined in RTS/ITS",
+      "trigger": "major ICT-related incident",
+      "source": "DORA Art. 17-19"
+    },
+    "NYDFS": {
+      "obligation": "Notify NYDFS of qualifying cybersecurity event.",
+      "timeline": "72 hours",
+      "trigger": "event with notice obligations or material impact",
+      "source": "23 NYCRR 500.17"
+    }
+  },
+  "psd2 sca vs reg e disputes": {
+    "PSD2": {
+      "obligation": "Apply strong customer authentication and secure communication for electronic payments.",
+      "timeline": "pre-transaction",
+      "trigger": "electronic payment initiation/access",
+      "source": "PSD2 Art. 97"
+    },
+    "REG_E": {
+      "obligation": "Investigate and resolve consumer EFT error claims within statutory windows.",
+      "timeline": "10 business days (provisional credit extension rules apply)",
+      "trigger": "consumer dispute of unauthorized EFT",
+      "source": "12 CFR 1005"
+    }
+  },
+  "aml sanctions screening: eu vs us": {
+    "EU": {
+      "obligation": "Risk-based AML transaction monitoring and sanctions controls with supervisory expectations under AMLD5/AMLD6.",
+      "timeline": "ongoing monitoring + periodic model/rule tuning",
+      "trigger": "high-risk customer/activity profile or sanctions-relevant transaction event",
+      "source": "AMLD5/AMLD6"
+    },
+    "US": {
+      "obligation": "Implement BSA/OFAC screening, escalation, and reporting controls for prohibited counterparties and suspicious activity.",
+      "timeline": "real-time or near real-time screening + SAR timelines where applicable",
+      "trigger": "match/near-match sanctions hit, suspicious pattern, or prohibited jurisdiction nexus",
+      "source": "BSA 31 U.S.C. 5318(h) + OFAC framework"
+    }
+  },
+  "instant payment fraud response: eu vs us": {
+    "EU": {
+      "obligation": "Apply SCA and transaction risk analysis controls for electronic payment initiation and account access.",
+      "timeline": "pre-transaction authentication and continuous fraud monitoring",
+      "trigger": "electronic payment initiation or account access request",
+      "source": "PSD2 Art. 97 + PSD2 RTS SCA"
+    },
+    "US": {
+      "obligation": "Maintain risk-based fraud controls and incident response for real-time payment services handling consumer account data.",
+      "timeline": "pre- and post-transaction controls with rapid case escalation",
+      "trigger": "suspicious new-payee behavior, social-engineering indicators, or anomalous payment velocity",
+      "source": "GLBA 501(b) safeguards expectations"
+    }
+  }
+}

@@ -1,0 +1,5 @@
+[
+  "Foundation MCP calls are represented as routing metadata and stubs; live federation requires MCP endpoint configuration.",
+  "State-by-state US licensing detail is modeled for key scenarios but not exhaustive.",
+  "Jurisdictional edge-cases are rule-driven and may need legal review for production decisions."
+]

@@ -1,0 +1,40 @@
+{
+  "generated_at": "2026-02-18T08:13:37.051Z",
+  "eu": {
+    "total": 27,
+    "covered": 27,
+    "missing": [],
+    "breach_covered": 27,
+    "baseline_missing": []
+  },
+  "us": {
+    "total": 51,
+    "covered": 51,
+    "missing": [],
+    "breach_covered": 51,
+    "baseline_missing": []
+  },
+  "regulatory_catalog": {
+    "eu": 15,
+    "us": 12
+  },
+  "us_state_breach_profiles": 51,
+  "us_state_breach_profile_quality": {
+    "total": 51,
+    "source_tier": {
+      "primary": 10,
+      "secondary": 41,
+      "unknown": 0
+    },
+    "confidence": {
+      "authoritative": 10,
+      "estimated": 41,
+      "unknown": 0
+    }
+  },
+  "obligation_graph": {
+    "version": "1.0.0",
+    "nodes": 279,
+    "edges": 277
+  }
+}

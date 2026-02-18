@@ -1,0 +1,154 @@
+{
+  "EU": {
+    "topic": "breach notification",
+    "notifications": [
+      {
+        "recipient": "Supervisory Authority",
+        "deadline": "72 hours",
+        "content_requirements": [
+          "nature of breach",
+          "data categories",
+          "likely consequences",
+          "mitigation measures"
+        ],
+        "penalties": "GDPR administrative fines"
+      }
+    ],
+    "citations": [
+      {
+        "type": "CELEX",
+        "ref": "GDPR Art. 33",
+        "source_url": "https://eur-lex.europa.eu/"
+      }
+    ]
+  },
+  "SE": {
+    "topic": "breach notification",
+    "notifications": [
+      {
+        "recipient": "IMY (Swedish DPA)",
+        "deadline": "72 hours",
+        "content_requirements": [
+          "GDPR breach details",
+          "affected data subjects",
+          "actions taken"
+        ],
+        "penalties": "GDPR sanctioning powers"
+      },
+      {
+        "recipient": "Financial Supervisory Authority (if operational incident)",
+        "deadline": "as soon as feasible / DORA incident timelines",
+        "content_requirements": [
+          "incident classification",
+          "service impact",
+          "containment status"
+        ],
+        "penalties": "supervisory measures and administrative sanctions"
+      }
+    ],
+    "citations": [
+      {
+        "type": "CELEX",
+        "ref": "DORA Art. 17",
+        "source_url": "https://eur-lex.europa.eu/"
+      }
+    ]
+  },
+  "DE": {
+    "topic": "breach notification",
+    "notifications": [
+      {
+        "recipient": "BfDI or relevant Lander DPA",
+        "deadline": "72 hours",
+        "content_requirements": [
+          "GDPR breach notification baseline",
+          "BDSG-specific notes"
+        ],
+        "penalties": "GDPR/BDSG sanctions"
+      }
+    ],
+    "citations": [
+      {
+        "type": "CELEX",
+        "ref": "GDPR Art. 33",
+        "source_url": "https://eur-lex.europa.eu/"
+      }
+    ]
+  },
+  "US-NY": {
+    "topic": "breach notification",
+    "notifications": [
+      {
+        "recipient": "NYDFS",
+        "deadline": "72 hours",
+        "content_requirements": [
+          "event type",
+          "affected systems",
+          "regulatory impact"
+        ],
+        "penalties": "NYDFS enforcement actions"
+      },
+      {
+        "recipient": "Affected individuals + state AG (threshold dependent)",
+        "deadline": "without unreasonable delay",
+        "content_requirements": [
+          "breach details",
+          "consumer guidance",
+          "remediation actions"
+        ],
+        "penalties": "state enforcement penalties"
+      }
+    ],
+    "citations": [
+      {
+        "type": "CFR",
+        "ref": "23 NYCRR 500.17",
+        "source_url": "https://www.dfs.ny.gov/"
+      }
+    ]
+  },
+  "US-CA": {
+    "topic": "breach notification",
+    "notifications": [
+      {
+        "recipient": "Affected California residents",
+        "deadline": "without unreasonable delay",
+        "content_requirements": [
+          "breach summary",
+          "types of information",
+          "support contacts"
+        ],
+        "penalties": "civil penalties and private litigation risk"
+      }
+    ],
+    "citations": [
+      {
+        "type": "USC",
+        "ref": "Cal. Civ. Code 1798.82",
+        "source_url": "https://leginfo.legislature.ca.gov/"
+      }
+    ]
+  },
+  "US": {
+    "topic": "breach notification",
+    "notifications": [
+      {
+        "recipient": "Primary federal regulator",
+        "deadline": "36 hours (banking computer-security incident rules where applicable)",
+        "content_requirements": [
+          "incident impact",
+          "services affected",
+          "status"
+        ],
+        "penalties": "supervisory actions"
+      }
+    ],
+    "citations": [
+      {
+        "type": "CFR",
+        "ref": "12 CFR 225/304/53 Incident Rule",
+        "source_url": "https://www.ecfr.gov/"
+      }
+    ]
+  }
+}

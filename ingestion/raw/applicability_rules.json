@@ -1,0 +1,615 @@
+[
+  {
+    "id": "app-se-bank-payments",
+    "condition": {
+      "country": [
+        "SE",
+        "EU"
+      ],
+      "role": [
+        "bank",
+        "financial-entity"
+      ],
+      "system_types": [
+        "fs-core-banking",
+        "fs-payments",
+        "payments"
+      ],
+      "data_types": [
+        "dc-account-data",
+        "dc-npi"
+      ]
+    },
+    "obligation": {
+      "regulation_id": "DORA",
+      "article": "6",
+      "standard_id": "std-iso-27017-27018",
+      "confidence": "authoritative"
+    },
+    "rationale": "Swedish and EU banks providing payments/lending are in-scope for DORA ICT risk management.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "app-se-psd2",
+    "condition": {
+      "country": [
+        "SE",
+        "EU"
+      ],
+      "role": [
+        "bank",
+        "payment-institution",
+        "fintech"
+      ],
+      "system_types": [
+        "fs-open-banking",
+        "payments",
+        "open-banking"
+      ],
+      "data_types": [
+        "dc-open-banking",
+        "dc-account-data"
+      ]
+    },
+    "obligation": {
+      "regulation_id": "PSD2",
+      "article": "97",
+      "standard_id": "std-berlin-group",
+      "confidence": "authoritative"
+    },
+    "rationale": "PSD2 SCA obligations apply to payment and open banking services in Sweden/EU.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "app-eu-gdpr-financial",
+    "condition": {
+      "country": [
+        "SE",
+        "DE",
+        "NL",
+        "EU"
+      ],
+      "role": [
+        "bank",
+        "insurance",
+        "fintech",
+        "payment-institution"
+      ],
+      "system_types": [
+        "any"
+      ],
+      "data_types": [
+        "dc-npi",
+        "dc-account-data",
+        "dc-credit",
+        "dc-insurance",
+        "dc-open-banking"
+      ]
+    },
+    "obligation": {
+      "regulation_id": "GDPR",
+      "article": "32",
+      "standard_id": "std-iso-27017-27018",
+      "confidence": "authoritative"
+    },
+    "rationale": "Financial processing of personal data in EU jurisdictions requires GDPR security of processing obligations.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "app-us-ny-fintech",
+    "condition": {
+      "country": [
+        "US-NY",
+        "US"
+      ],
+      "role": [
+        "fintech",
+        "bank",
+        "payment-institution"
+      ],
+      "system_types": [
+        "fs-payments",
+        "fs-digital-lending",
+        "payments",
+        "lending"
+      ],
+      "data_types": [
+        "dc-npi",
+        "dc-credit",
+        "dc-card-data"
+      ]
+    },
+    "obligation": {
+      "regulation_id": "GLBA",
+      "section": "501(b)",
+      "standard_id": "std-nist-800-86",
+      "confidence": "authoritative"
+    },
+    "rationale": "US fintech lending/payments processing NPI are under GLBA safeguards expectations.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "app-us-nydfs",
+    "condition": {
+      "country": [
+        "US-NY"
+      ],
+      "role": [
+        "fintech",
+        "bank",
+        "insurance"
+      ],
+      "system_types": [
+        "any"
+      ],
+      "data_types": [
+        "dc-npi",
+        "dc-account-data",
+        "dc-credit"
+      ]
+    },
+    "obligation": {
+      "regulation_id": "NYDFS_CYBER_500",
+      "section": "500.17",
+      "standard_id": "std-stix-taxii",
+      "confidence": "authoritative"
+    },
+    "rationale": "NYDFS cybersecurity regulation imposes incident reporting and cybersecurity program obligations.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "app-us-ca-privacy",
+    "condition": {
+      "country": [
+        "US-CA"
+      ],
+      "role": [
+        "fintech",
+        "bank",
+        "insurance"
+      ],
+      "system_types": [
+        "any"
+      ],
+      "data_types": [
+        "dc-npi",
+        "dc-credit",
+        "dc-biometric"
+      ]
+    },
+    "obligation": {
+      "regulation_id": "CCPA",
+      "section": "1798.100",
+      "standard_id": "std-iso-27017-27018",
+      "confidence": "authoritative"
+    },
+    "rationale": "California privacy requirements overlay GLBA exceptions with consumer rights and incident obligations.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "app-de-insurance",
+    "condition": {
+      "country": [
+        "DE",
+        "EU"
+      ],
+      "role": [
+        "insurance",
+        "financial-entity"
+      ],
+      "system_types": [
+        "fs-insurance-core",
+        "insurance"
+      ],
+      "data_types": [
+        "dc-insurance",
+        "dc-npi"
+      ]
+    },
+    "obligation": {
+      "regulation_id": "Solvency_II",
+      "article": "41",
+      "standard_id": "std-iso-27017-27018",
+      "confidence": "authoritative"
+    },
+    "rationale": "German insurers are subject to Solvency II governance with ICT controls under DORA and BaFin guidance.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "app-de-bafin-vait",
+    "condition": {
+      "country": [
+        "DE"
+      ],
+      "role": [
+        "insurance",
+        "bank"
+      ],
+      "system_types": [
+        "any"
+      ],
+      "data_types": [
+        "dc-insurance",
+        "dc-account-data"
+      ]
+    },
+    "obligation": {
+      "regulation_id": "BaFin_VAIT",
+      "section": "ICT",
+      "standard_id": "std-iso-27017-27018",
+      "confidence": "inferred"
+    },
+    "rationale": "BaFin VAIT/BAIT supervisory expectations apply by sector and institution type.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "app-digital-assets-eu",
+    "condition": {
+      "country": [
+        "EU",
+        "DE",
+        "NL",
+        "SE"
+      ],
+      "role": [
+        "crypto-asset-service-provider",
+        "fintech"
+      ],
+      "system_types": [
+        "fs-digital-assets",
+        "digital-assets"
+      ],
+      "data_types": [
+        "dc-digital-asset",
+        "dc-kyc-aml"
+      ]
+    },
+    "obligation": {
+      "regulation_id": "MiCA",
+      "article": "63",
+      "standard_id": "std-stix-taxii",
+      "confidence": "authoritative"
+    },
+    "rationale": "MiCA and AMLD obligations apply to crypto-asset service providers in the EU.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "app-pci-any",
+    "condition": {
+      "country": [
+        "US",
+        "US-NY",
+        "US-CA",
+        "DE",
+        "SE",
+        "NL",
+        "EU"
+      ],
+      "role": [
+        "merchant",
+        "payment-institution",
+        "fintech",
+        "bank"
+      ],
+      "system_types": [
+        "fs-payments",
+        "payments",
+        "fs-instant-pay"
+      ],
+      "data_types": [
+        "dc-card-data"
+      ]
+    },
+    "obligation": {
+      "regulation_id": "PCI_DSS_4_0",
+      "clause": "Req 1-12",
+      "standard_id": "std-pci-dss-4-0",
+      "confidence": "authoritative"
+    },
+    "rationale": "Any handling of cardholder data brings PCI DSS obligations regardless of jurisdiction.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "app-swift-any",
+    "condition": {
+      "country": [
+        "US",
+        "US-NY",
+        "DE",
+        "SE",
+        "NL",
+        "EU"
+      ],
+      "role": [
+        "bank"
+      ],
+      "system_types": [
+        "fs-swift",
+        "swift"
+      ],
+      "data_types": [
+        "dc-swift"
+      ]
+    },
+    "obligation": {
+      "regulation_id": "SWIFT_CSP",
+      "clause": "mandatory controls",
+      "standard_id": "std-swift-csp",
+      "confidence": "authoritative"
+    },
+    "rationale": "SWIFT-connected entities are expected to implement and attest to CSP control baselines.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "app-aml-any",
+    "condition": {
+      "country": [
+        "US",
+        "US-NY",
+        "US-CA",
+        "DE",
+        "SE",
+        "NL",
+        "EU"
+      ],
+      "role": [
+        "bank",
+        "fintech",
+        "payment-institution",
+        "crypto-asset-service-provider"
+      ],
+      "system_types": [
+        "fs-aml",
+        "payments",
+        "digital-assets",
+        "lending"
+      ],
+      "data_types": [
+        "dc-kyc-aml",
+        "dc-digital-asset"
+      ]
+    },
+    "obligation": {
+      "regulation_id": "AMLD6_BSA",
+      "section": "monitoring",
+      "standard_id": "std-stix-taxii",
+      "confidence": "authoritative"
+    },
+    "rationale": "AML obligations apply broadly across monitored financial services activities.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "app-nis2-financial",
+    "condition": {
+      "country": [
+        "SE",
+        "DE",
+        "NL",
+        "EU"
+      ],
+      "role": [
+        "bank",
+        "insurance",
+        "payment-institution",
+        "fintech"
+      ],
+      "system_types": [
+        "any"
+      ],
+      "data_types": [
+        "dc-account-data",
+        "dc-npi",
+        "dc-open-banking",
+        "dc-swift"
+      ]
+    },
+    "obligation": {
+      "regulation_id": "NIS2",
+      "article": "21",
+      "standard_id": "std-stix-taxii",
+      "confidence": "inferred"
+    },
+    "rationale": "NIS2 and financial sector resilience obligations overlap for essential/important entities.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "app-eu-open-banking-fapi",
+    "condition": {
+      "country": [
+        "EU",
+        "SE",
+        "DE",
+        "NL"
+      ],
+      "role": [
+        "bank",
+        "payment-institution",
+        "fintech",
+        "financial-entity"
+      ],
+      "system_types": [
+        "fs-open-banking",
+        "open-banking",
+        "fs-payments",
+        "payments"
+      ],
+      "data_types": [
+        "dc-open-banking",
+        "dc-account-data"
+      ]
+    },
+    "obligation": {
+      "regulation_id": "PSD2_RTS_SCA",
+      "article": "97",
+      "standard_id": "std-fapi-2-0",
+      "confidence": "authoritative",
+      "obligation_type": "strong_customer_authentication",
+      "priority": 92,
+      "conflict_group": "payment-authentication",
+      "effective_from": "2019-09-14"
+    },
+    "rationale": "EU open banking and payment initiation flows require SCA and secure communication implementation patterns.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "app-eu-dora-third-party",
+    "condition": {
+      "country": [
+        "EU",
+        "SE",
+        "DE",
+        "NL"
+      ],
+      "role": [
+        "bank",
+        "insurance",
+        "payment-institution",
+        "investment-firm",
+        "fintech",
+        "financial-entity"
+      ],
+      "system_types": [
+        "any"
+      ],
+      "data_types": [
+        "dc-account-data",
+        "dc-npi",
+        "dc-open-banking",
+        "dc-trading"
+      ]
+    },
+    "obligation": {
+      "regulation_id": "DORA",
+      "article": "28",
+      "standard_id": "std-cpmi-iosco-cyber",
+      "confidence": "authoritative",
+      "obligation_type": "third_party_risk_management",
+      "priority": 89,
+      "conflict_group": "third-party-risk",
+      "effective_from": "2025-01-17"
+    },
+    "rationale": "EU financial entities must manage critical ICT third-party lifecycle risk, resilience testing, and exit readiness under DORA.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "app-eu-aml6-screening",
+    "condition": {
+      "country": [
+        "EU",
+        "SE",
+        "DE",
+        "NL"
+      ],
+      "role": [
+        "bank",
+        "fintech",
+        "payment-institution",
+        "crypto-asset-service-provider",
+        "financial-entity"
+      ],
+      "system_types": [
+        "fs-aml",
+        "fs-digital-assets",
+        "fs-payments",
+        "payments"
+      ],
+      "data_types": [
+        "dc-kyc-aml",
+        "dc-digital-asset",
+        "dc-account-data"
+      ]
+    },
+    "obligation": {
+      "regulation_id": "AMLD6",
+      "article": "7",
+      "standard_id": "std-stix-taxii",
+      "confidence": "authoritative",
+      "obligation_type": "aml_transaction_monitoring",
+      "priority": 87,
+      "conflict_group": "financial-crime-controls",
+      "effective_from": "2021-12-03"
+    },
+    "rationale": "EU AML programs must maintain risk-based screening and monitoring controls for complex payment and crypto activity.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "app-us-ofac-screening",
+    "condition": {
+      "country": [
+        "US",
+        "US-NY",
+        "US-CA"
+      ],
+      "role": [
+        "bank",
+        "fintech",
+        "payment-institution",
+        "crypto-asset-service-provider",
+        "financial-entity"
+      ],
+      "system_types": [
+        "fs-aml",
+        "fs-swift",
+        "fs-digital-assets",
+        "fs-payments",
+        "payments"
+      ],
+      "data_types": [
+        "dc-kyc-aml",
+        "dc-swift",
+        "dc-digital-asset",
+        "dc-account-data"
+      ]
+    },
+    "obligation": {
+      "regulation_id": "OFAC",
+      "section": "SDN screening",
+      "standard_id": "std-nist-csf-2-0",
+      "confidence": "authoritative",
+      "obligation_type": "sanctions_screening",
+      "priority": 90,
+      "conflict_group": "financial-crime-controls",
+      "effective_from": "2001-09-24"
+    },
+    "rationale": "US financial institutions require risk-based sanctions screening and escalation controls for prohibited counterparties and payments.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "app-us-instant-pay-fraud",
+    "condition": {
+      "country": [
+        "US",
+        "US-NY",
+        "US-CA"
+      ],
+      "role": [
+        "bank",
+        "fintech",
+        "payment-institution",
+        "financial-entity"
+      ],
+      "system_types": [
+        "fs-instant-pay",
+        "fs-payments",
+        "payments"
+      ],
+      "data_types": [
+        "dc-account-data",
+        "dc-npi",
+        "dc-open-banking"
+      ]
+    },
+    "obligation": {
+      "regulation_id": "GLBA",
+      "section": "501(b)",
+      "standard_id": "std-nist-csf-2-0",
+      "confidence": "authoritative",
+      "obligation_type": "fraud_prevention_and_monitoring",
+      "priority": 84,
+      "conflict_group": "payment-fraud-controls",
+      "effective_from": "2003-07-01"
+    },
+    "rationale": "US real-time payment services should maintain fraud prevention controls proportionate to transfer speed and irreversibility risk.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  }
+]

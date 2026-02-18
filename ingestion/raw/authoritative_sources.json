@@ -1,0 +1,132 @@
+[
+  {
+    "id": "src-pci-ssc",
+    "source_type": "standard",
+    "name": "PCI Security Standards Council",
+    "content": "PCI DSS 4.0, SAQ guidance, PCI program documentation",
+    "provenance": "PCI SSC official publications",
+    "license": "PCI SSC license (free access)",
+    "refresh_cadence": "per version",
+    "source_url": "https://www.pcisecuritystandards.org/"
+  },
+  {
+    "id": "src-swift",
+    "source_type": "standard",
+    "name": "SWIFT",
+    "content": "Customer Security Programme control framework",
+    "provenance": "SWIFT official documentation and attestation guidance",
+    "license": "SWIFT membership (public summary)",
+    "refresh_cadence": "annual",
+    "source_url": "https://www.swift.com/your-needs/cyber-security/customer-security-programme-csp"
+  },
+  {
+    "id": "src-eba",
+    "source_type": "regulation",
+    "name": "European Banking Authority",
+    "content": "DORA RTS/ITS, PSD2 RTS on SCA",
+    "provenance": "EBA regulatory technical standards",
+    "license": "Free access (EU)",
+    "refresh_cadence": "per publication",
+    "source_url": "https://www.eba.europa.eu/"
+  },
+  {
+    "id": "src-esma",
+    "source_type": "regulation",
+    "name": "European Securities and Markets Authority",
+    "content": "MiFID II and MiCA technical standards",
+    "provenance": "ESMA public regulations and guidance",
+    "license": "Free access (EU)",
+    "refresh_cadence": "per publication",
+    "source_url": "https://www.esma.europa.eu/"
+  },
+  {
+    "id": "src-eiopa",
+    "source_type": "regulation",
+    "name": "European Insurance and Occupational Pensions Authority",
+    "content": "Solvency II and insurance ITS guidance",
+    "provenance": "EIOPA regulations and consultation papers",
+    "license": "Free access (EU)",
+    "refresh_cadence": "per publication",
+    "source_url": "https://www.eiopa.europa.eu/"
+  },
+  {
+    "id": "src-bafin",
+    "source_type": "supervisory",
+    "name": "BaFin",
+    "content": "BAIT/VAIT/KAIT supervisory guidance",
+    "provenance": "BaFin ICT security circulars",
+    "license": "Free access (DE)",
+    "refresh_cadence": "per update",
+    "source_url": "https://www.bafin.de/"
+  },
+  {
+    "id": "src-us-bank-regulators",
+    "source_type": "regulation",
+    "name": "Federal Reserve / OCC / FDIC",
+    "content": "US banking cybersecurity examination guidance",
+    "provenance": "US federal regulator publications",
+    "license": "Public domain (US government)",
+    "refresh_cadence": "per publication",
+    "source_url": "https://www.federalreserve.gov/"
+  },
+  {
+    "id": "src-fs-isac",
+    "source_type": "threat-intel",
+    "name": "FS-ISAC",
+    "content": "Financial sector threat intelligence and controls guidance",
+    "provenance": "Member bulletins and public summaries",
+    "license": "Membership (public summaries)",
+    "refresh_cadence": "continuous",
+    "source_url": "https://www.fsisac.com/"
+  },
+  {
+    "id": "src-nist",
+    "source_type": "standard",
+    "name": "NIST",
+    "content": "Financial sector cybersecurity profiles",
+    "provenance": "NIST special publications",
+    "license": "Public domain (US government)",
+    "refresh_cadence": "per revision",
+    "source_url": "https://www.nist.gov/"
+  },
+  {
+    "id": "src-fincen",
+    "source_type": "regulation",
+    "name": "FinCEN",
+    "content": "BSA/AML program obligations, SAR/CTR guidance, and advisories",
+    "provenance": "FinCEN statutes, regulations, advisories, and FAQs",
+    "license": "Public domain (US government)",
+    "refresh_cadence": "per publication",
+    "source_url": "https://www.fincen.gov/"
+  },
+  {
+    "id": "src-ofac",
+    "source_type": "regulation",
+    "name": "U.S. Treasury OFAC",
+    "content": "Sanctions programs, SDN lists, and compliance framework guidance",
+    "provenance": "OFAC regulations, sanctions lists, and compliance publications",
+    "license": "Public domain (US government)",
+    "refresh_cadence": "continuous",
+    "source_url": "https://ofac.treasury.gov/"
+  },
+  {
+    "id": "src-cfpb",
+    "source_type": "regulation",
+    "name": "Consumer Financial Protection Bureau",
+    "content": "FCRA/ECOA supervisory and examination guidance",
+    "provenance": "CFPB statutes and compliance resources",
+    "license": "Public domain (US government)",
+    "refresh_cadence": "per publication",
+    "source_url": "https://www.consumerfinance.gov/"
+  },
+  {
+    "id": "src-ecb-tiber-eu",
+    "source_type": "supervisory",
+    "name": "European Central Bank (TIBER-EU)",
+    "content": "Threat-led penetration testing framework for financial entities",
+    "provenance": "ECB and national authority TIBER-EU framework publications",
+    "license": "Free access (EU)",
+    "refresh_cadence": "per framework update",
+    "source_url": "https://www.ecb.europa.eu/paym/cyber-resilience/tiber-eu/html/index.en.html"
+  }
+]

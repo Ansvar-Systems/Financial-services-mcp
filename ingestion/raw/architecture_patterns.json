@@ -1,0 +1,606 @@
+[
+  {
+    "id": "fs-core-banking",
+    "name": "Core Banking System",
+    "category": "banking",
+    "description": "Core ledger and product servicing architecture for retail and corporate banking.",
+    "components": [
+      "core ledger",
+      "account management",
+      "product engine",
+      "transaction processing",
+      "general ledger interface",
+      "regulatory reporting"
+    ],
+    "trust_boundaries": [
+      {
+        "boundary": "customer channels to API layer",
+        "rationale": "internet-originated risk and identity trust transition"
+      },
+      {
+        "boundary": "API layer to core ledger",
+        "rationale": "high-integrity posting boundary"
+      },
+      {
+        "boundary": "core systems to reporting zone",
+        "rationale": "separate data handling and disclosure controls"
+      }
+    ],
+    "data_flows": [
+      {
+        "source": "channels",
+        "destination": "transaction processing",
+        "data_type": "account data",
+        "protocol": "HTTPS",
+        "encryption": "TLS 1.2+"
+      },
+      {
+        "source": "transaction processing",
+        "destination": "core ledger",
+        "data_type": "account data",
+        "protocol": "internal RPC",
+        "encryption": "mTLS"
+      },
+      {
+        "source": "core ledger",
+        "destination": "regulatory reporting",
+        "data_type": "account/trading data",
+        "protocol": "batch",
+        "encryption": "at-rest + in-transit"
+      }
+    ],
+    "integration_points": [
+      "card processors",
+      "payment rails",
+      "credit bureaus",
+      "regulatory gateways"
+    ],
+    "known_weaknesses": [
+      "batch window privilege escalation",
+      "insufficient segregation of duties"
+    ],
+    "applicable_standards": [
+      "ISO_20022",
+      "SOX_ITGC",
+      "DORA"
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "fs-payments",
+    "name": "Payment Processing",
+    "category": "payments",
+    "description": "Card and account-based payment processing including authorization, fraud, and settlement.",
+    "components": [
+      "payment gateway",
+      "acquiring processor",
+      "card network interface",
+      "settlement engine",
+      "fraud detection",
+      "3DS server"
+    ],
+    "trust_boundaries": [
+      {
+        "boundary": "merchant integration boundary",
+        "rationale": "external input and replay/fraud risk"
+      },
+      {
+        "boundary": "cardholder data environment boundary",
+        "rationale": "PCI DSS scope control"
+      },
+      {
+        "boundary": "settlement boundary",
+        "rationale": "high-value irreversible financial postings"
+      }
+    ],
+    "data_flows": [
+      {
+        "source": "merchant",
+        "destination": "gateway",
+        "data_type": "payment card data",
+        "protocol": "HTTPS",
+        "encryption": "TLS 1.2+"
+      },
+      {
+        "source": "gateway",
+        "destination": "network interface",
+        "data_type": "PAN/token",
+        "protocol": "ISO8583/API",
+        "encryption": "mTLS"
+      },
+      {
+        "source": "network interface",
+        "destination": "settlement engine",
+        "data_type": "clearing data",
+        "protocol": "batch/API",
+        "encryption": "TLS + encryption at rest"
+      }
+    ],
+    "integration_points": [
+      "card schemes",
+      "acquirers",
+      "issuer processors",
+      "fraud intelligence feeds"
+    ],
+    "known_weaknesses": [
+      "scope creep into CDE",
+      "insufficient 3DS telemetry checks"
+    ],
+    "applicable_standards": [
+      "PCI_DSS_4_0",
+      "EMV_3DS",
+      "ISO_20022"
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "fs-trading",
+    "name": "Trading Platform",
+    "category": "markets",
+    "description": "Order management, execution and post-trade stack for electronic trading.",
+    "components": [
+      "order management system",
+      "execution management system",
+      "market data feed",
+      "risk engine",
+      "post-trade processing",
+      "regulatory reporting"
+    ],
+    "trust_boundaries": [
+      {
+        "boundary": "market connectivity boundary",
+        "rationale": "exchange and broker trust controls"
+      },
+      {
+        "boundary": "algo model boundary",
+        "rationale": "high-impact automated decision controls"
+      }
+    ],
+    "data_flows": [
+      {
+        "source": "client order channels",
+        "destination": "OMS",
+        "data_type": "trading data",
+        "protocol": "FIX",
+        "encryption": "TLS/leased line controls"
+      },
+      {
+        "source": "OMS",
+        "destination": "EMS",
+        "data_type": "order flow",
+        "protocol": "FIX",
+        "encryption": "mTLS"
+      }
+    ],
+    "integration_points": [
+      "venues",
+      "market data vendors",
+      "surveillance tooling"
+    ],
+    "known_weaknesses": [
+      "parameter tampering",
+      "latency manipulation"
+    ],
+    "applicable_standards": [
+      "FIX",
+      "MiFID_II",
+      "STIX_TAXII"
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "fs-open-banking",
+    "name": "Open Banking / PSD2",
+    "category": "open-banking",
+    "description": "TPP onboarding and AIS/PIS API ecosystem with consent and SCA controls.",
+    "components": [
+      "TPP registration",
+      "consent management",
+      "API gateway",
+      "AIS service",
+      "PIS service",
+      "SCA engine"
+    ],
+    "trust_boundaries": [
+      {
+        "boundary": "TPP boundary",
+        "rationale": "third-party trust with delegated consent"
+      },
+      {
+        "boundary": "consent decision boundary",
+        "rationale": "legal basis and scope enforcement"
+      }
+    ],
+    "data_flows": [
+      {
+        "source": "TPP",
+        "destination": "API gateway",
+        "data_type": "open banking data",
+        "protocol": "REST",
+        "encryption": "TLS + cert pinning"
+      },
+      {
+        "source": "gateway",
+        "destination": "consent management",
+        "data_type": "consent scope",
+        "protocol": "internal API",
+        "encryption": "mTLS"
+      }
+    ],
+    "integration_points": [
+      "eIDAS/QWAC services",
+      "customer identity providers"
+    ],
+    "known_weaknesses": [
+      "scope escalation",
+      "consent replay",
+      "SCA downgrade"
+    ],
+    "applicable_standards": [
+      "Berlin_Group_NextGenPSD2",
+      "PSD2_RTS_SCA",
+      "FDX_API"
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "fs-digital-lending",
+    "name": "Digital Lending Platform",
+    "category": "lending",
+    "description": "Loan origination and servicing with automated credit decisioning.",
+    "components": [
+      "application intake",
+      "credit decisioning",
+      "underwriting engine",
+      "loan origination",
+      "servicing",
+      "collections"
+    ],
+    "trust_boundaries": [
+      {
+        "boundary": "applicant data boundary",
+        "rationale": "sensitive PII and credit data protection"
+      },
+      {
+        "boundary": "model governance boundary",
+        "rationale": "fair lending and explainability controls"
+      }
+    ],
+    "data_flows": [
+      {
+        "source": "applicant",
+        "destination": "intake",
+        "data_type": "credit data",
+        "protocol": "HTTPS",
+        "encryption": "TLS 1.2+"
+      },
+      {
+        "source": "intake",
+        "destination": "decisioning",
+        "data_type": "credit score + features",
+        "protocol": "internal API",
+        "encryption": "mTLS"
+      }
+    ],
+    "integration_points": [
+      "credit bureaus",
+      "identity verification providers",
+      "collections agencies"
+    ],
+    "known_weaknesses": [
+      "feature tampering",
+      "adverse-action traceability gaps"
+    ],
+    "applicable_standards": [
+      "FCRA",
+      "ECOA",
+      "ISO_27018"
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "fs-wealth",
+    "name": "Wealth Management",
+    "category": "wealth",
+    "description": "Portfolio and advisory systems with custody and reporting integrations.",
+    "components": [
+      "portfolio management",
+      "client reporting",
+      "advisory tools",
+      "custody integration",
+      "compliance checks"
+    ],
+    "trust_boundaries": [
+      {
+        "boundary": "advisor-client portal boundary",
+        "rationale": "personalized investment data access control"
+      }
+    ],
+    "data_flows": [
+      {
+        "source": "advisor tools",
+        "destination": "portfolio core",
+        "data_type": "trading/account data",
+        "protocol": "API",
+        "encryption": "TLS"
+      }
+    ],
+    "integration_points": [
+      "custodians",
+      "market data",
+      "KYC services"
+    ],
+    "known_weaknesses": [
+      "excessive advisor privilege"
+    ],
+    "applicable_standards": [
+      "MiFID_II",
+      "ISO_27017"
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "fs-insurance-core",
+    "name": "Insurance Core System",
+    "category": "insurance",
+    "description": "Policy admin, claims, underwriting and actuarial processing stack.",
+    "components": [
+      "policy administration",
+      "claims management",
+      "underwriting",
+      "actuarial",
+      "reinsurance",
+      "distribution"
+    ],
+    "trust_boundaries": [
+      {
+        "boundary": "claims intake boundary",
+        "rationale": "high volume personal data and fraud input channel"
+      }
+    ],
+    "data_flows": [
+      {
+        "source": "brokers/agents",
+        "destination": "policy admin",
+        "data_type": "insurance data",
+        "protocol": "API/SFTP",
+        "encryption": "TLS + at-rest encryption"
+      }
+    ],
+    "integration_points": [
+      "reinsurers",
+      "medical assessment providers",
+      "fraud bureaus"
+    ],
+    "known_weaknesses": [
+      "claims fraud model poisoning"
+    ],
+    "applicable_standards": [
+      "Solvency_II",
+      "DORA"
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "fs-swift",
+    "name": "SWIFT Messaging",
+    "category": "payments",
+    "description": "SWIFT Alliance and sanctions screening flows for correspondent banking.",
+    "components": [
+      "alliance access/lite",
+      "message validation",
+      "sanctions screening",
+      "correspondent banking gateway",
+      "reconciliation"
+    ],
+    "trust_boundaries": [
+      {
+        "boundary": "operator workstation boundary",
+        "rationale": "credential theft and privileged misuse risk"
+      },
+      {
+        "boundary": "message release boundary",
+        "rationale": "tamper-proof authorization requirements"
+      }
+    ],
+    "data_flows": [
+      {
+        "source": "payment operations",
+        "destination": "alliance",
+        "data_type": "SWIFT messaging",
+        "protocol": "SWIFTNet",
+        "encryption": "SWIFT controls"
+      },
+      {
+        "source": "alliance",
+        "destination": "sanctions screening",
+        "data_type": "SWIFT message content",
+        "protocol": "internal API",
+        "encryption": "mTLS"
+      }
+    ],
+    "integration_points": [
+      "SWIFT network",
+      "sanctions engines",
+      "core payments"
+    ],
+    "known_weaknesses": [
+      "shared operator credentials",
+      "weak segregation in release chain"
+    ],
+    "applicable_standards": [
+      "SWIFT_CSP",
+      "ISO_20022"
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "fs-aml",
+    "name": "AML/KYC Platform",
+    "category": "compliance",
+    "description": "Onboarding, sanctions, monitoring, and SAR case management platform.",
+    "components": [
+      "customer onboarding",
+      "identity verification",
+      "transaction monitoring",
+      "sanctions screening",
+      "case management",
+      "SAR filing"
+    ],
+    "trust_boundaries": [
+      {
+        "boundary": "external data provider boundary",
+        "rationale": "third-party identity and watchlist integrity"
+      }
+    ],
+    "data_flows": [
+      {
+        "source": "core banking",
+        "destination": "transaction monitoring",
+        "data_type": "KYC/AML data",
+        "protocol": "stream/batch",
+        "encryption": "TLS + signed feeds"
+      }
+    ],
+    "integration_points": [
+      "OFAC lists",
+      "EU sanctions feeds",
+      "law enforcement reporting gateways"
+    ],
+    "known_weaknesses": [
+      "rule bypass via threshold fragmentation"
+    ],
+    "applicable_standards": [
+      "AMLD6",
+      "BSA_AML"
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "fs-digital-assets",
+    "name": "Digital Asset / Crypto",
+    "category": "digital-assets",
+    "description": "Wallet and custody architecture for digital asset service providers.",
+    "components": [
+      "wallet infrastructure",
+      "custody (hot/cold)",
+      "exchange integration",
+      "defi interface",
+      "compliance monitoring"
+    ],
+    "trust_boundaries": [
+      {
+        "boundary": "key management boundary",
+        "rationale": "critical cryptographic secret lifecycle boundary"
+      },
+      {
+        "boundary": "smart contract boundary",
+        "rationale": "immutable code risk"
+      }
+    ],
+    "data_flows": [
+      {
+        "source": "customers",
+        "destination": "wallet service",
+        "data_type": "digital asset data",
+        "protocol": "API",
+        "encryption": "TLS + HSM-backed keys"
+      }
+    ],
+    "integration_points": [
+      "blockchain nodes",
+      "liquidity venues",
+      "travel rule providers"
+    ],
+    "known_weaknesses": [
+      "hot wallet exposure",
+      "bridge protocol dependency risk"
+    ],
+    "applicable_standards": [
+      "MiCA",
+      "FATF_TRAVEL_RULE"
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "fs-instant-pay",
+    "name": "Instant/Real-Time Payments",
+    "category": "payments",
+    "description": "SEPA Instant/FedNow/RTP payment stack with liquidity and fraud controls.",
+    "components": [
+      "instant payment gateway",
+      "iso 20022 messaging",
+      "fraud scoring",
+      "liquidity management",
+      "settlement interface"
+    ],
+    "trust_boundaries": [
+      {
+        "boundary": "real-time authorization boundary",
+        "rationale": "irreversible payment risk under short decision window"
+      }
+    ],
+    "data_flows": [
+      {
+        "source": "customer channel",
+        "destination": "instant gateway",
+        "data_type": "payment data",
+        "protocol": "API",
+        "encryption": "TLS"
+      }
+    ],
+    "integration_points": [
+      "FedNow",
+      "RTP",
+      "SEPA Instant CSMs"
+    ],
+    "known_weaknesses": [
+      "real-time mule account fraud"
+    ],
+    "applicable_standards": [
+      "ISO_20022",
+      "DORA"
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "fs-regtech",
+    "name": "Regulatory Reporting",
+    "category": "regtech",
+    "description": "Data aggregation and report production architecture for financial supervisory reporting.",
+    "components": [
+      "data aggregation",
+      "report generation",
+      "submission gateway",
+      "reconciliation",
+      "audit trail"
+    ],
+    "trust_boundaries": [
+      {
+        "boundary": "regulatory submission boundary",
+        "rationale": "integrity and non-repudiation controls for filed data"
+      }
+    ],
+    "data_flows": [
+      {
+        "source": "source systems",
+        "destination": "reporting engine",
+        "data_type": "trading/account/insurance data",
+        "protocol": "batch/API",
+        "encryption": "TLS + signing"
+      }
+    ],
+    "integration_points": [
+      "xbrl gateways",
+      "supervisory portals"
+    ],
+    "known_weaknesses": [
+      "manual data transformations without traceability"
+    ],
+    "applicable_standards": [
+      "XBRL",
+      "SOX_ITGC"
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  }
+]

@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: ["**"]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "25"
+
+      - name: Build Ingestion Dataset
+        run: npm run ingest
+
+      - name: Drift Check
+        run: npm run check:drift
+
+      - name: Data Integrity Gate
+        run: npm run check:data
+
+      - name: MCP Health Check
+        run: npm run check
+
+      - name: Test Suite
+        run: npm test

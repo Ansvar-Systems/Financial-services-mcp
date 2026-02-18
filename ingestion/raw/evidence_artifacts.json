@@ -1,0 +1,262 @@
+[
+  {
+    "id": "ev-dora-ict-framework",
+    "audit_type": "DORA Compliance",
+    "artifact_name": "ICT risk management framework",
+    "description": "Documented framework covering ICT governance, risk controls, and resilience metrics.",
+    "mandatory": true,
+    "retention_period": "7 years",
+    "template_ref": "tmpl/dora-ict-framework.md",
+    "regulation_basis": [
+      {
+        "regulation_id": "DORA",
+        "article": "6"
+      }
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "ev-dora-third-party-register",
+    "audit_type": "DORA Compliance",
+    "artifact_name": "ICT third-party register of information",
+    "description": "Contractual, criticality, and service dependency registry for ICT providers.",
+    "mandatory": true,
+    "retention_period": "7 years",
+    "template_ref": "tmpl/dora-third-party-register.csv",
+    "regulation_basis": [
+      {
+        "regulation_id": "DORA",
+        "article": "28"
+      }
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "ev-pci-network-diagrams",
+    "audit_type": "PCI DSS 4.0 Assessment",
+    "artifact_name": "CDE network and data flow diagrams",
+    "description": "Current diagrams showing card data environment boundaries and connected systems.",
+    "mandatory": true,
+    "retention_period": "1 year",
+    "template_ref": "tmpl/pci-network-diagram.drawio",
+    "regulation_basis": [
+      {
+        "regulation_id": "PCI_DSS_4_0",
+        "clause": "Req 1"
+      }
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "ev-pci-testing",
+    "audit_type": "PCI DSS 4.0 Assessment",
+    "artifact_name": "Quarterly ASV and penetration test evidence",
+    "description": "External/internal vulnerability scans and penetration testing outcomes.",
+    "mandatory": true,
+    "retention_period": "1 year",
+    "template_ref": "tmpl/pci-testing-evidence.md",
+    "regulation_basis": [
+      {
+        "regulation_id": "PCI_DSS_4_0",
+        "clause": "Req 11"
+      }
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "ev-swift-attestation",
+    "audit_type": "SWIFT CSP Attestation",
+    "artifact_name": "SWIFT CSP attestation package",
+    "description": "Evidence for mandatory/advisory controls and annual attestation.",
+    "mandatory": true,
+    "retention_period": "3 years",
+    "template_ref": "tmpl/swift-csp-attestation.md",
+    "regulation_basis": [
+      {
+        "regulation_id": "SWIFT_CSP",
+        "clause": "attestation"
+      }
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "ev-sox-itgc",
+    "audit_type": "SOX IT Controls",
+    "artifact_name": "ITGC control operation evidence",
+    "description": "Access, change, and operations control evidence supporting SOX reporting controls.",
+    "mandatory": true,
+    "retention_period": "7 years",
+    "template_ref": "tmpl/sox-itgc-control-log.xlsx",
+    "regulation_basis": [
+      {
+        "regulation_id": "SOX",
+        "section": "404"
+      }
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "ev-glba-wisp",
+    "audit_type": "GLBA Safeguards",
+    "artifact_name": "Written information security program",
+    "description": "GLBA safeguards-aligned security program and risk assessment evidence.",
+    "mandatory": true,
+    "retention_period": "5 years",
+    "template_ref": "tmpl/glba-wisp.md",
+    "regulation_basis": [
+      {
+        "regulation_id": "GLBA",
+        "section": "501(b)"
+      }
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "ev-aml-monitoring",
+    "audit_type": "AML/BSA Program",
+    "artifact_name": "Transaction monitoring and SAR evidence",
+    "description": "Rule logic, alert handling, and SAR filing evidence.",
+    "mandatory": true,
+    "retention_period": "5 years",
+    "template_ref": "tmpl/aml-monitoring.md",
+    "regulation_basis": [
+      {
+        "regulation_id": "BSA",
+        "section": "5318"
+      }
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "ev-mifid-order-handling",
+    "audit_type": "MiFID II",
+    "artifact_name": "Order handling and best execution evidence",
+    "description": "Procedures and records proving compliant order handling and transaction reporting.",
+    "mandatory": true,
+    "retention_period": "5 years",
+    "template_ref": "tmpl/mifid-order-handling.md",
+    "regulation_basis": [
+      {
+        "regulation_id": "MiFID_II",
+        "article": "27"
+      }
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "ev-ofac-screening-governance",
+    "audit_type": "OFAC/BSA Compliance",
+    "artifact_name": "Sanctions screening governance and tuning evidence",
+    "description": "Documented sanctions screening model governance, threshold tuning, and escalation workflow evidence.",
+    "mandatory": true,
+    "retention_period": "5 years",
+    "template_ref": "tmpl/ofac-screening-governance.md",
+    "regulation_basis": [
+      {
+        "regulation_id": "OFAC",
+        "section": "SDN screening"
+      },
+      {
+        "regulation_id": "BSA",
+        "section": "5318(h)"
+      }
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "ev-psd2-sca-exemption-register",
+    "audit_type": "PSD2 SCA Compliance",
+    "artifact_name": "SCA exemption decision register",
+    "description": "Decision log and monitoring evidence for TRA, low-value, and recurring-payment SCA exemptions.",
+    "mandatory": true,
+    "retention_period": "5 years",
+    "template_ref": "tmpl/psd2-sca-exemptions.csv",
+    "regulation_basis": [
+      {
+        "regulation_id": "PSD2_RTS_SCA",
+        "article": "18"
+      },
+      {
+        "regulation_id": "PSD2",
+        "article": "97"
+      }
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "ev-model-risk-fair-lending",
+    "audit_type": "Fair Lending Model Governance",
+    "artifact_name": "Credit model validation and fairness testing evidence",
+    "description": "Model change logs, challenger testing, fairness metrics, and adverse-action explainability evidence.",
+    "mandatory": true,
+    "retention_period": "7 years",
+    "template_ref": "tmpl/fair-lending-model-validation.md",
+    "regulation_basis": [
+      {
+        "regulation_id": "ECOA",
+        "section": "701"
+      },
+      {
+        "regulation_id": "FCRA",
+        "section": "607"
+      }
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "ev-dora-ict-exit-playbook",
+    "audit_type": "DORA Third-Party Risk",
+    "artifact_name": "Critical ICT provider exit and substitution playbook",
+    "description": "Operational exit plan evidence for critical ICT providers including failover tests and dependency mappings.",
+    "mandatory": true,
+    "retention_period": "7 years",
+    "template_ref": "tmpl/dora-ict-exit-playbook.md",
+    "regulation_basis": [
+      {
+        "regulation_id": "DORA",
+        "article": "28"
+      }
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "ev-instant-pay-fraud-scenarios",
+    "audit_type": "Payments Fraud Controls",
+    "artifact_name": "Instant payment fraud scenario test evidence",
+    "description": "Scenario-based tests for APP fraud controls, mule interdiction, and high-velocity transfer escalation.",
+    "mandatory": true,
+    "retention_period": "5 years",
+    "template_ref": "tmpl/instant-pay-fraud-scenarios.md",
+    "regulation_basis": [
+      {
+        "regulation_id": "GLBA",
+        "section": "501(b)"
+      },
+      {
+        "regulation_id": "PSD2",
+        "article": "97"
+      }
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "ev-cloud-control-plane-drills",
+    "audit_type": "Operational Resilience",
+    "artifact_name": "Cloud control-plane compromise simulation evidence",
+    "description": "Detection, response, and recovery drill evidence for cloud IAM/control-plane compromise in critical financial services.",
+    "mandatory": true,
+    "retention_period": "7 years",
+    "template_ref": "tmpl/cloud-control-plane-drills.md",
+    "regulation_basis": [
+      {
+        "regulation_id": "DORA",
+        "article": "28"
+      },
+      {
+        "regulation_id": "NIS2",
+        "article": "21"
+      }
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  }
+]

@@ -1,0 +1,70 @@
+{
+  "SCF.AC-01": {
+    "title": "Access control and strong authentication",
+    "priority_weight": 100
+  },
+  "SCF.AU-02": {
+    "title": "Audit logging and monitoring",
+    "priority_weight": 92
+  },
+  "SCF.CR-03": {
+    "title": "Cryptographic protection and key handling",
+    "priority_weight": 95
+  },
+  "SCF.NW-06": {
+    "title": "Network segmentation and secure communication",
+    "priority_weight": 90
+  },
+  "SCF.DS-02": {
+    "title": "Data security and minimization",
+    "priority_weight": 89
+  },
+  "SCF.CM-05": {
+    "title": "Secure change management",
+    "priority_weight": 80
+  },
+  "SCF.IR-03": {
+    "title": "Incident response and reporting",
+    "priority_weight": 86
+  },
+  "SCF.GV-04": {
+    "title": "Governance and model risk controls",
+    "priority_weight": 78
+  },
+  "SCF.SD-03": {
+    "title": "Secure software development",
+    "priority_weight": 74
+  },
+  "SCF.TV-01": {
+    "title": "Threat and vulnerability testing",
+    "priority_weight": 72
+  },
+  "SCF.KM-01": {
+    "title": "Cryptographic key management",
+    "priority_weight": 94
+  },
+  "SCF.EN-01": {
+    "title": "Encryption at rest and in transit",
+    "priority_weight": 88
+  },
+  "SCF.SC-04": {
+    "title": "Sanctions screening and interdiction controls",
+    "priority_weight": 93
+  },
+  "SCF.TP-02": {
+    "title": "Third-party ICT risk and concentration governance",
+    "priority_weight": 87
+  },
+  "SCF.FD-01": {
+    "title": "Real-time fraud detection and mule interdiction",
+    "priority_weight": 91
+  },
+  "SCF.AI-01": {
+    "title": "Model governance, validation, and explainability",
+    "priority_weight": 82
+  },
+  "SCF.BC-02": {
+    "title": "Business continuity and recovery testing",
+    "priority_weight": 85
+  }
+}
