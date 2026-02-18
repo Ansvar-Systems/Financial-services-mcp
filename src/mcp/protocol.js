@@ -48,6 +48,10 @@ export function createRequestHandler(repo, options = {}) {
           });
         case "notifications/initialized":
           return null;
+        case "notifications/cancelled":
+          // This server currently executes tool calls synchronously and quickly,
+          // so cancellation is acknowledged as a no-op.
+          return null;
         case "ping":
           return success(id, { ok: true, timestamp: new Date().toISOString() });
         case "tools/list":

@@ -101,9 +101,21 @@ export const toolDefinitions = [
       {
         country: { type: "string", description: "Country or sub-jurisdiction code (SE, DE, US-NY)." },
         role: { type: "string", description: "Entity role (bank, fintech, insurance, payment-institution)." },
-        system_types: { type: "array", items: { type: "string" } },
-        data_types: { type: "array", items: { type: "string" } },
-        additional_context: { type: "object", additionalProperties: true },
+        system_types: {
+          type: "array",
+          items: { type: "string" },
+          description: "System/service types in scope (e.g., payments, lending, fs-open-banking)."
+        },
+        data_types: {
+          type: "array",
+          items: { type: "string" },
+          description: "Financial data categories in scope (e.g., dc-account-data, dc-card-data)."
+        },
+        additional_context: {
+          type: "object",
+          additionalProperties: true,
+          description: "Optional contextual qualifiers such as operating_jurisdictions or delivery model."
+        },
         as_of_date: {
           type: "string",
           description: "Optional temporal evaluation date in YYYY-MM-DD format."
@@ -118,8 +130,8 @@ export const toolDefinitions = [
     inputSchema: obj({
       country: { type: "string", description: "Optional jurisdiction code (e.g., DE, US-TX)." },
       as_of_date: { type: "string", description: "Optional evaluation date in YYYY-MM-DD format." },
-      limit: { type: "number", minimum: 1, maximum: 500 },
-      offset: { type: "number", minimum: 0 }
+      limit: { type: "number", minimum: 1, maximum: 500, default: 100, description: "Max nodes returned (default 100)." },
+      offset: { type: "number", minimum: 0, default: 0, description: "Pagination offset (default 0)." }
     })
   },
   {
@@ -135,14 +147,14 @@ export const toolDefinitions = [
     description: "Full-text search across architecture, threat, data taxonomy, and standards knowledge.",
     inputSchema: obj(
       {
-        query: { type: "string" },
+        query: { type: "string", description: "Search phrase for full-text lookup across domain content." },
         content_type: {
           type: "array",
           items: { type: "string" },
           description: "Optional content filters: architecture_patterns, threat_scenarios, technical_standards, data_categories."
         },
-        limit: { type: "number", minimum: 1, maximum: 25 },
-        offset: { type: "number", minimum: 0 }
+        limit: { type: "number", minimum: 1, maximum: 25, default: 10, description: "Max results per page (default 10)." },
+        offset: { type: "number", minimum: 0, default: 0, description: "Pagination offset (default 0)." }
       },
       ["query"]
     )
@@ -152,8 +164,12 @@ export const toolDefinitions = [
     description: "Compare obligations across jurisdictions for a specific topic.",
     inputSchema: obj(
       {
-        topic: { type: "string" },
-        jurisdictions: { type: "array", items: { type: "string" } },
+        topic: { type: "string", description: "Comparison topic, such as breach notification or incident reporting." },
+        jurisdictions: {
+          type: "array",
+          items: { type: "string" },
+          description: "List of jurisdictions to compare (e.g., EU, SE, US-NY, US-CA)."
+        },
         as_of_date: { type: "string", description: "Optional evaluation date in YYYY-MM-DD format." }
       },
       ["topic", "jurisdictions"]
@@ -166,7 +182,8 @@ export const toolDefinitions = [
       {
         org_profile: {
           type: "object",
-          additionalProperties: true
+          additionalProperties: true,
+          description: "Organization profile including system_types, data_types, and optional operating context."
         }
       },
       ["org_profile"]
@@ -176,8 +193,15 @@ export const toolDefinitions = [
     name: "build_evidence_plan",
     description: "Build required audit evidence plan from baseline and audit type.",
     inputSchema: obj({
-      baseline: { type: "object", additionalProperties: true },
-      audit_type: { type: "string" }
+      baseline: {
+        type: "object",
+        additionalProperties: true,
+        description: "Baseline output or control set used to select evidence artifacts."
+      },
+      audit_type: {
+        type: "string",
+        description: "Optional audit scope filter (e.g., DORA Compliance, PCI DSS 4.0 Assessment)."
+      }
     })
   },
   {
@@ -185,9 +209,17 @@ export const toolDefinitions = [
     description: "Assess breach notification requirements by jurisdiction and data type.",
     inputSchema: obj(
       {
-        incident_description: { type: "string" },
-        jurisdictions: { type: "array", items: { type: "string" } },
-        data_types: { type: "array", items: { type: "string" } },
+        incident_description: { type: "string", description: "Short incident summary used for breach notification routing." },
+        jurisdictions: {
+          type: "array",
+          items: { type: "string" },
+          description: "Impacted jurisdictions (EU, US-FL, US-TX, etc.)."
+        },
+        data_types: {
+          type: "array",
+          items: { type: "string" },
+          description: "Impacted data category IDs or plain-language labels."
+        },
         as_of_date: { type: "string", description: "Optional evaluation date in YYYY-MM-DD format." }
       },
       ["incident_description", "jurisdictions", "data_types"]
@@ -198,8 +230,16 @@ export const toolDefinitions = [
     description: "Create prioritized remediation backlog from current and target control state.",
     inputSchema: obj(
       {
-        current_state: { type: "object", additionalProperties: true },
-        target_baseline: { type: "object", additionalProperties: true }
+        current_state: {
+          type: "object",
+          additionalProperties: true,
+          description: "Current control posture or assessment findings."
+        },
+        target_baseline: {
+          type: "object",
+          additionalProperties: true,
+          description: "Target control baseline produced by build_control_baseline."
+        }
       },
       ["current_state", "target_baseline"]
     )
@@ -209,9 +249,13 @@ export const toolDefinitions = [
     description: "Classify financial entity under DORA and national supervisory context.",
     inputSchema: obj(
       {
-        entity_description: { type: "string" },
-        services: { type: "array", items: { type: "string" } },
-        jurisdiction: { type: "string" }
+        entity_description: { type: "string", description: "Narrative of legal entity, licenses, and activity profile." },
+        services: {
+          type: "array",
+          items: { type: "string" },
+          description: "Primary services offered (payments, lending, custody, brokerage, etc.)."
+        },
+        jurisdiction: { type: "string", description: "Primary jurisdiction code for supervisory classification." }
       },
       ["entity_description", "services", "jurisdiction"]
     )
@@ -221,9 +265,13 @@ export const toolDefinitions = [
     description: "Scope PCI DSS boundaries and determine probable SAQ type.",
     inputSchema: obj(
       {
-        payment_flow: { type: "string" },
-        data_stored: { type: "array", items: { type: "string" } },
-        architecture: { type: "string" }
+        payment_flow: { type: "string", description: "Payment flow narrative including channel and processor handoff." },
+        data_stored: {
+          type: "array",
+          items: { type: "string" },
+          description: "Cardholder data elements stored, processed, or transmitted."
+        },
+        architecture: { type: "string", description: "Architecture context (hosted page, redirect, direct post, tokenized, etc.)." }
       },
       ["payment_flow", "data_stored", "architecture"]
     )
@@ -233,8 +281,8 @@ export const toolDefinitions = [
     description: "Assess SWIFT CSP mandatory and advisory controls based on architecture and role.",
     inputSchema: obj(
       {
-        architecture_type: { type: "string" },
-        operator_role: { type: "string" }
+        architecture_type: { type: "string", description: "SWIFT connectivity pattern (service bureau, Alliance Access, etc.)." },
+        operator_role: { type: "string", description: "Operational role interacting with SWIFT infrastructure." }
       },
       ["architecture_type", "operator_role"]
     )
@@ -244,9 +292,17 @@ export const toolDefinitions = [
     description: "Classify digital asset services for MiCA and US state licensing context.",
     inputSchema: obj(
       {
-        service_description: { type: "string" },
-        asset_types: { type: "array", items: { type: "string" } },
-        jurisdictions: { type: "array", items: { type: "string" } }
+        service_description: { type: "string", description: "Digital asset business model and offered functions." },
+        asset_types: {
+          type: "array",
+          items: { type: "string" },
+          description: "Supported asset categories (stablecoins, utility tokens, securities tokens, etc.)."
+        },
+        jurisdictions: {
+          type: "array",
+          items: { type: "string" },
+          description: "Target jurisdictions for licensing and regulatory classification."
+        }
       },
       ["service_description", "asset_types", "jurisdictions"]
     )

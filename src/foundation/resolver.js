@@ -6,9 +6,13 @@ const ENDPOINT_ENV = {
   "law-mcp": "FOUNDATION_MCP_LAW_URL"
 };
 
-function endpointForMcp(mcp) {
-  const envName = ENDPOINT_ENV[mcp];
-  const value = envName ? process.env[envName] : null;
+const DEFAULT_ENDPOINTS = {
+  "eu-regulations": "https://eu-regulations-mcp.vercel.app/mcp",
+  "us-regulations": "https://us-regulations-mcp.vercel.app/mcp",
+  "security-controls": "https://security-controls-mcp.vercel.app/mcp"
+};
+
+function normalizeEndpoint(value) {
   if (!value) {
     return null;
   }
@@ -16,6 +20,34 @@ function endpointForMcp(mcp) {
     return value;
   }
   return `${value.replace(/\/+$/, "")}/mcp`;
+}
+
+export function resolveFoundationEndpoint(mcp) {
+  const envName = ENDPOINT_ENV[mcp];
+  const envValue = envName ? process.env[envName] : null;
+  if (envValue) {
+    return {
+      endpoint: normalizeEndpoint(envValue),
+      source: "env",
+      envName
+    };
+  }
+  if (DEFAULT_ENDPOINTS[mcp]) {
+    return {
+      endpoint: DEFAULT_ENDPOINTS[mcp],
+      source: "default",
+      envName
+    };
+  }
+  return {
+    endpoint: null,
+    source: "missing",
+    envName
+  };
+}
+
+function endpointForMcp(mcp) {
+  return resolveFoundationEndpoint(mcp).endpoint;
 }
 
 async function callFoundation(endpoint, tool, params, timeoutMs) {

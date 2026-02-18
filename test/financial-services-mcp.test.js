@@ -84,6 +84,21 @@ test("compare breach notification uses jurisdiction-specific statute source URLs
   assert.ok(String(citation.source_url).includes("statutes.capitol.texas.gov"));
 });
 
+test("compare breach notification uses NYDFS source URL for US-NY", () => {
+  const result = repo.compareJurisdictions("breach notification", ["US-NY"]);
+  const citation = result.metadata.citations.find((item) => String(item.ref).startsWith("US-NY:"));
+  assert.ok(citation);
+  assert.ok(String(citation.source_url).includes("dfs.ny.gov"));
+});
+
+test("assess applicability citations use source registry URL for NYDFS_CYBER_500", () => {
+  const result = repo.assessApplicability("US-NY", "fintech", ["payments"], ["dc-account-data"], {}, "2026-02-18");
+  const citation = result.metadata.citations.find((item) => String(item.ref).startsWith("NYDFS_CYBER_500"));
+  assert.ok(citation);
+  assert.equal(citation.type, "LAW_MCP");
+  assert.ok(String(citation.source_url).includes("dfs.ny.gov"));
+});
+
 test("negative domain request redirects out of scope", () => {
   const result = repo.classifyData("medical device classification", ["EU"]);
   assert.ok(result.data.redirect);

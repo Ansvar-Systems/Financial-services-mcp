@@ -22,7 +22,7 @@ This implementation follows the shared domain MCP contract from `domain-mcp-spec
 - Dual transport support:
   - `stdio` (MCP JSON-RPC framed with `Content-Length`)
   - HTTP JSON-RPC at `POST /mcp`
-- Health endpoint at `GET /health`
+- Health endpoint at `GET /health` with status (`ok`/`degraded`/`stale`) and machine-readable reasons
 
 ## Requirements
 
@@ -32,6 +32,12 @@ This implementation follows the shared domain MCP contract from `domain-mcp-spec
 
 ```bash
 npm start
+```
+
+Or run directly via package binary:
+
+```bash
+npx @ansvar/financial-services-mcp
 ```
 
 By default both transports run:
@@ -132,6 +138,16 @@ npm run check
 npm test
 ```
 
+## Registry Metadata
+
+- Registry manifest: `server.json`
+- MCP namespace id: `eu.ansvar/financial-services-mcp`
+- Metadata alignment is tested between `package.json` and `server.json`.
+
+## Changelog
+
+- Release and data-quality history is tracked in `CHANGELOG.md`.
+
 ## Tool Summary
 
 Universal tools:
@@ -174,6 +190,10 @@ Financial-specific tools:
   - `FOUNDATION_MCP_EU_URL`
   - `FOUNDATION_MCP_US_URL`
   - `FOUNDATION_MCP_CONTROLS_URL`
+- If these are not set, the server uses production defaults:
+  - `https://eu-regulations-mcp.vercel.app/mcp`
+  - `https://us-regulations-mcp.vercel.app/mcp`
+  - `https://security-controls-mcp.vercel.app/mcp`
 - Temporal queries: pass `as_of_date` (`YYYY-MM-DD`) to `assess_applicability`, `assess_breach_obligations`, `compare_jurisdictions`, and `get_obligation_graph`.
 - `as_of_date` is strict calendar-validated (invalid dates such as `2026-02-30` are rejected).
 - Runtime prefers compiled ingestion data (`data/domain-dataset.json`) and automatically falls back to embedded seed data if the compiled file is missing or invalid.

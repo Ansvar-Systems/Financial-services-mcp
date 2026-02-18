@@ -4,6 +4,7 @@ import { readFileSync } from "node:fs";
 import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
+import { toolDefinitions } from "../src/mcp/tools.js";
 
 const testDir = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = path.resolve(testDir, "..");
@@ -121,5 +122,25 @@ test("regulatory catalog covers all regulation IDs used in dataset", () => {
 
   const catalogIds = new Set([...(catalog.eu ?? []), ...(catalog.us ?? [])].map((item) => String(item.id).toUpperCase()));
   const missing = [...used].filter((id) => !catalogIds.has(id));
+  assert.deepEqual(missing, []);
+});
+
+test("registry metadata aligns between package.json and server.json", () => {
+  const pkg = JSON.parse(readFileSync(new URL("../package.json", import.meta.url), "utf8"));
+  const server = JSON.parse(readFileSync(new URL("../server.json", import.meta.url), "utf8"));
+  assert.equal(pkg.mcpName, server.name);
+  assert.equal(pkg.version, server.version);
+});
+
+test("tool schemas include parameter descriptions for agent usability", () => {
+  const missing = [];
+  for (const tool of toolDefinitions) {
+    const properties = tool.inputSchema?.properties ?? {};
+    for (const [name, schema] of Object.entries(properties)) {
+      if (!schema?.description) {
+        missing.push(`${tool.name}.${name}`);
+      }
+    }
+  }
   assert.deepEqual(missing, []);
 });

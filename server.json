@@ -1,0 +1,26 @@
+{
+  "name": "eu.ansvar/financial-services-mcp",
+  "displayName": "Ansvar Financial Services MCP",
+  "description": "Financial services domain MCP for architecture, threats, controls, and EU/US regulatory applicability intelligence.",
+  "version": "1.0.0",
+  "repository": {
+    "url": "https://github.com/Ansvar-Systems/Financial-services-mcp"
+  },
+  "license": "MIT",
+  "runtime": {
+    "language": "node",
+    "version": ">=25.0.0"
+  },
+  "transports": {
+    "stdio": {
+      "command": "npx",
+      "args": [
+        "@ansvar/financial-services-mcp"
+      ]
+    },
+    "http": {
+      "url": "https://financial-services-mcp.vercel.app/mcp",
+      "health_url": "https://financial-services-mcp.vercel.app/health"
+    }
+  }
+}

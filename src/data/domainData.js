@@ -1374,25 +1374,29 @@ export const jurisdictionComparisonTopics = {
       obligation: "Notify supervisory authority within 72 hours for personal data breaches.",
       timeline: "72h",
       trigger: "Likely risk to rights and freedoms",
-      source: "GDPR Art. 33"
+      source: "GDPR Art. 33",
+      source_url: "https://eur-lex.europa.eu/eli/reg/2016/679/oj"
     },
     SE: {
       obligation: "GDPR breach reporting plus financial resilience incident reporting under DORA when applicable.",
       timeline: "72h + DORA staged reporting",
       trigger: "Data breach and significant ICT incident",
-      source: "GDPR Art. 33 + DORA Art. 17"
+      source: "GDPR Art. 33 + DORA Art. 17",
+      source_url: "https://eur-lex.europa.eu/eli/reg/2022/2554/oj"
     },
     "US-NY": {
       obligation: "Report qualifying cybersecurity events to NYDFS and satisfy state notice requirements.",
       timeline: "72h (NYDFS) + consumer notice without unreasonable delay",
       trigger: "material cybersecurity event / breach of private information",
-      source: "23 NYCRR 500.17"
+      source: "23 NYCRR 500.17",
+      source_url: "https://www.dfs.ny.gov/industry_guidance/cybersecurity"
     },
     "US-CA": {
       obligation: "Notify affected residents for data breach incidents.",
       timeline: "without unreasonable delay",
       trigger: "breach of personal information",
-      source: "Cal. Civ. Code 1798.82"
+      source: "Cal. Civ. Code 1798.82",
+      source_url: "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?sectionNum=1798.82.&lawCode=CIV"
     }
   },
   "dora vs nydfs incident reporting": {
@@ -1400,13 +1404,15 @@ export const jurisdictionComparisonTopics = {
       obligation: "Classify ICT incidents and provide initial/intermediate/final reports to competent authority.",
       timeline: "staged timelines defined in RTS/ITS",
       trigger: "major ICT-related incident",
-      source: "DORA Art. 17-19"
+      source: "DORA Art. 17-19",
+      source_url: "https://eur-lex.europa.eu/eli/reg/2022/2554/oj"
     },
     NYDFS: {
       obligation: "Notify NYDFS of qualifying cybersecurity event.",
       timeline: "72 hours",
       trigger: "event with notice obligations or material impact",
-      source: "23 NYCRR 500.17"
+      source: "23 NYCRR 500.17",
+      source_url: "https://www.dfs.ny.gov/industry_guidance/cybersecurity"
     }
   },
   "psd2 sca vs reg e disputes": {
@@ -1414,13 +1420,15 @@ export const jurisdictionComparisonTopics = {
       obligation: "Apply strong customer authentication and secure communication for electronic payments.",
       timeline: "pre-transaction",
       trigger: "electronic payment initiation/access",
-      source: "PSD2 Art. 97"
+      source: "PSD2 Art. 97",
+      source_url: "https://eur-lex.europa.eu/eli/dir/2015/2366/oj"
     },
     REG_E: {
       obligation: "Investigate and resolve consumer EFT error claims within statutory windows.",
       timeline: "10 business days (provisional credit extension rules apply)",
       trigger: "consumer dispute of unauthorized EFT",
-      source: "12 CFR 1005"
+      source: "12 CFR 1005",
+      source_url: "https://www.ecfr.gov/current/title-12/chapter-X/part-1005"
     }
   },
   "fda cybersecurity vs eu mdr cybersecurity": {
@@ -1428,13 +1436,15 @@ export const jurisdictionComparisonTopics = {
       obligation: "Premarket and postmarket cybersecurity evidence with vulnerability lifecycle controls.",
       timeline: "premarket submission + ongoing postmarket",
       trigger: "medical device software lifecycle",
-      source: "FDA Section 524B guidance"
+      source: "FDA Section 524B guidance",
+      source_url: "https://www.fda.gov/medical-devices/digital-health-center-excellence/cybersecurity-medical-devices"
     },
     EU_MDR: {
       obligation: "Cybersecurity integrated in safety/risk management and technical documentation.",
       timeline: "conformity assessment + lifecycle monitoring",
       trigger: "MDR/IVDR device classification",
-      source: "MDCG 2019-16"
+      source: "MDCG 2019-16",
+      source_url: "https://eur-lex.europa.eu/eli/reg/2017/745/oj"
     }
   }
 };

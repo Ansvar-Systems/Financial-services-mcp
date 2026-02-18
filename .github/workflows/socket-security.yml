@@ -1,0 +1,38 @@
+name: Socket Security
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+  schedule:
+    - cron: "0 6 * * 1"
+
+concurrency:
+  group: socket-security-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  socket-security:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      issues: write
+      contents: read
+      pull-requests: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Skip when Socket API key is missing
+        if: ${{ secrets.SOCKET_SECURITY_API_KEY == '' }}
+        run: echo "SOCKET_SECURITY_API_KEY is not configured; skipping Socket Security scan."
+
+      - name: Run Socket Basics
+        if: ${{ secrets.SOCKET_SECURITY_API_KEY != '' }}
+        uses: SocketDev/socket-basics@1.0.25
+        env:
+          GITHUB_PR_NUMBER: ${{ github.event.pull_request.number || github.event.issue.number }}
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          socket_security_api_key: ${{ secrets.SOCKET_SECURITY_API_KEY }}

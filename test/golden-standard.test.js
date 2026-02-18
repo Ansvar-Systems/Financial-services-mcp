@@ -123,6 +123,16 @@ test("protocol rejects calendar-invalid as_of_date", async () => {
   assert.match(response.error.message, /not a valid date/i);
 });
 
+test("protocol handles notifications/cancelled as no-op", async () => {
+  const handler = createRequestHandler(repo, { foundationResolver: new FoundationResolver() });
+  const response = await handler({
+    jsonrpc: "2.0",
+    method: "notifications/cancelled",
+    params: { requestId: "demo" }
+  });
+  assert.equal(response, null);
+});
+
 test("temporal applicability excludes DORA before effective date and includes after", () => {
   const before = repo.assessApplicability(
     "DE",

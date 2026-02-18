@@ -1,20 +1,34 @@
 {
   "name": "@ansvar/financial-services-mcp",
+  "mcpName": "eu.ansvar/financial-services-mcp",
   "version": "1.0.0",
   "description": "Financial Services Domain MCP for architecture, data, threat, standards, and applicability intelligence.",
   "type": "module",
   "main": "src/index.js",
+  "bin": {
+    "financial-services-mcp": "bin/financial-services-mcp.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ansvar-Systems/Financial-services-mcp.git"
+  },
+  "homepage": "https://github.com/Ansvar-Systems/Financial-services-mcp#readme",
+  "bugs": {
+    "url": "https://github.com/Ansvar-Systems/Financial-services-mcp/issues"
+  },
   "scripts": {
     "start": "node src/index.js",
     "dev": "node --watch src/index.js",
     "ingest": "node scripts/ingest/build-dataset.mjs",
     "ingest:bootstrap": "node scripts/ingest/bootstrap-from-code.mjs",
     "ingest:verify-sources": "node scripts/ingest/refresh-source-health.mjs",
+    "check:source-updates": "npm run ingest:verify-sources",
     "check:drift": "node scripts/ingest/check-drift.mjs",
     "audit:production": "node scripts/qa/mcp-production-audit.mjs",
     "check:data": "node scripts/qa/data-integrity.mjs",
     "test": "node --test --test-concurrency=1",
-    "check": "node src/index.js --check"
+    "check": "node src/index.js --check",
+    "prepare:release": "npm run ingest && npm run check:drift && npm run check:data && npm run check && npm test && npm run audit:production"
   },
   "keywords": [
     "mcp",

@@ -4,7 +4,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { createDomainDatabase } from "../../src/db/database.js";
-import { FoundationResolver } from "../../src/foundation/resolver.js";
+import { FoundationResolver, resolveFoundationEndpoint } from "../../src/foundation/resolver.js";
 import { createRequestHandler } from "../../src/mcp/protocol.js";
 import { toolDefinitions } from "../../src/mcp/tools.js";
 
@@ -20,7 +20,7 @@ async function main() {
   report.phases.structural = await checkStructural();
   report.phases.data_accuracy = await checkDataAccuracy();
   report.phases.agent_optimization = checkAgentOptimization();
-  report.phases.deployment = checkDeployment();
+  report.phases.deployment = await checkDeployment();
   report.phases.integration = checkIntegration();
 
   const failed = Object.values(report.phases).flatMap((phase) =>
@@ -148,12 +148,52 @@ function checkAgentOptimization() {
   };
 }
 
-function checkDeployment() {
+async function checkDeployment() {
   const failures = [];
-  const expectedFiles = ["src/transports/http.js", "src/transports/stdio.js"];
+  const expectedFiles = [
+    "src/transports/http.js",
+    "src/transports/stdio.js",
+    "server.json",
+    "CHANGELOG.md",
+    ".github/workflows/ci.yml",
+    ".github/workflows/publish.yml",
+    ".github/workflows/check-source-updates.yml"
+  ];
   for (const file of expectedFiles) {
     if (!existsSync(path.join(root, file))) {
-      failures.push(`Missing transport file '${file}'.`);
+      failures.push(`Missing deployment artifact '${file}'.`);
+    }
+  }
+
+  const securityWorkflows = [
+    ".github/workflows/codeql.yml",
+    ".github/workflows/semgrep.yml",
+    ".github/workflows/trivy.yml",
+    ".github/workflows/gitleaks.yml",
+    ".github/workflows/socket-security.yml",
+    ".github/workflows/scorecard.yml"
+  ];
+  for (const file of securityWorkflows) {
+    if (!existsSync(path.join(root, file))) {
+      failures.push(`Missing required security workflow '${file}'.`);
+    }
+  }
+
+  if (existsSync(path.join(root, "package.json")) && existsSync(path.join(root, "server.json"))) {
+    try {
+      const pkg = JSON.parse(await readFile(path.join(root, "package.json"), "utf8"));
+      const server = JSON.parse(await readFile(path.join(root, "server.json"), "utf8"));
+      if (pkg.mcpName !== server.name) {
+        failures.push("package.json mcpName does not match server.json name.");
+      }
+      if (pkg.version !== server.version) {
+        failures.push("package.json version does not match server.json version.");
+      }
+      if (!pkg.bin || typeof pkg.bin !== "object" || Object.keys(pkg.bin).length === 0) {
+        failures.push("package.json is missing a stdio bin entry.");
+      }
+    } catch (error) {
+      failures.push(`Failed to parse package/server metadata: ${error instanceof Error ? error.message : String(error)}`);
     }
   }
   return {
@@ -164,18 +204,19 @@ function checkDeployment() {
 
 function checkIntegration() {
   const failures = [];
-  const endpointVars = [
-    "FOUNDATION_MCP_EU_URL",
-    "FOUNDATION_MCP_US_URL",
-    "FOUNDATION_MCP_CONTROLS_URL"
+  const requiredFoundations = [
+    { mcp: "eu-regulations", label: "FOUNDATION_MCP_EU_URL" },
+    { mcp: "us-regulations", label: "FOUNDATION_MCP_US_URL" },
+    { mcp: "security-controls", label: "FOUNDATION_MCP_CONTROLS_URL" }
   ];
-  for (const variable of endpointVars) {
-    if (!process.env[variable]) {
-      failures.push(`Integration endpoint '${variable}' is not configured (acceptable for offline mode).`);
+  for (const entry of requiredFoundations) {
+    const resolved = resolveFoundationEndpoint(entry.mcp);
+    if (!resolved.endpoint) {
+      failures.push(`Integration endpoint '${entry.label}' is not configured and no default endpoint is available.`);
     }
   }
   return {
-    status: failures.length === 0 ? "pass" : "warn",
+    status: failures.length === 0 ? "pass" : "fail",
     failures
   };
 }

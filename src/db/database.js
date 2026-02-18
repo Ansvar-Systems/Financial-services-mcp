@@ -721,8 +721,15 @@ function expandCompositeRegulationIds(regulationIdInput) {
 }
 
 function regulationReferenceToCitationType(obligation, regulationId) {
+  const reg = String(regulationId ?? "").toUpperCase();
   if (obligation.article || isEuRegulationId(regulationId)) {
     return "CELEX";
+  }
+  if (["NYDFS_CYBER_500", "STATE_BREACH_NOTIFICATION", "BIPA", "CCPA"].includes(reg)) {
+    return "LAW_MCP";
+  }
+  if (["PCI_DSS_4_0", "SWIFT_CSP"].includes(reg)) {
+    return "STD";
   }
   return "CFR";
 }
@@ -777,10 +784,23 @@ function sourceUrlForComparisonSource(source, fallbackUrl) {
   if (fallbackUrl) {
     return fallbackUrl;
   }
+  const value = normalizeText(source);
+  if (value.includes("23 nycrr") || value.includes("nydfs")) {
+    return "https://www.dfs.ny.gov/industry_guidance/cybersecurity";
+  }
+  if (value.includes("cal. civ. code") || value.includes("1798.82")) {
+    return "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?sectionNum=1798.82.&lawCode=CIV";
+  }
+  if (value.includes("fla. stat") || value.includes("501.171")) {
+    return "https://www.flsenate.gov/Laws/Statutes/2024/501.171";
+  }
+  if (value.includes("tex. bus.") || value.includes("tex bus")) {
+    return "https://statutes.capitol.texas.gov/Docs/BC/htm/BC.521.htm";
+  }
   if (looksLikeEuReference(source)) {
     return "https://eur-lex.europa.eu/";
   }
-  if (String(source ?? "").toLowerCase().includes("not available")) {
+  if (value.includes("not available")) {
     return "https://www.ecfr.gov/";
   }
   return "https://www.ecfr.gov/";
@@ -842,6 +862,41 @@ export class FinancialServicesRepository {
     this.db = db;
     this.datasetFingerprint = datasetFingerprint;
     this.keywordMap = mapDataCategoryKeywords();
+    this.regulationSourceUrlById = this.buildRegulationSourceUrlIndex();
+  }
+
+  buildRegulationSourceUrlIndex() {
+    const index = new Map();
+    const rows = this.db.prepare("SELECT id, name, source_url FROM source_registry").all();
+    for (const row of rows) {
+      const sourceUrl = String(row.source_url ?? "").trim();
+      if (!sourceUrl) {
+        continue;
+      }
+      const nameKey = normalizeText(row.name);
+      if (nameKey) {
+        index.set(nameKey, sourceUrl);
+      }
+      const idKey = normalizeText(row.id);
+      if (idKey) {
+        index.set(idKey, sourceUrl);
+      }
+      const normalizedFromSourceId = idKey.startsWith("src-reg-")
+        ? idKey.slice("src-reg-".length).replace(/-/g, "_")
+        : "";
+      if (normalizedFromSourceId) {
+        index.set(normalizedFromSourceId, sourceUrl);
+      }
+    }
+    return index;
+  }
+
+  sourceUrlForRegulation(regulationId) {
+    const key = normalizeText(regulationId);
+    if (key && this.regulationSourceUrlById.has(key)) {
+      return this.regulationSourceUrlById.get(key);
+    }
+    return isEuRegulationId(regulationId) ? "https://eur-lex.europa.eu/" : "https://www.ecfr.gov/";
   }
 
   about() {
@@ -1297,7 +1352,7 @@ export class FinancialServicesRepository {
             ref: `${regulationId}${obligation.article ? ` Art. ${obligation.article}` : ""}${
               obligation.section ? ` Sec. ${obligation.section}` : ""
             }${obligation.clause ? ` ${obligation.clause}` : ""}`,
-            source_url: isEuRegulationId(regulationId) ? "https://eur-lex.europa.eu/" : "https://www.ecfr.gov/"
+            source_url: this.sourceUrlForRegulation(regulationId)
           }))
         ),
         foundation_mcp_calls: foundationCalls
