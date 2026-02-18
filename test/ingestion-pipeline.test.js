@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
+import { existsSync } from "node:fs";
 import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
@@ -123,6 +124,223 @@ test("regulatory catalog covers all regulation IDs used in dataset", () => {
   const catalogIds = new Set([...(catalog.eu ?? []), ...(catalog.us ?? [])].map((item) => String(item.id).toUpperCase()));
   const missing = [...used].filter((id) => !catalogIds.has(id));
   assert.deepEqual(missing, []);
+});
+
+test("every catalog regulation has standards, applicability, and evidence coverage", () => {
+  const dataset = JSON.parse(readFileSync(new URL("../data/domain-dataset.json", import.meta.url), "utf8"));
+  const catalog = JSON.parse(
+    readFileSync(new URL("../ingestion/reference/regulatory_catalog.eu-us.json", import.meta.url), "utf8")
+  );
+  const catalogIds = new Set([...(catalog.eu ?? []), ...(catalog.us ?? [])].map((item) => String(item.id).toUpperCase()));
+
+  const mappedInRules = new Set(
+    (dataset.applicabilityRules ?? [])
+      .filter((item) => String(item?.obligation?.standard_id ?? "").trim())
+      .map((item) => String(item?.obligation?.regulation_id ?? "").toUpperCase())
+      .filter(Boolean)
+  );
+  const mappedInStandards = new Set(
+    (dataset.technicalStandards ?? [])
+      .flatMap((item) => item.regulation_mappings ?? [])
+      .map((item) => String(item?.regulation_id ?? "").toUpperCase())
+      .filter(Boolean)
+  );
+  const mappedInEvidence = new Set(
+    (dataset.evidenceArtifacts ?? [])
+      .flatMap((item) => item.regulation_basis ?? [])
+      .map((item) => String(item?.regulation_id ?? "").toUpperCase())
+      .filter(Boolean)
+  );
+  const mappedInThreats = new Set(
+    (dataset.threatScenarios ?? [])
+      .flatMap((item) => item.regulation_refs ?? [])
+      .map((item) => String(item?.regulation_id ?? "").toUpperCase())
+      .filter(Boolean)
+  );
+
+  const missingRules = [...catalogIds].filter((id) => !mappedInRules.has(id));
+  const missingStandards = [...catalogIds].filter((id) => !mappedInStandards.has(id));
+  const missingEvidence = [...catalogIds].filter((id) => !mappedInEvidence.has(id));
+  const missingThreats = [...catalogIds].filter((id) => !mappedInThreats.has(id));
+
+  assert.deepEqual(missingRules, []);
+  assert.deepEqual(missingStandards, []);
+  assert.deepEqual(missingEvidence, []);
+  assert.deepEqual(missingThreats, []);
+});
+
+test("every technical standard is adopted by at least one applicability rule", () => {
+  const dataset = JSON.parse(readFileSync(new URL("../data/domain-dataset.json", import.meta.url), "utf8"));
+  const standardIds = new Set((dataset.technicalStandards ?? []).map((item) => item.id).filter(Boolean));
+  const adoptedStandardIds = new Set(
+    (dataset.applicabilityRules ?? [])
+      .map((item) => String(item?.obligation?.standard_id ?? "").trim())
+      .filter(Boolean)
+  );
+  const orphanStandards = [...standardIds].filter((id) => !adoptedStandardIds.has(id));
+  assert.deepEqual(orphanStandards, []);
+});
+
+test("every architecture pattern has at least one linked threat scenario", () => {
+  const dataset = JSON.parse(readFileSync(new URL("../data/domain-dataset.json", import.meta.url), "utf8"));
+  const patternIds = new Set((dataset.architecturePatterns ?? []).map((item) => item.id).filter(Boolean));
+  const coveredPatternIds = new Set(
+    (dataset.threatScenarios ?? []).flatMap((item) => item.affected_patterns ?? []).filter(Boolean)
+  );
+  const missingPatternCoverage = [...patternIds].filter((id) => !coveredPatternIds.has(id));
+  assert.deepEqual(missingPatternCoverage, []);
+});
+
+test("every architecture pattern has explicit applicability-rule coverage", () => {
+  const dataset = JSON.parse(readFileSync(new URL("../data/domain-dataset.json", import.meta.url), "utf8"));
+  const patternIds = new Set((dataset.architecturePatterns ?? []).map((item) => item.id).filter(Boolean));
+  const coveredByRules = new Set(
+    (dataset.applicabilityRules ?? []).flatMap((item) => item?.condition?.system_types ?? []).filter(Boolean)
+  );
+  const missingApplicabilityCoverage = [...patternIds].filter((id) => !coveredByRules.has(id));
+  assert.deepEqual(missingApplicabilityCoverage, []);
+});
+
+test("every threat scenario links to at least one evidence artifact by regulation", () => {
+  const dataset = JSON.parse(readFileSync(new URL("../data/domain-dataset.json", import.meta.url), "utf8"));
+  const evidenceRegs = new Set(
+    (dataset.evidenceArtifacts ?? [])
+      .flatMap((item) => item.regulation_basis ?? [])
+      .map((item) => String(item?.regulation_id ?? "").toUpperCase())
+      .filter(Boolean)
+  );
+  const unlinkedThreats = [];
+  for (const threat of dataset.threatScenarios ?? []) {
+    const regs = (threat.regulation_refs ?? [])
+      .map((ref) => String(ref?.regulation_id ?? "").toUpperCase())
+      .filter(Boolean);
+    if (regs.length === 0 || !regs.some((reg) => evidenceRegs.has(reg))) {
+      unlinkedThreats.push(threat.id);
+    }
+  }
+  assert.deepEqual(unlinkedThreats, []);
+});
+
+test("every evidence artifact template_ref exists in repository", () => {
+  const dataset = JSON.parse(readFileSync(new URL("../data/domain-dataset.json", import.meta.url), "utf8"));
+  const missingTemplates = [];
+  for (const artifact of dataset.evidenceArtifacts ?? []) {
+    const templateRef = String(artifact?.template_ref ?? "").trim();
+    if (!templateRef) {
+      missingTemplates.push(`${artifact?.id ?? "<missing id>"}::<missing>`);
+      continue;
+    }
+    const abs = path.resolve(projectRoot, templateRef);
+    if (!existsSync(abs)) {
+      missingTemplates.push(`${artifact.id}::${templateRef}`);
+    }
+  }
+  assert.deepEqual(missingTemplates, []);
+});
+
+test("evidence templates are production-grade and non-placeholder", () => {
+  const dataset = JSON.parse(readFileSync(new URL("../data/domain-dataset.json", import.meta.url), "utf8"));
+  const failures = [];
+  const requiredMdHeadings = [
+    "## Document Control",
+    "## Control Objective",
+    "## Regulatory Basis",
+    "## Evidence Collection Checklist",
+    "## Review and Approval"
+  ];
+
+  for (const artifact of dataset.evidenceArtifacts ?? []) {
+    const templateRef = String(artifact?.template_ref ?? "").trim();
+    if (!templateRef) {
+      failures.push(`${artifact?.id ?? "<missing id>"}::missing-template-ref`);
+      continue;
+    }
+    const abs = path.resolve(projectRoot, templateRef);
+    if (!existsSync(abs)) {
+      failures.push(`${artifact.id}::missing-file`);
+      continue;
+    }
+    const content = readFileSync(abs, "utf8");
+    const lowered = content.toLowerCase();
+    if (lowered.includes("placeholder")) {
+      failures.push(`${artifact.id}::placeholder-content`);
+      continue;
+    }
+    if (templateRef.endsWith(".md")) {
+      if (content.length < 1200) {
+        failures.push(`${artifact.id}::md-too-short`);
+      }
+      for (const heading of requiredMdHeadings) {
+        if (!content.includes(heading)) {
+          failures.push(`${artifact.id}::missing-heading:${heading}`);
+        }
+      }
+    } else if (templateRef.endsWith(".csv")) {
+      const firstLine = content.split(/\r?\n/, 1)[0] ?? "";
+      const columnCount = firstLine.split(",").map((part) => part.trim()).filter(Boolean).length;
+      if (columnCount < 8) {
+        failures.push(`${artifact.id}::csv-too-few-columns`);
+      }
+    } else if (templateRef.endsWith(".drawio")) {
+      if (!content.includes("<mxfile") || !content.includes("<mxGraphModel")) {
+        failures.push(`${artifact.id}::invalid-drawio`);
+      }
+    }
+  }
+
+  assert.deepEqual(failures, []);
+});
+
+test("every technical standard links to threats and evidence via regulation mappings", () => {
+  const dataset = JSON.parse(readFileSync(new URL("../data/domain-dataset.json", import.meta.url), "utf8"));
+  const threatRegs = new Set(
+    (dataset.threatScenarios ?? [])
+      .flatMap((item) => item.regulation_refs ?? [])
+      .map((ref) => String(ref?.regulation_id ?? "").toUpperCase())
+      .filter(Boolean)
+  );
+  const evidenceRegs = new Set(
+    (dataset.evidenceArtifacts ?? [])
+      .flatMap((item) => item.regulation_basis ?? [])
+      .map((ref) => String(ref?.regulation_id ?? "").toUpperCase())
+      .filter(Boolean)
+  );
+
+  const missingThreatLink = [];
+  const missingEvidenceLink = [];
+  for (const standard of dataset.technicalStandards ?? []) {
+    const regs = (standard.regulation_mappings ?? [])
+      .map((ref) => String(ref?.regulation_id ?? "").toUpperCase())
+      .filter(Boolean);
+    if (regs.length === 0 || !regs.some((reg) => threatRegs.has(reg))) {
+      missingThreatLink.push(standard.id);
+    }
+    if (regs.length === 0 || !regs.some((reg) => evidenceRegs.has(reg))) {
+      missingEvidenceLink.push(standard.id);
+    }
+  }
+
+  assert.deepEqual(missingThreatLink, []);
+  assert.deepEqual(missingEvidenceLink, []);
+});
+
+test("every evidence artifact links to applicability rules via regulation basis", () => {
+  const dataset = JSON.parse(readFileSync(new URL("../data/domain-dataset.json", import.meta.url), "utf8"));
+  const applicabilityRegs = new Set(
+    (dataset.applicabilityRules ?? [])
+      .map((item) => String(item?.obligation?.regulation_id ?? "").toUpperCase())
+      .filter(Boolean)
+  );
+  const unlinkedEvidence = [];
+  for (const artifact of dataset.evidenceArtifacts ?? []) {
+    const regs = (artifact.regulation_basis ?? [])
+      .map((ref) => String(ref?.regulation_id ?? "").toUpperCase())
+      .filter(Boolean);
+    if (regs.length === 0 || !regs.some((reg) => applicabilityRegs.has(reg))) {
+      unlinkedEvidence.push(artifact.id);
+    }
+  }
+  assert.deepEqual(unlinkedEvidence, []);
 });
 
 test("registry metadata aligns between package.json and server.json", () => {

@@ -1,0 +1,2 @@
+control_id,control_domain,control_description,application_name,owner,frequency,evidence_reference,last_execution_date,tester,test_result,finding_id,remediation_due_date,status
+,, , , , , , , , , , ,

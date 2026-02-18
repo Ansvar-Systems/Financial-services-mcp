@@ -7,6 +7,7 @@ This implementation follows the shared domain MCP contract from `domain-mcp-spec
 - Universal domain tools (`about`, `classify_data`, `assess_applicability`, `build_control_baseline`, etc.)
 - Financial-specific tools (`classify_financial_entity`, `scope_pci_dss`, `assess_swift_csp`, `classify_digital_asset_service`)
 - SQLite + FTS5 domain dataset with architecture patterns, data taxonomy, threat catalog, standards crosswalk, applicability rules, and evidence artifacts
+- Financial-domain standards are curated here; generic cross-sector security baselines are delegated to the `security-controls` foundation MCP
 - Ingestion pipeline with raw domain inputs in `ingestion/raw`, compiled dataset artifacts in `data/`, and provenance export in `sources.yml`
 - EU + US baseline jurisdiction coverage generation during ingestion (27 EU member states + 50 US states + DC)
 - Temporal obligation reasoning (`as_of_date`) with generated obligation graph nodes/edges
@@ -92,7 +93,7 @@ Run data completeness/correctness gate (coverage + cross-reference integrity):
 npm run check:data
 ```
 
-`check:data` also enforces that all regulation IDs referenced across rules/threats/standards/evidence exist in `ingestion/reference/regulatory_catalog.eu-us.json`.
+`check:data` also enforces that all regulation IDs referenced across rules/threats/standards/evidence exist in `ingestion/reference/regulatory_catalog.eu-us.json`, that every catalog regulation is covered in applicability-to-standard mappings, standards crosswalks, threat scenarios, and evidence artifacts, that no standards/patterns/threats are orphaned (unused standards, patterns without threats, patterns without applicability rules, or threats without evidence linkage), that each `evidence_artifacts.template_ref` file exists, and that standards/evidence have cross-layer linkage (standards link to threats+evidence; evidence links to applicability rules) via shared regulation IDs.
 
 Verify source URL reachability and capture HTTP/title health report:
 

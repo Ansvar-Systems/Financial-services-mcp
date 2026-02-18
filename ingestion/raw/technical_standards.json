@@ -65,6 +65,10 @@
       {
         "regulation_id": "DORA",
         "article": "9"
+      },
+      {
+        "regulation_id": "SWIFT_CSP",
+        "clause": "mandatory controls"
       }
     ],
     "implementation_guidance": "Segregate operator roles, harden endpoints, and verify release workflow integrity.",
@@ -234,6 +238,18 @@
       {
         "regulation_id": "DORA",
         "article": "28"
+      },
+      {
+        "regulation_id": "GDPR",
+        "article": "32"
+      },
+      {
+        "regulation_id": "CCPA",
+        "section": "1798.150"
+      },
+      {
+        "regulation_id": "BaFin_VAIT",
+        "section": "ICT"
       }
     ],
     "implementation_guidance": "Apply cloud-native access boundaries and processor assurance evidence.",
@@ -262,6 +278,10 @@
       {
         "regulation_id": "GLBA",
         "section": "501(b)"
+      },
+      {
+        "regulation_id": "STATE_BREACH_NOTIFICATION",
+        "section": "state notification process"
       }
     ],
     "implementation_guidance": "Align fraud and breach investigations with forensic chain-of-custody.",
@@ -315,6 +335,10 @@
       {
         "regulation_id": "SOX",
         "section": "302"
+      },
+      {
+        "regulation_id": "Solvency_II",
+        "article": "35"
       }
     ],
     "implementation_guidance": "Use deterministic transformation pipelines and lineage checks.",
@@ -341,6 +365,26 @@
       {
         "regulation_id": "DORA",
         "article": "13"
+      },
+      {
+        "regulation_id": "OFAC",
+        "section": "sanctions intelligence"
+      },
+      {
+        "regulation_id": "NIS2",
+        "article": "23"
+      },
+      {
+        "regulation_id": "AMLD6",
+        "article": "7"
+      },
+      {
+        "regulation_id": "AMLD6_BSA",
+        "section": "monitoring"
+      },
+      {
+        "regulation_id": "MiCA",
+        "article": "63"
       }
     ],
     "implementation_guidance": "Integrate FS-ISAC feeds with detection engineering pipelines.",
@@ -484,6 +528,435 @@
     ],
     "implementation_guidance": "Define impact tolerances, sector-wide scenario testing, and time-bound recovery objectives for critical payment services.",
     "licensing_restrictions": "Public guidance.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "std-epc-sepa-rulebooks",
+    "name": "EPC SEPA Scheme Rulebooks (SCT/SDD/SCT Inst)",
+    "version": "2025",
+    "publisher": "European Payments Council",
+    "scope": "EU account-to-account payment scheme interoperability and participant obligations",
+    "key_clauses": [
+      "SCT inter-PSP message set",
+      "SCT Inst execution constraints",
+      "R-transaction lifecycle"
+    ],
+    "control_mappings": [
+      {
+        "framework": "scf",
+        "control_id": "SCF.NW-06"
+      },
+      {
+        "framework": "scf",
+        "control_id": "SCF.AU-02"
+      },
+      {
+        "framework": "scf",
+        "control_id": "SCF.FD-01"
+      }
+    ],
+    "regulation_mappings": [
+      {
+        "regulation_id": "PSD2",
+        "article": "87"
+      },
+      {
+        "regulation_id": "PSR",
+        "article": "payment service operation"
+      }
+    ],
+    "implementation_guidance": "Align API and clearing interfaces to SEPA scheme message constraints, return reason codes, and exception processing timelines.",
+    "licensing_restrictions": "Scheme rulebooks are published by EPC with usage terms.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "std-nacha-operating-rules",
+    "name": "Nacha Operating Rules",
+    "version": "2026",
+    "publisher": "Nacha",
+    "scope": "US ACH processing, authorization, and risk controls",
+    "key_clauses": [
+      "WEB/PPD authorization",
+      "return rate thresholds",
+      "fraud monitoring obligations"
+    ],
+    "control_mappings": [
+      {
+        "framework": "scf",
+        "control_id": "SCF.AC-01"
+      },
+      {
+        "framework": "scf",
+        "control_id": "SCF.FD-01"
+      },
+      {
+        "framework": "scf",
+        "control_id": "SCF.AU-02"
+      }
+    ],
+    "regulation_mappings": [
+      {
+        "regulation_id": "GLBA",
+        "section": "501(b)"
+      },
+      {
+        "regulation_id": "BSA",
+        "section": "5318(h)"
+      }
+    ],
+    "implementation_guidance": "Apply originator authorization validation, return-rate monitoring, and exposure controls for ACH origination and receiving activities.",
+    "licensing_restrictions": "Rule text is proprietary to Nacha; references and summaries only.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "std-etsi-eidas-trust-services",
+    "name": "ETSI eIDAS Trust Service Standards",
+    "version": "EN 319 series",
+    "publisher": "ETSI",
+    "scope": "Qualified trust services and certificate policy requirements used in EU financial identity and signing flows",
+    "key_clauses": [
+      "EN 319 401 policy requirements",
+      "certificate issuance and lifecycle",
+      "qualified signature and seal assurance"
+    ],
+    "control_mappings": [
+      {
+        "framework": "scf",
+        "control_id": "SCF.CR-03"
+      },
+      {
+        "framework": "scf",
+        "control_id": "SCF.AC-01"
+      },
+      {
+        "framework": "scf",
+        "control_id": "SCF.NW-06"
+      }
+    ],
+    "regulation_mappings": [
+      {
+        "regulation_id": "eIDAS",
+        "article": "24"
+      },
+      {
+        "regulation_id": "PSD2",
+        "article": "98"
+      }
+    ],
+    "implementation_guidance": "Use qualified certificates for PSD2/eIDAS trust boundaries and enforce certificate lifecycle validation in onboarding and transaction signing.",
+    "licensing_restrictions": "ETSI publications are publicly available with ETSI IPR policy terms.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "std-esma-rts-6",
+    "name": "ESMA MiFID II RTS 6",
+    "version": "Regulatory Technical Standard",
+    "publisher": "ESMA",
+    "scope": "Algorithmic trading systems controls, testing, and governance",
+    "key_clauses": [
+      "pre-trade controls",
+      "kill functionality",
+      "conformance and stress testing"
+    ],
+    "control_mappings": [
+      {
+        "framework": "scf",
+        "control_id": "SCF.TV-01"
+      },
+      {
+        "framework": "scf",
+        "control_id": "SCF.NW-06"
+      },
+      {
+        "framework": "scf",
+        "control_id": "SCF.AU-02"
+      }
+    ],
+    "regulation_mappings": [
+      {
+        "regulation_id": "MiFID_II",
+        "article": "17"
+      },
+      {
+        "regulation_id": "MAR",
+        "article": "16"
+      }
+    ],
+    "implementation_guidance": "Implement deterministic pre-trade risk controls, venue conformance test evidence, and governance over model and strategy changes.",
+    "licensing_restrictions": "EU legal text references; use official ESMA/eur-lex publications.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "std-iso-17442-lei",
+    "name": "ISO 17442 LEI",
+    "version": "2020",
+    "publisher": "ISO / GLEIF",
+    "scope": "Legal entity identifier data model for counterparties in reporting and surveillance",
+    "key_clauses": [
+      "LEI reference data quality",
+      "entity uniqueness",
+      "parent relationship reporting"
+    ],
+    "control_mappings": [
+      {
+        "framework": "scf",
+        "control_id": "SCF.DS-02"
+      },
+      {
+        "framework": "scf",
+        "control_id": "SCF.AU-02"
+      }
+    ],
+    "regulation_mappings": [
+      {
+        "regulation_id": "MiFID_II",
+        "article": "26"
+      },
+      {
+        "regulation_id": "MAR",
+        "article": "4"
+      },
+      {
+        "regulation_id": "MiCA",
+        "article": "68"
+      }
+    ],
+    "implementation_guidance": "Enforce LEI capture and periodic validation for issuers, counterparties, and reportable entities across trading and digital-asset workflows.",
+    "licensing_restrictions": "ISO text licensing applies; LEI reference data from GLEIF is open.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "std-iso-10383-mic",
+    "name": "ISO 10383 MIC",
+    "version": "2025",
+    "publisher": "ISO",
+    "scope": "Market Identifier Codes for venue and execution reporting normalization",
+    "key_clauses": [
+      "operating MIC",
+      "segment MIC",
+      "venue classification"
+    ],
+    "control_mappings": [
+      {
+        "framework": "scf",
+        "control_id": "SCF.DS-02"
+      },
+      {
+        "framework": "scf",
+        "control_id": "SCF.AU-02"
+      }
+    ],
+    "regulation_mappings": [
+      {
+        "regulation_id": "MiFID_II",
+        "article": "25"
+      },
+      {
+        "regulation_id": "MAR",
+        "article": "16"
+      }
+    ],
+    "implementation_guidance": "Normalize venue identifiers in order/trade surveillance and transaction reporting pipelines to reduce reconciliation drift.",
+    "licensing_restrictions": "ISO publication terms apply.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "std-fatf-recommendations",
+    "name": "FATF Recommendations",
+    "version": "2023",
+    "publisher": "FATF",
+    "scope": "Risk-based AML/CFT controls including customer due diligence, sanctions, and monitoring",
+    "key_clauses": [
+      "Recommendation 10 CDD",
+      "Recommendation 16 wire transfers",
+      "Recommendation 20 suspicious transaction reporting"
+    ],
+    "control_mappings": [
+      {
+        "framework": "scf",
+        "control_id": "SCF.FD-01"
+      },
+      {
+        "framework": "scf",
+        "control_id": "SCF.AU-02"
+      },
+      {
+        "framework": "scf",
+        "control_id": "SCF.IR-03"
+      }
+    ],
+    "regulation_mappings": [
+      {
+        "regulation_id": "AMLD5",
+        "article": "13"
+      },
+      {
+        "regulation_id": "AMLD6",
+        "article": "7"
+      },
+      {
+        "regulation_id": "AMLD6_BSA",
+        "section": "monitoring"
+      },
+      {
+        "regulation_id": "BSA",
+        "section": "5318(h)"
+      },
+      {
+        "regulation_id": "OFAC",
+        "section": "SDN screening"
+      },
+      {
+        "regulation_id": "MiCA",
+        "article": "63"
+      }
+    ],
+    "implementation_guidance": "Implement risk-based customer due diligence, sanctions screening, and transaction monitoring controls with documented escalation and governance.",
+    "licensing_restrictions": "Public policy standard; jurisdictional transposition varies.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "std-ivms-101",
+    "name": "IVMS101",
+    "version": "2023",
+    "publisher": "Joint Working Group on interVASP Messaging",
+    "scope": "Travel Rule data model interoperability for virtual asset service providers",
+    "key_clauses": [
+      "originator/beneficiary attribute schema",
+      "message transport neutrality",
+      "jurisdictional optionality"
+    ],
+    "control_mappings": [
+      {
+        "framework": "scf",
+        "control_id": "SCF.DS-02"
+      },
+      {
+        "framework": "scf",
+        "control_id": "SCF.NW-06"
+      },
+      {
+        "framework": "scf",
+        "control_id": "SCF.FD-01"
+      }
+    ],
+    "regulation_mappings": [
+      {
+        "regulation_id": "MiCA",
+        "article": "63"
+      },
+      {
+        "regulation_id": "AMLD6_BSA",
+        "section": "cross-border transfer monitoring"
+      }
+    ],
+    "implementation_guidance": "Use a consistent Travel Rule payload schema across VASP counterparties and validate mandatory attributes before transfer release.",
+    "licensing_restrictions": "Open industry specification references.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "std-eiopa-xbrl-taxonomy",
+    "name": "EIOPA XBRL Taxonomy",
+    "version": "latest annual release",
+    "publisher": "EIOPA",
+    "scope": "Solvency II supervisory reporting taxonomy and validation rules",
+    "key_clauses": [
+      "Data Point Model conformance",
+      "validation rule execution",
+      "filing consistency checks"
+    ],
+    "control_mappings": [
+      {
+        "framework": "scf",
+        "control_id": "SCF.AU-02"
+      },
+      {
+        "framework": "scf",
+        "control_id": "SCF.DS-02"
+      }
+    ],
+    "regulation_mappings": [
+      {
+        "regulation_id": "Solvency_II",
+        "article": "35"
+      }
+    ],
+    "implementation_guidance": "Automate taxonomy version control, filing validation, and audit trails for insurer prudential submissions.",
+    "licensing_restrictions": "Public supervisory taxonomy publication.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "std-cdia-metro-2",
+    "name": "CDIA Metro 2 Format",
+    "version": "2025",
+    "publisher": "Consumer Data Industry Association",
+    "scope": "US consumer credit furnishing and adverse-action related data exchange",
+    "key_clauses": [
+      "base segment accuracy",
+      "special comment codes",
+      "consumer dispute indicators"
+    ],
+    "control_mappings": [
+      {
+        "framework": "scf",
+        "control_id": "SCF.DS-02"
+      },
+      {
+        "framework": "scf",
+        "control_id": "SCF.AU-02"
+      },
+      {
+        "framework": "scf",
+        "control_id": "SCF.CR-03"
+      }
+    ],
+    "regulation_mappings": [
+      {
+        "regulation_id": "FCRA",
+        "section": "607"
+      },
+      {
+        "regulation_id": "ECOA",
+        "section": "1002.9"
+      }
+    ],
+    "implementation_guidance": "Implement furnishing quality controls, dispute correction workflows, and reason-code traceability for adverse action communications.",
+    "licensing_restrictions": "Detailed specification is licensed by CDIA.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "std-iso-30107-3",
+    "name": "ISO/IEC 30107-3",
+    "version": "2017",
+    "publisher": "ISO/IEC",
+    "scope": "Biometric presentation attack detection testing and reporting",
+    "key_clauses": [
+      "PAD evaluation methodology",
+      "attack instrument classes",
+      "test reporting"
+    ],
+    "control_mappings": [
+      {
+        "framework": "scf",
+        "control_id": "SCF.AC-01"
+      },
+      {
+        "framework": "scf",
+        "control_id": "SCF.CR-03"
+      },
+      {
+        "framework": "scf",
+        "control_id": "SCF.TV-01"
+      }
+    ],
+    "regulation_mappings": [
+      {
+        "regulation_id": "BIPA",
+        "section": "15"
+      }
+    ],
+    "implementation_guidance": "When biometric authentication is used, require PAD-tested components and retain assessment evidence for privacy and consent governance.",
+    "licensing_restrictions": "ISO/IEC standards text licensing applies.",
     "last_updated": "2026-02-18T00:00:00Z"
   }
 ]

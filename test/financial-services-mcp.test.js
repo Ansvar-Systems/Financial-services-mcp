@@ -61,6 +61,12 @@ test("German insurance obligations include Solvency II", () => {
   assert.ok(regs.includes("Solvency_II"));
 });
 
+test("US wealth management obligations include GLBA coverage", () => {
+  const result = repo.assessApplicability("US-NY", "investment-firm", ["fs-wealth"], ["dc-account-data", "dc-trading"], {});
+  const regs = result.data.obligations.map((item) => item.regulation_id);
+  assert.ok(regs.includes("GLBA"));
+});
+
 test("map standards by PCI requirement returns PCI DSS standard", () => {
   const result = repo.mapToTechnicalStandards("PCI_DSS_4_0 Req 3", "");
   assert.ok(result.data.standard_mappings.some((item) => item.standard_id === "std-pci-dss-4-0"));
@@ -68,6 +74,13 @@ test("map standards by PCI requirement returns PCI DSS standard", () => {
     result.metadata.citations.some((item) =>
       String(item.source_url).includes("pcisecuritystandards.org")
     )
+  );
+});
+
+test("map standards by eIDAS reference returns ETSI trust-services standard", () => {
+  const result = repo.mapToTechnicalStandards("eIDAS Art 24", "");
+  assert.ok(
+    result.data.standard_mappings.some((item) => item.standard_id === "std-etsi-eidas-trust-services")
   );
 });
 
@@ -138,4 +151,19 @@ test("evidence plan marks direct relevance for AML/sanctions baseline", () => {
   assert.ok(ofacEvidence);
   assert.equal(ofacEvidence.baseline_relevance, "direct");
   assert.ok(ofacEvidence.matched_regulations.includes("OFAC") || ofacEvidence.matched_regulations.includes("BSA"));
+});
+
+test("evidence plan marks BIPA artifact as direct when baseline includes BIPA regulation basis", () => {
+  const plan = repo.buildEvidencePlan(
+    {
+      controls: [{ control_id: "SCF.AC-01", regulation_basis: ["BIPA"] }]
+    },
+    ""
+  );
+  const bipaEvidence = plan.data.evidence_items.find(
+    (item) => item.artifact_name === "BIPA biometric consent and retention control evidence"
+  );
+  assert.ok(bipaEvidence);
+  assert.equal(bipaEvidence.baseline_relevance, "direct");
+  assert.ok(bipaEvidence.matched_regulations.includes("BIPA"));
 });

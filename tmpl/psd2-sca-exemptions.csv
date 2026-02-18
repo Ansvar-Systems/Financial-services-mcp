@@ -1,0 +1,2 @@
+decision_id,decision_timestamp,payment_channel,exemption_type,transaction_amount,currency,risk_score,sca_applied,issuer_response,fraud_outcome,reviewer,retention_until,notes
+,, , , , , , , , , , ,

@@ -611,5 +611,841 @@
     },
     "rationale": "US real-time payment services should maintain fraud prevention controls proportionate to transfer speed and irreversibility risk.",
     "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "app-eu-eidas-trust-services",
+    "condition": {
+      "country": [
+        "EU",
+        "SE",
+        "DE",
+        "NL"
+      ],
+      "role": [
+        "bank",
+        "payment-institution",
+        "fintech",
+        "financial-entity"
+      ],
+      "system_types": [
+        "fs-open-banking",
+        "open-banking",
+        "fs-payments",
+        "payments"
+      ],
+      "data_types": [
+        "dc-open-banking",
+        "dc-account-data",
+        "dc-npi"
+      ]
+    },
+    "obligation": {
+      "regulation_id": "eIDAS",
+      "article": "24",
+      "standard_id": "std-etsi-eidas-trust-services",
+      "confidence": "authoritative",
+      "obligation_type": "qualified_trust_services",
+      "priority": 82,
+      "conflict_group": "digital-identity-and-signing",
+      "effective_from": "2016-07-01"
+    },
+    "rationale": "EU financial open banking and payment trust boundaries require qualified trust services and certificate lifecycle controls under eIDAS.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "app-eu-amld5-cdd",
+    "condition": {
+      "country": [
+        "EU",
+        "SE",
+        "DE",
+        "NL"
+      ],
+      "role": [
+        "bank",
+        "payment-institution",
+        "fintech",
+        "crypto-asset-service-provider",
+        "financial-entity"
+      ],
+      "system_types": [
+        "fs-aml",
+        "fs-payments",
+        "payments",
+        "fs-digital-assets",
+        "digital-assets"
+      ],
+      "data_types": [
+        "dc-kyc-aml",
+        "dc-account-data",
+        "dc-digital-asset"
+      ]
+    },
+    "obligation": {
+      "regulation_id": "AMLD5",
+      "article": "13",
+      "standard_id": "std-fatf-recommendations",
+      "confidence": "authoritative",
+      "obligation_type": "customer_due_diligence",
+      "priority": 86,
+      "conflict_group": "financial-crime-controls",
+      "effective_from": "2020-01-10"
+    },
+    "rationale": "AMLD5 customer due diligence and monitoring obligations align with FATF risk-based controls across EU payment and crypto services.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "app-eu-mifid-algo-trading",
+    "condition": {
+      "country": [
+        "EU",
+        "DE",
+        "SE",
+        "NL"
+      ],
+      "role": [
+        "investment-firm",
+        "bank",
+        "financial-entity"
+      ],
+      "system_types": [
+        "fs-trading"
+      ],
+      "data_types": [
+        "dc-trading",
+        "dc-account-data"
+      ]
+    },
+    "obligation": {
+      "regulation_id": "MiFID_II",
+      "article": "17",
+      "standard_id": "std-esma-rts-6",
+      "confidence": "authoritative",
+      "obligation_type": "algorithmic_trading_controls",
+      "priority": 88,
+      "conflict_group": "market-integrity-controls",
+      "effective_from": "2018-01-03"
+    },
+    "rationale": "EU investment firms operating algorithmic trading must implement RTS 6 controls for governance, testing, and kill functionality.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "app-eu-mar-market-surveillance",
+    "condition": {
+      "country": [
+        "EU",
+        "DE",
+        "SE",
+        "NL"
+      ],
+      "role": [
+        "investment-firm",
+        "bank",
+        "financial-entity"
+      ],
+      "system_types": [
+        "fs-trading"
+      ],
+      "data_types": [
+        "dc-trading",
+        "dc-account-data"
+      ]
+    },
+    "obligation": {
+      "regulation_id": "MAR",
+      "article": "16",
+      "standard_id": "std-esma-rts-6",
+      "confidence": "authoritative",
+      "obligation_type": "market_abuse_monitoring",
+      "priority": 85,
+      "conflict_group": "market-integrity-controls",
+      "effective_from": "2016-07-03"
+    },
+    "rationale": "Market abuse monitoring and suspicious transaction detection obligations require resilient surveillance and control evidence.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "app-eu-psr-payment-schemes",
+    "condition": {
+      "country": [
+        "EU",
+        "SE",
+        "DE",
+        "NL"
+      ],
+      "role": [
+        "bank",
+        "payment-institution",
+        "fintech",
+        "financial-entity"
+      ],
+      "system_types": [
+        "fs-payments",
+        "payments",
+        "fs-open-banking",
+        "open-banking",
+        "fs-instant-pay"
+      ],
+      "data_types": [
+        "dc-account-data",
+        "dc-open-banking",
+        "dc-npi"
+      ]
+    },
+    "obligation": {
+      "regulation_id": "PSR",
+      "article": "payment service operation",
+      "standard_id": "std-epc-sepa-rulebooks",
+      "confidence": "inferred",
+      "obligation_type": "payment_scheme_interoperability",
+      "priority": 78,
+      "conflict_group": "payment-operating-controls",
+      "effective_from": "2025-01-17"
+    },
+    "rationale": "EU payment service operation controls rely on interoperable scheme implementation and exception-handling discipline.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "app-us-bsa-program",
+    "condition": {
+      "country": [
+        "US",
+        "US-NY",
+        "US-CA"
+      ],
+      "role": [
+        "bank",
+        "payment-institution",
+        "fintech",
+        "crypto-asset-service-provider",
+        "financial-entity"
+      ],
+      "system_types": [
+        "fs-aml",
+        "fs-payments",
+        "payments",
+        "fs-swift",
+        "swift",
+        "fs-digital-assets",
+        "digital-assets"
+      ],
+      "data_types": [
+        "dc-kyc-aml",
+        "dc-account-data",
+        "dc-swift",
+        "dc-digital-asset"
+      ]
+    },
+    "obligation": {
+      "regulation_id": "BSA",
+      "section": "5318(h)",
+      "standard_id": "std-fatf-recommendations",
+      "confidence": "authoritative",
+      "obligation_type": "aml_program_and_monitoring",
+      "priority": 91,
+      "conflict_group": "financial-crime-controls",
+      "effective_from": "2001-10-26"
+    },
+    "rationale": "US institutions handling payments and transfers must operate BSA-compliant AML programs with ongoing monitoring and escalation.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "app-us-fcra-credit-reporting",
+    "condition": {
+      "country": [
+        "US",
+        "US-NY",
+        "US-CA"
+      ],
+      "role": [
+        "bank",
+        "fintech",
+        "financial-entity"
+      ],
+      "system_types": [
+        "fs-digital-lending",
+        "lending",
+        "fs-core-banking"
+      ],
+      "data_types": [
+        "dc-credit",
+        "dc-npi",
+        "dc-account-data"
+      ]
+    },
+    "obligation": {
+      "regulation_id": "FCRA",
+      "section": "607",
+      "standard_id": "std-cdia-metro-2",
+      "confidence": "authoritative",
+      "obligation_type": "credit_data_accuracy_and_dispute",
+      "priority": 83,
+      "conflict_group": "credit-decision-controls",
+      "effective_from": "1997-09-30"
+    },
+    "rationale": "Consumer credit reporting workflows require furnishing accuracy and dispute lifecycle controls aligned to Metro 2 operational practice.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "app-us-ecoa-adverse-action",
+    "condition": {
+      "country": [
+        "US",
+        "US-NY",
+        "US-CA"
+      ],
+      "role": [
+        "bank",
+        "fintech",
+        "financial-entity"
+      ],
+      "system_types": [
+        "fs-digital-lending",
+        "lending",
+        "fs-core-banking"
+      ],
+      "data_types": [
+        "dc-credit",
+        "dc-npi",
+        "dc-account-data"
+      ]
+    },
+    "obligation": {
+      "regulation_id": "ECOA",
+      "section": "1002.9",
+      "standard_id": "std-cdia-metro-2",
+      "confidence": "authoritative",
+      "obligation_type": "adverse_action_explainability",
+      "priority": 82,
+      "conflict_group": "credit-decision-controls",
+      "effective_from": "1977-10-28"
+    },
+    "rationale": "Lending decisions must preserve reason-code traceability and adverse-action notice data quality for ECOA compliance.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "app-us-sox-financial-reporting",
+    "condition": {
+      "country": [
+        "US",
+        "US-NY",
+        "US-CA"
+      ],
+      "role": [
+        "bank",
+        "insurance",
+        "financial-entity"
+      ],
+      "system_types": [
+        "fs-core-banking",
+        "fs-insurance-core",
+        "fs-regtech"
+      ],
+      "data_types": [
+        "dc-account-data",
+        "dc-trading",
+        "dc-insurance"
+      ]
+    },
+    "obligation": {
+      "regulation_id": "SOX",
+      "section": "302",
+      "standard_id": "std-xbrl",
+      "confidence": "authoritative",
+      "obligation_type": "financial_reporting_integrity",
+      "priority": 80,
+      "conflict_group": "regulatory-reporting-controls",
+      "effective_from": "2002-07-30"
+    },
+    "rationale": "US public-company financial reporting controls rely on consistent taxonomy validation and auditable disclosure pipelines.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "app-us-il-bipa-biometric-consent",
+    "condition": {
+      "country": [
+        "US-IL",
+        "US"
+      ],
+      "role": [
+        "bank",
+        "fintech",
+        "payment-institution",
+        "financial-entity"
+      ],
+      "system_types": [
+        "fs-open-banking",
+        "open-banking",
+        "fs-payments",
+        "payments",
+        "fs-digital-lending",
+        "lending"
+      ],
+      "data_types": [
+        "dc-biometric",
+        "dc-npi",
+        "dc-account-data"
+      ]
+    },
+    "obligation": {
+      "regulation_id": "BIPA",
+      "section": "15",
+      "standard_id": "std-iso-30107-3",
+      "confidence": "inferred",
+      "obligation_type": "biometric_collection_and_protection",
+      "priority": 79,
+      "conflict_group": "biometric-privacy-controls",
+      "effective_from": "2008-10-03"
+    },
+    "rationale": "Where biometric authentication is used in Illinois financial workflows, PAD assurance and biometric handling controls support BIPA obligations.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "app-eu-psd2-iso20022-message-controls",
+    "condition": {
+      "country": [
+        "EU",
+        "SE",
+        "DE",
+        "NL"
+      ],
+      "role": [
+        "bank",
+        "payment-institution",
+        "fintech",
+        "financial-entity"
+      ],
+      "system_types": [
+        "fs-payments",
+        "payments",
+        "fs-instant-pay"
+      ],
+      "data_types": [
+        "dc-account-data",
+        "dc-open-banking"
+      ]
+    },
+    "obligation": {
+      "regulation_id": "PSD2",
+      "article": "95",
+      "standard_id": "std-iso-20022",
+      "confidence": "authoritative",
+      "obligation_type": "payment_message_integrity",
+      "priority": 80,
+      "conflict_group": "payment-message-controls",
+      "effective_from": "2018-01-13"
+    },
+    "rationale": "PSD2 payment messaging and operational security obligations require reliable schema, validation, and traceability controls.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "app-eu-psd2-rts-card-auth-emv3ds",
+    "condition": {
+      "country": [
+        "EU",
+        "SE",
+        "DE",
+        "NL"
+      ],
+      "role": [
+        "merchant",
+        "payment-institution",
+        "bank",
+        "fintech"
+      ],
+      "system_types": [
+        "fs-payments",
+        "payments",
+        "fs-instant-pay"
+      ],
+      "data_types": [
+        "dc-card-data",
+        "dc-account-data"
+      ]
+    },
+    "obligation": {
+      "regulation_id": "PSD2_RTS_SCA",
+      "article": "2",
+      "standard_id": "std-emv-3ds",
+      "confidence": "authoritative",
+      "obligation_type": "card_strong_customer_authentication",
+      "priority": 88,
+      "conflict_group": "payment-authentication",
+      "effective_from": "2019-09-14"
+    },
+    "rationale": "EU card-not-present flows rely on EMV 3DS controls to enforce SCA and limit fallback abuse.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "app-us-fdx-open-banking-security",
+    "condition": {
+      "country": [
+        "US",
+        "US-NY",
+        "US-CA"
+      ],
+      "role": [
+        "bank",
+        "fintech",
+        "payment-institution",
+        "financial-entity"
+      ],
+      "system_types": [
+        "fs-open-banking",
+        "open-banking",
+        "fs-payments",
+        "payments"
+      ],
+      "data_types": [
+        "dc-open-banking",
+        "dc-account-data",
+        "dc-npi"
+      ]
+    },
+    "obligation": {
+      "regulation_id": "GLBA",
+      "section": "501(b)",
+      "standard_id": "std-fdx-api",
+      "confidence": "inferred",
+      "obligation_type": "open_banking_api_security",
+      "priority": 77,
+      "conflict_group": "open-banking-api-controls",
+      "effective_from": "2018-01-01"
+    },
+    "rationale": "US open banking interfaces handling nonpublic personal information should enforce consent, token scope, and API security profiles.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "app-eu-trading-fix-session-integrity",
+    "condition": {
+      "country": [
+        "EU",
+        "SE",
+        "DE",
+        "NL"
+      ],
+      "role": [
+        "investment-firm",
+        "bank",
+        "financial-entity"
+      ],
+      "system_types": [
+        "fs-trading"
+      ],
+      "data_types": [
+        "dc-trading",
+        "dc-account-data"
+      ]
+    },
+    "obligation": {
+      "regulation_id": "MiFID_II",
+      "article": "17",
+      "standard_id": "std-fix-protocol",
+      "confidence": "authoritative",
+      "obligation_type": "trading_session_integrity",
+      "priority": 83,
+      "conflict_group": "market-integrity-controls",
+      "effective_from": "2018-01-03"
+    },
+    "rationale": "Trading venues and participants need resilient session and message-integrity controls for algorithmic and electronic execution flows.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "app-eu-trading-venue-code-normalization",
+    "condition": {
+      "country": [
+        "EU",
+        "SE",
+        "DE",
+        "NL"
+      ],
+      "role": [
+        "investment-firm",
+        "bank",
+        "financial-entity"
+      ],
+      "system_types": [
+        "fs-trading",
+        "fs-regtech"
+      ],
+      "data_types": [
+        "dc-trading",
+        "dc-account-data"
+      ]
+    },
+    "obligation": {
+      "regulation_id": "MAR",
+      "article": "16",
+      "standard_id": "std-iso-10383-mic",
+      "confidence": "inferred",
+      "obligation_type": "venue_identifier_integrity",
+      "priority": 75,
+      "conflict_group": "market-reporting-controls",
+      "effective_from": "2016-07-03"
+    },
+    "rationale": "Market abuse surveillance and reporting quality depend on consistent market-identifier normalization across venues.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "app-eu-lei-entity-reference-controls",
+    "condition": {
+      "country": [
+        "EU",
+        "SE",
+        "DE",
+        "NL"
+      ],
+      "role": [
+        "investment-firm",
+        "bank",
+        "crypto-asset-service-provider",
+        "financial-entity"
+      ],
+      "system_types": [
+        "fs-trading",
+        "fs-regtech",
+        "fs-digital-assets"
+      ],
+      "data_types": [
+        "dc-trading",
+        "dc-digital-asset",
+        "dc-account-data"
+      ]
+    },
+    "obligation": {
+      "regulation_id": "MiFID_II",
+      "article": "26",
+      "standard_id": "std-iso-17442-lei",
+      "confidence": "inferred",
+      "obligation_type": "entity_reference_data_integrity",
+      "priority": 74,
+      "conflict_group": "market-reporting-controls",
+      "effective_from": "2018-01-03"
+    },
+    "rationale": "Counterparty and issuer reference integrity relies on LEI normalization for supervisory and surveillance workflows.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "app-eu-digital-assets-ivms-travel-rule",
+    "condition": {
+      "country": [
+        "EU",
+        "SE",
+        "DE",
+        "NL"
+      ],
+      "role": [
+        "crypto-asset-service-provider",
+        "fintech",
+        "financial-entity"
+      ],
+      "system_types": [
+        "fs-digital-assets",
+        "digital-assets",
+        "fs-aml"
+      ],
+      "data_types": [
+        "dc-digital-asset",
+        "dc-kyc-aml",
+        "dc-account-data"
+      ]
+    },
+    "obligation": {
+      "regulation_id": "AMLD6_BSA",
+      "section": "cross-border transfer monitoring",
+      "standard_id": "std-ivms-101",
+      "confidence": "inferred",
+      "obligation_type": "travel_rule_message_completeness",
+      "priority": 84,
+      "conflict_group": "financial-crime-controls",
+      "effective_from": "2021-12-03"
+    },
+    "rationale": "Cross-border virtual-asset transfer monitoring depends on consistent originator/beneficiary payload semantics.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "app-us-ach-nacha-risk-controls",
+    "condition": {
+      "country": [
+        "US",
+        "US-NY",
+        "US-CA"
+      ],
+      "role": [
+        "bank",
+        "payment-institution",
+        "fintech",
+        "financial-entity"
+      ],
+      "system_types": [
+        "fs-payments",
+        "payments",
+        "fs-core-banking"
+      ],
+      "data_types": [
+        "dc-account-data",
+        "dc-npi",
+        "dc-kyc-aml"
+      ]
+    },
+    "obligation": {
+      "regulation_id": "BSA",
+      "section": "5318(h)",
+      "standard_id": "std-nacha-operating-rules",
+      "confidence": "inferred",
+      "obligation_type": "ach_fraud_and_aml_monitoring",
+      "priority": 79,
+      "conflict_group": "payment-fraud-controls",
+      "effective_from": "2001-10-26"
+    },
+    "rationale": "ACH origination and receiving activities require durable authorization, return-rate, and monitoring controls.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "app-eu-solvency-reporting-taxonomy-controls",
+    "condition": {
+      "country": [
+        "EU",
+        "DE",
+        "SE",
+        "NL"
+      ],
+      "role": [
+        "insurance",
+        "financial-entity"
+      ],
+      "system_types": [
+        "fs-insurance-core",
+        "insurance",
+        "fs-regtech"
+      ],
+      "data_types": [
+        "dc-insurance",
+        "dc-account-data"
+      ]
+    },
+    "obligation": {
+      "regulation_id": "Solvency_II",
+      "article": "35",
+      "standard_id": "std-eiopa-xbrl-taxonomy",
+      "confidence": "authoritative",
+      "obligation_type": "prudential_reporting_taxonomy_integrity",
+      "priority": 81,
+      "conflict_group": "regulatory-reporting-controls",
+      "effective_from": "2016-01-01"
+    },
+    "rationale": "Insurer supervisory submissions require consistent taxonomy and validation rule execution controls.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "app-eu-open-banking-psr-profile-alignment",
+    "condition": {
+      "country": [
+        "EU",
+        "SE",
+        "DE",
+        "NL"
+      ],
+      "role": [
+        "bank",
+        "payment-institution",
+        "fintech",
+        "financial-entity"
+      ],
+      "system_types": [
+        "fs-open-banking",
+        "open-banking",
+        "fs-payments",
+        "payments"
+      ],
+      "data_types": [
+        "dc-open-banking",
+        "dc-account-data",
+        "dc-npi"
+      ]
+    },
+    "obligation": {
+      "regulation_id": "PSR",
+      "article": "SCA",
+      "standard_id": "std-uk-open-banking",
+      "confidence": "inferred",
+      "obligation_type": "open_banking_profile_interoperability",
+      "priority": 72,
+      "conflict_group": "open-banking-api-controls",
+      "effective_from": "2025-01-17"
+    },
+    "rationale": "Cross-border and multi-jurisdiction open-banking programs often align with OBIE profile controls for high-assurance interoperability.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "app-eu-wealth-suitability-governance",
+    "condition": {
+      "country": [
+        "EU",
+        "SE",
+        "DE",
+        "NL"
+      ],
+      "role": [
+        "investment-firm",
+        "bank",
+        "financial-entity"
+      ],
+      "system_types": [
+        "fs-wealth"
+      ],
+      "data_types": [
+        "dc-account-data",
+        "dc-trading",
+        "dc-npi"
+      ]
+    },
+    "obligation": {
+      "regulation_id": "MiFID_II",
+      "article": "24",
+      "standard_id": "std-iso-17442-lei",
+      "confidence": "inferred",
+      "obligation_type": "investment_suitability_and_recordkeeping",
+      "priority": 76,
+      "conflict_group": "wealth-governance-controls",
+      "effective_from": "2018-01-03"
+    },
+    "rationale": "Wealth advisory and portfolio workflows require robust client/instrument identification and auditable suitability governance.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "app-us-wealth-customer-data-protection",
+    "condition": {
+      "country": [
+        "US",
+        "US-NY",
+        "US-CA"
+      ],
+      "role": [
+        "investment-firm",
+        "bank",
+        "financial-entity"
+      ],
+      "system_types": [
+        "fs-wealth"
+      ],
+      "data_types": [
+        "dc-account-data",
+        "dc-trading",
+        "dc-npi"
+      ]
+    },
+    "obligation": {
+      "regulation_id": "GLBA",
+      "section": "501(b)",
+      "standard_id": "std-nist-csf-2-0",
+      "confidence": "inferred",
+      "obligation_type": "wealth_customer_data_security",
+      "priority": 73,
+      "conflict_group": "wealth-governance-controls",
+      "effective_from": "2003-07-01"
+    },
+    "rationale": "US wealth operations handling nonpublic personal financial information require durable governance, monitoring, and incident controls.",
+    "last_updated": "2026-02-18T00:00:00Z"
   }
 ]

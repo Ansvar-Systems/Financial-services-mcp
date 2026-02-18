@@ -218,6 +218,34 @@ test("expert instant payment fraud scenario is retrievable by pattern and data t
   assert.ok(result.data.threats.some((item) => item.threat_id === "th-instant-payment-app-fraud"));
 });
 
+test("state breach-notification threat scenario is retrievable for US customer data context", () => {
+  const result = repo.getDomainThreats(["fs-core-banking"], ["dc-npi"], {});
+  assert.ok(result.data.threats.some((item) => item.threat_id === "th-state-breach-notification-delay"));
+});
+
+test("MAR market abuse threat scenario is retrievable for trading context", () => {
+  const result = repo.getDomainThreats(["fs-trading"], ["dc-trading"], {});
+  assert.ok(result.data.threats.some((item) => item.threat_id === "th-market-abuse-spoofing-concealment"));
+});
+
+test("wealth architecture returns dedicated threat coverage", () => {
+  const result = repo.getDomainThreats(["fs-wealth"], ["dc-account-data"], {});
+  assert.ok(result.data.threats.some((item) => item.threat_id === "th-wealth-portfolio-rebalancing-manipulation"));
+});
+
+test("EU wealth management applicability includes MiFID II coverage", () => {
+  const result = repo.assessApplicability(
+    "DE",
+    "investment-firm",
+    ["fs-wealth"],
+    ["dc-account-data", "dc-trading"],
+    {},
+    "2026-02-18"
+  );
+  const regs = result.data.obligations.map((item) => item.regulation_id);
+  assert.ok(regs.includes("MiFID_II"));
+});
+
 test("composite AMLD6_BSA obligations expand to EU and US foundation calls", () => {
   const result = repo.assessApplicability(
     "US",

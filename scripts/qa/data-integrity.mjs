@@ -1,5 +1,6 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { existsSync, readFileSync } from "node:fs";
 
 import { readJson } from "../ingest/lib/dataset-files.mjs";
 
@@ -27,6 +28,16 @@ async function main() {
   verifyRegulationReferenceQuality(dataset, failures);
   verifyModelReferenceIntegrity(dataset, euStates, usStates, failures);
   verifyRegulatoryCatalogCoverage(dataset, regulatoryCatalog, failures);
+  verifyThreatCoverageDepth(dataset, regulatoryCatalog, failures);
+  verifyRegulationCoverageDepth(dataset, regulatoryCatalog, failures);
+  verifyStandardAdoptionCoverage(dataset, failures);
+  verifyArchitectureThreatCoverage(dataset, failures);
+  verifyArchitectureApplicabilityCoverage(dataset, failures);
+  verifyThreatEvidenceLinkage(dataset, failures);
+  verifyStandardsThreatEvidenceLinkage(dataset, failures);
+  verifyEvidenceApplicabilityLinkage(dataset, failures);
+  verifyEvidenceTemplateReferences(dataset, failures);
+  verifyEvidenceTemplateQuality(dataset, failures);
   verifyUsStateBreachProfiles(dataset, usStates, failures);
   verifyObligationGraph(dataset, failures);
 
@@ -138,13 +149,18 @@ function verifyRegulationReferenceQuality(dataset, failures) {
     "SOLVENCY_II",
     "AMLD5",
     "AMLD6",
+    "AMLD6_BSA",
     "GLBA",
     "SOX",
     "BSA",
     "OFAC",
     "FCRA",
     "ECOA",
+    "BIPA",
     "CCPA",
+    "BAFIN_VAIT",
+    "MAR",
+    "PSR",
     "NYDFS_CYBER_500",
     "STATE_BREACH_NOTIFICATION",
     "SWIFT_CSP",
@@ -221,6 +237,239 @@ function verifyRegulatoryCatalogCoverage(dataset, catalog, failures) {
     }
     if (!String(entry.url ?? "").startsWith("https://")) {
       failures.push(`Regulatory catalog entry '${entry.id}' must use an https URL.`);
+    }
+  }
+}
+
+function verifyThreatCoverageDepth(dataset, catalog, failures) {
+  const catalogIds = new Set(
+    [...(catalog.eu ?? []), ...(catalog.us ?? [])].map((item) => String(item.id ?? "").toUpperCase()).filter(Boolean)
+  );
+  const threatMapped = new Set(
+    (dataset.threatScenarios ?? [])
+      .flatMap((item) => item.regulation_refs ?? [])
+      .map((item) => String(item?.regulation_id ?? "").toUpperCase())
+      .filter(Boolean)
+  );
+  const missingThreatCoverage = [...catalogIds].filter((id) => !threatMapped.has(id)).sort();
+  if (missingThreatCoverage.length > 0) {
+    failures.push(
+      `Threat scenario regulation_refs missing for regulation IDs: ${missingThreatCoverage.join(", ")}.`
+    );
+  }
+}
+
+function verifyRegulationCoverageDepth(dataset, catalog, failures) {
+  const catalogIds = new Set(
+    [...(catalog.eu ?? []), ...(catalog.us ?? [])].map((item) => String(item.id ?? "").toUpperCase()).filter(Boolean)
+  );
+
+  const ruleMapped = new Set(
+    (dataset.applicabilityRules ?? [])
+      .filter((item) => String(item?.obligation?.standard_id ?? "").trim())
+      .map((item) => String(item?.obligation?.regulation_id ?? "").toUpperCase())
+      .filter(Boolean)
+  );
+  const standardMapped = new Set(
+    (dataset.technicalStandards ?? [])
+      .flatMap((item) => item.regulation_mappings ?? [])
+      .map((item) => String(item?.regulation_id ?? "").toUpperCase())
+      .filter(Boolean)
+  );
+  const evidenceMapped = new Set(
+    (dataset.evidenceArtifacts ?? [])
+      .flatMap((item) => item.regulation_basis ?? [])
+      .map((item) => String(item?.regulation_id ?? "").toUpperCase())
+      .filter(Boolean)
+  );
+
+  const missingRuleCoverage = [...catalogIds].filter((id) => !ruleMapped.has(id)).sort();
+  const missingStandardCoverage = [...catalogIds].filter((id) => !standardMapped.has(id)).sort();
+  const missingEvidenceCoverage = [...catalogIds].filter((id) => !evidenceMapped.has(id)).sort();
+
+  if (missingRuleCoverage.length > 0) {
+    failures.push(
+      `Applicability rule standard mapping missing for regulation IDs: ${missingRuleCoverage.join(", ")}.`
+    );
+  }
+  if (missingStandardCoverage.length > 0) {
+    failures.push(
+      `Technical standards regulation_mappings missing for regulation IDs: ${missingStandardCoverage.join(", ")}.`
+    );
+  }
+  if (missingEvidenceCoverage.length > 0) {
+    failures.push(
+      `Evidence artifact regulation_basis missing for regulation IDs: ${missingEvidenceCoverage.join(", ")}.`
+    );
+  }
+}
+
+function verifyStandardAdoptionCoverage(dataset, failures) {
+  const standardIds = new Set((dataset.technicalStandards ?? []).map((item) => item.id).filter(Boolean));
+  const adopted = new Set(
+    (dataset.applicabilityRules ?? [])
+      .map((item) => String(item?.obligation?.standard_id ?? "").trim())
+      .filter(Boolean)
+  );
+  const orphanStandards = [...standardIds].filter((id) => !adopted.has(id)).sort();
+  if (orphanStandards.length > 0) {
+    failures.push(`Technical standards not referenced by applicability rules: ${orphanStandards.join(", ")}.`);
+  }
+}
+
+function verifyArchitectureThreatCoverage(dataset, failures) {
+  const patternIds = new Set((dataset.architecturePatterns ?? []).map((item) => item.id).filter(Boolean));
+  const coveredByThreats = new Set(
+    (dataset.threatScenarios ?? []).flatMap((item) => item.affected_patterns ?? []).filter(Boolean)
+  );
+  const uncoveredPatterns = [...patternIds].filter((id) => !coveredByThreats.has(id)).sort();
+  if (uncoveredPatterns.length > 0) {
+    failures.push(`Architecture patterns missing threat coverage: ${uncoveredPatterns.join(", ")}.`);
+  }
+}
+
+function verifyArchitectureApplicabilityCoverage(dataset, failures) {
+  const patternIds = new Set((dataset.architecturePatterns ?? []).map((item) => item.id).filter(Boolean));
+  const coveredByRules = new Set(
+    (dataset.applicabilityRules ?? []).flatMap((item) => item?.condition?.system_types ?? []).filter(Boolean)
+  );
+  const uncoveredPatterns = [...patternIds].filter((id) => !coveredByRules.has(id)).sort();
+  if (uncoveredPatterns.length > 0) {
+    failures.push(`Architecture patterns missing applicability rule coverage: ${uncoveredPatterns.join(", ")}.`);
+  }
+}
+
+function verifyThreatEvidenceLinkage(dataset, failures) {
+  const evidenceByReg = new Set(
+    (dataset.evidenceArtifacts ?? [])
+      .flatMap((item) => item.regulation_basis ?? [])
+      .map((ref) => String(ref?.regulation_id ?? "").toUpperCase())
+      .filter(Boolean)
+  );
+  for (const threat of dataset.threatScenarios ?? []) {
+    const refs = (threat.regulation_refs ?? [])
+      .map((ref) => String(ref?.regulation_id ?? "").toUpperCase())
+      .filter(Boolean);
+    if (refs.length === 0) {
+      failures.push(`Threat '${threat.id}' must include at least one regulation_ref.`);
+      continue;
+    }
+    const hasEvidenceLink = refs.some((regId) => evidenceByReg.has(regId));
+    if (!hasEvidenceLink) {
+      failures.push(`Threat '${threat.id}' has no evidence artifact linkage via regulation_refs.`);
+    }
+  }
+}
+
+function verifyEvidenceTemplateReferences(dataset, failures) {
+  for (const artifact of dataset.evidenceArtifacts ?? []) {
+    const templateRef = String(artifact?.template_ref ?? "").trim();
+    if (!templateRef) {
+      failures.push(`Evidence artifact '${artifact?.id ?? "<missing id>"}' is missing template_ref.`);
+      continue;
+    }
+    const resolved = path.join(root, templateRef);
+    if (!existsSync(resolved)) {
+      failures.push(`Evidence artifact '${artifact.id}' template_ref does not exist: ${templateRef}.`);
+    }
+  }
+}
+
+function verifyEvidenceTemplateQuality(dataset, failures) {
+  const requiredMdHeadings = [
+    "## Document Control",
+    "## Control Objective",
+    "## Regulatory Basis",
+    "## Evidence Collection Checklist",
+    "## Review and Approval"
+  ];
+
+  for (const artifact of dataset.evidenceArtifacts ?? []) {
+    const templateRef = String(artifact?.template_ref ?? "").trim();
+    if (!templateRef) {
+      continue;
+    }
+    const resolved = path.join(root, templateRef);
+    if (!existsSync(resolved)) {
+      continue;
+    }
+    const content = readFileSync(resolved, "utf8");
+    const lowered = content.toLowerCase();
+    if (lowered.includes("placeholder")) {
+      failures.push(`Evidence template '${templateRef}' contains placeholder text.`);
+      continue;
+    }
+
+    if (templateRef.endsWith(".md")) {
+      if (content.length < 1200) {
+        failures.push(`Evidence template '${templateRef}' is too short for production use.`);
+      }
+      for (const heading of requiredMdHeadings) {
+        if (!content.includes(heading)) {
+          failures.push(`Evidence template '${templateRef}' missing required section '${heading}'.`);
+        }
+      }
+    } else if (templateRef.endsWith(".csv")) {
+      const firstLine = content.split(/\r?\n/, 1)[0] ?? "";
+      const columns = firstLine.split(",").map((part) => part.trim()).filter(Boolean);
+      if (columns.length < 8) {
+        failures.push(`Evidence template '${templateRef}' must define at least 8 CSV columns.`);
+      }
+    } else if (templateRef.endsWith(".drawio")) {
+      if (!content.includes("<mxfile") || !content.includes("<mxGraphModel")) {
+        failures.push(`Evidence template '${templateRef}' is not a valid draw.io XML scaffold.`);
+      }
+    }
+  }
+}
+
+function verifyStandardsThreatEvidenceLinkage(dataset, failures) {
+  const threatRegs = new Set(
+    (dataset.threatScenarios ?? [])
+      .flatMap((item) => item.regulation_refs ?? [])
+      .map((ref) => String(ref?.regulation_id ?? "").toUpperCase())
+      .filter(Boolean)
+  );
+  const evidenceRegs = new Set(
+    (dataset.evidenceArtifacts ?? [])
+      .flatMap((item) => item.regulation_basis ?? [])
+      .map((ref) => String(ref?.regulation_id ?? "").toUpperCase())
+      .filter(Boolean)
+  );
+
+  for (const standard of dataset.technicalStandards ?? []) {
+    const regs = (standard.regulation_mappings ?? [])
+      .map((ref) => String(ref?.regulation_id ?? "").toUpperCase())
+      .filter(Boolean);
+    if (regs.length === 0) {
+      failures.push(`Technical standard '${standard.id}' has no regulation_mappings.`);
+      continue;
+    }
+    if (!regs.some((reg) => threatRegs.has(reg))) {
+      failures.push(`Technical standard '${standard.id}' has no threat linkage via regulation_mappings.`);
+    }
+    if (!regs.some((reg) => evidenceRegs.has(reg))) {
+      failures.push(`Technical standard '${standard.id}' has no evidence linkage via regulation_mappings.`);
+    }
+  }
+}
+
+function verifyEvidenceApplicabilityLinkage(dataset, failures) {
+  const applicabilityRegs = new Set(
+    (dataset.applicabilityRules ?? [])
+      .map((item) => String(item?.obligation?.regulation_id ?? "").toUpperCase())
+      .filter(Boolean)
+  );
+  for (const artifact of dataset.evidenceArtifacts ?? []) {
+    const regs = (artifact.regulation_basis ?? [])
+      .map((ref) => String(ref?.regulation_id ?? "").toUpperCase())
+      .filter(Boolean);
+    if (regs.length === 0) {
+      failures.push(`Evidence artifact '${artifact.id}' has no regulation_basis entries.`);
+      continue;
+    }
+    if (!regs.some((reg) => applicabilityRegs.has(reg))) {
+      failures.push(`Evidence artifact '${artifact.id}' has no applicability-rule linkage via regulation_basis.`);
     }
   }
 }

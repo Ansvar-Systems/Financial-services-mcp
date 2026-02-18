@@ -815,5 +815,466 @@
       "Regulatory focus on explainability and fairness breakdowns in digital lending models"
     ],
     "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "th-state-breach-notification-delay",
+    "name": "Delayed multi-state breach notification",
+    "category": "regtech",
+    "description": "Incident response and legal triage failures delay notifications required under US state breach laws.",
+    "attack_narrative": "Attackers exploit weak detection and fragmented legal workflows, causing late or incomplete customer/regulator notifications across states.",
+    "mitre_mapping": [
+      "T1070",
+      "T1562",
+      "T1499"
+    ],
+    "affected_patterns": [
+      "fs-core-banking",
+      "fs-regtech",
+      "fs-payments"
+    ],
+    "affected_data_categories": [
+      "dc-npi",
+      "dc-account-data",
+      "dc-credit"
+    ],
+    "likelihood_factors": [
+      "inconsistent incident classification",
+      "cross-state legal workflow complexity"
+    ],
+    "impact_dimensions": {
+      "financial": "high",
+      "regulatory": "severe",
+      "reputational": "high"
+    },
+    "regulation_refs": [
+      {
+        "regulation_id": "STATE_BREACH_NOTIFICATION",
+        "section": "state notice timelines",
+        "foundation_mcp": "us-regulations"
+      }
+    ],
+    "control_refs": [
+      "SCF.IR-03",
+      "SCF.AU-02",
+      "SCF.GV-04"
+    ],
+    "detection_indicators": [
+      "breach containment completed without corresponding notice workflow ticket",
+      "jurisdiction impact list changes after legal filing deadlines"
+    ],
+    "historical_incidents": [
+      "US enforcement actions tied to delayed customer breach notifications"
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "th-biometric-consent-retention-noncompliance",
+    "name": "Biometric consent and retention control bypass",
+    "category": "digital-lending",
+    "description": "Biometric onboarding data is collected or retained without enforceable consent and deletion controls.",
+    "attack_narrative": "Process and system gaps allow unauthorized biometric template retention, reuse, or downstream sharing in high-volume onboarding.",
+    "mitre_mapping": [
+      "T1005",
+      "T1530",
+      "T1565"
+    ],
+    "affected_patterns": [
+      "fs-open-banking",
+      "fs-digital-lending",
+      "fs-core-banking"
+    ],
+    "affected_data_categories": [
+      "dc-biometric",
+      "dc-npi"
+    ],
+    "likelihood_factors": [
+      "third-party KYC SDK sprawl",
+      "inconsistent consent-state propagation"
+    ],
+    "impact_dimensions": {
+      "financial": "medium",
+      "regulatory": "high",
+      "reputational": "high"
+    },
+    "regulation_refs": [
+      {
+        "regulation_id": "BIPA",
+        "section": "15",
+        "foundation_mcp": "us-regulations"
+      }
+    ],
+    "control_refs": [
+      "SCF.AC-01",
+      "SCF.DS-02",
+      "SCF.AU-02",
+      "SCF.GV-04"
+    ],
+    "detection_indicators": [
+      "biometric records missing consent linkage",
+      "retention jobs skipping biometric data classes"
+    ],
+    "historical_incidents": [
+      "Biometric privacy litigation involving financial onboarding platforms"
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "th-bafin-vait-ict-governance-breakdown",
+    "name": "ICT governance breakdown in German supervised entities",
+    "category": "core-banking",
+    "description": "Control weaknesses in ICT governance, outsourcing oversight, and operations create supervisory and resilience failures.",
+    "attack_narrative": "Threat actors exploit weak operational governance and vendor dependencies to disrupt critical financial workloads with slow recovery.",
+    "mitre_mapping": [
+      "T1195",
+      "T1078",
+      "T1485"
+    ],
+    "affected_patterns": [
+      "fs-core-banking",
+      "fs-insurance-core",
+      "fs-regtech"
+    ],
+    "affected_data_categories": [
+      "dc-account-data",
+      "dc-insurance",
+      "dc-npi"
+    ],
+    "likelihood_factors": [
+      "outsourcing concentration",
+      "insufficient operational control attestation"
+    ],
+    "impact_dimensions": {
+      "financial": "high",
+      "regulatory": "high",
+      "reputational": "high"
+    },
+    "regulation_refs": [
+      {
+        "regulation_id": "BaFin_VAIT",
+        "section": "ICT",
+        "foundation_mcp": "eu-regulations"
+      }
+    ],
+    "control_refs": [
+      "SCF.TP-02",
+      "SCF.BC-02",
+      "SCF.GV-04",
+      "SCF.IR-03"
+    ],
+    "detection_indicators": [
+      "critical ICT service disruptions without tested fallback execution",
+      "missing governance attestations for high-risk outsourced services"
+    ],
+    "historical_incidents": [
+      "German supervisory findings on insufficient ICT governance controls"
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "th-ccpa-data-rights-process-abuse",
+    "name": "Consumer privacy rights workflow abuse",
+    "category": "regtech",
+    "description": "Data-subject rights and disclosure workflows are abused or bypassed, causing unlawful disclosure or denial outcomes.",
+    "attack_narrative": "Adversaries and process failures exploit weak identity verification or workflow controls in consumer rights handling pipelines.",
+    "mitre_mapping": [
+      "T1078",
+      "T1556",
+      "T1565"
+    ],
+    "affected_patterns": [
+      "fs-digital-lending",
+      "fs-open-banking",
+      "fs-regtech"
+    ],
+    "affected_data_categories": [
+      "dc-npi",
+      "dc-credit",
+      "dc-account-data"
+    ],
+    "likelihood_factors": [
+      "manual exception handling",
+      "fragmented customer identity resolution"
+    ],
+    "impact_dimensions": {
+      "financial": "medium",
+      "regulatory": "high",
+      "reputational": "high"
+    },
+    "regulation_refs": [
+      {
+        "regulation_id": "CCPA",
+        "section": "1798.130",
+        "foundation_mcp": "us-regulations"
+      }
+    ],
+    "control_refs": [
+      "SCF.AC-01",
+      "SCF.AU-02",
+      "SCF.DS-02"
+    ],
+    "detection_indicators": [
+      "rights-request closures without verification evidence",
+      "disclosure exports to mismatched customer identities"
+    ],
+    "historical_incidents": [
+      "Regulatory settlements tied to consumer request handling failures"
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "th-market-abuse-spoofing-concealment",
+    "name": "Spoofing concealment in surveillance blind spots",
+    "category": "trading",
+    "description": "Manipulative order layering/spoofing evades surveillance tuning and delayed alert adjudication.",
+    "attack_narrative": "Attackers exploit venue fragmentation and parameter gaps to conceal manipulative intent before surveillance controls trigger action.",
+    "mitre_mapping": [
+      "T1565.001",
+      "T1078",
+      "T1027"
+    ],
+    "affected_patterns": [
+      "fs-trading"
+    ],
+    "affected_data_categories": [
+      "dc-trading"
+    ],
+    "likelihood_factors": [
+      "venue fragmentation",
+      "surveillance threshold drift"
+    ],
+    "impact_dimensions": {
+      "financial": "high",
+      "regulatory": "severe",
+      "reputational": "high"
+    },
+    "regulation_refs": [
+      {
+        "regulation_id": "MAR",
+        "article": "16",
+        "foundation_mcp": "eu-regulations"
+      }
+    ],
+    "control_refs": [
+      "SCF.AU-02",
+      "SCF.CM-05",
+      "SCF.GV-04"
+    ],
+    "detection_indicators": [
+      "layered order placements with rapid cancellation near execution",
+      "persistent abnormal order-to-trade ratios on specific instruments"
+    ],
+    "historical_incidents": [
+      "European market abuse enforcement involving spoofing and layering behavior"
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "th-psr-payment-operation-disruption",
+    "name": "Payment operations disruption and exception misuse",
+    "category": "payments",
+    "description": "Operational weaknesses in payment routing and exception handling enable fraud, delays, or misapplied customer protection outcomes.",
+    "attack_narrative": "Adversaries and process weaknesses exploit exception paths in payment operations to reroute funds or suppress remediation actions.",
+    "mitre_mapping": [
+      "T1565",
+      "T1078",
+      "T1499"
+    ],
+    "affected_patterns": [
+      "fs-payments",
+      "fs-instant-pay",
+      "fs-open-banking"
+    ],
+    "affected_data_categories": [
+      "dc-account-data",
+      "dc-open-banking",
+      "dc-npi"
+    ],
+    "likelihood_factors": [
+      "high operational tempo",
+      "weak exception governance"
+    ],
+    "impact_dimensions": {
+      "financial": "high",
+      "regulatory": "high",
+      "reputational": "medium"
+    },
+    "regulation_refs": [
+      {
+        "regulation_id": "PSR",
+        "article": "payment service operation",
+        "foundation_mcp": "eu-regulations"
+      }
+    ],
+    "control_refs": [
+      "SCF.FD-01",
+      "SCF.AU-02",
+      "SCF.IR-03",
+      "SCF.GV-04"
+    ],
+    "detection_indicators": [
+      "high-value payment exceptions resolved outside approved workflow",
+      "spikes in unresolved payment disputes and reversals"
+    ],
+    "historical_incidents": [
+      "Scheme and operational incidents causing consumer harm in payment service operations"
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "th-solvency-ii-reporting-integrity-breakdown",
+    "name": "Insurance prudential reporting integrity breakdown",
+    "category": "regtech",
+    "description": "Tampering or weak controls in insurer reporting pipelines undermine prudential submission integrity.",
+    "attack_narrative": "Insider misuse or process failures alter QRT transformations and validation outcomes, degrading supervisory reporting quality.",
+    "mitre_mapping": [
+      "T1565.001",
+      "T1119",
+      "T1070"
+    ],
+    "affected_patterns": [
+      "fs-insurance-core",
+      "fs-regtech"
+    ],
+    "affected_data_categories": [
+      "dc-insurance",
+      "dc-account-data"
+    ],
+    "likelihood_factors": [
+      "manual filing adjustments",
+      "weak validation governance"
+    ],
+    "impact_dimensions": {
+      "financial": "medium",
+      "regulatory": "high",
+      "reputational": "high"
+    },
+    "regulation_refs": [
+      {
+        "regulation_id": "Solvency_II",
+        "article": "35",
+        "foundation_mcp": "eu-regulations"
+      }
+    ],
+    "control_refs": [
+      "SCF.AU-02",
+      "SCF.CM-05",
+      "SCF.GV-04"
+    ],
+    "detection_indicators": [
+      "late-cycle QRT value swings without source-system reconciliation",
+      "validation bypasses in prudential filing workflow"
+    ],
+    "historical_incidents": [
+      "Supervisory remediation actions tied to insurer reporting control deficiencies"
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "th-cross-border-travel-rule-fragmentation",
+    "name": "Cross-border Travel Rule data fragmentation",
+    "category": "aml",
+    "description": "Inconsistent originator/beneficiary data handling across jurisdictions weakens monitoring and sanctions controls.",
+    "attack_narrative": "Bad actors exploit schema mismatches and intermediary hops to obscure required transfer metadata and evade interdiction controls.",
+    "mitre_mapping": [
+      "T1036",
+      "T1027",
+      "T1074"
+    ],
+    "affected_patterns": [
+      "fs-digital-assets",
+      "fs-aml",
+      "fs-payments"
+    ],
+    "affected_data_categories": [
+      "dc-digital-asset",
+      "dc-kyc-aml",
+      "dc-account-data"
+    ],
+    "likelihood_factors": [
+      "cross-jurisdiction payload inconsistency",
+      "heterogeneous VASP/PSP messaging"
+    ],
+    "impact_dimensions": {
+      "financial": "high",
+      "regulatory": "severe",
+      "reputational": "high"
+    },
+    "regulation_refs": [
+      {
+        "regulation_id": "AMLD6_BSA",
+        "section": "cross-border transfer monitoring",
+        "foundation_mcp": "eu-regulations"
+      }
+    ],
+    "control_refs": [
+      "SCF.SC-04",
+      "SCF.DS-02",
+      "SCF.AU-02",
+      "SCF.IR-03"
+    ],
+    "detection_indicators": [
+      "missing originator/beneficiary attributes for cross-border transfers",
+      "serial near-threshold transfers across mixed-identity counterparties"
+    ],
+    "historical_incidents": [
+      "Cross-border AML enforcement citing weak transfer data controls"
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "th-wealth-portfolio-rebalancing-manipulation",
+    "name": "Portfolio rebalancing and suitability manipulation",
+    "category": "wealth",
+    "description": "Unauthorized changes to wealth-advisory models or suitability parameters cause harmful or non-compliant recommendations.",
+    "attack_narrative": "Adversaries or insiders alter risk-profile mappings, strategy constraints, or execution thresholds, producing unsuitable trades and delayed detection.",
+    "mitre_mapping": [
+      "T1565.001",
+      "T1078",
+      "T1119"
+    ],
+    "affected_patterns": [
+      "fs-wealth",
+      "fs-trading"
+    ],
+    "affected_data_categories": [
+      "dc-account-data",
+      "dc-trading",
+      "dc-npi"
+    ],
+    "likelihood_factors": [
+      "high model complexity in advisory workflows",
+      "weak segregation of duties in portfolio policy updates"
+    ],
+    "impact_dimensions": {
+      "financial": "high",
+      "regulatory": "high",
+      "reputational": "high"
+    },
+    "regulation_refs": [
+      {
+        "regulation_id": "MiFID_II",
+        "article": "24",
+        "foundation_mcp": "eu-regulations"
+      },
+      {
+        "regulation_id": "MAR",
+        "article": "16",
+        "foundation_mcp": "eu-regulations"
+      }
+    ],
+    "control_refs": [
+      "SCF.GV-04",
+      "SCF.CM-05",
+      "SCF.AU-02",
+      "SCF.AI-01"
+    ],
+    "detection_indicators": [
+      "abrupt shifts in client risk buckets without corresponding consent or profile updates",
+      "strategy parameter updates outside approved portfolio governance windows"
+    ],
+    "historical_incidents": [
+      "Supervisory findings related to unsuitable automated portfolio recommendations"
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
   }
 ]

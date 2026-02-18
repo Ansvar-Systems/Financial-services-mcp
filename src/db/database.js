@@ -746,11 +746,35 @@ function standardSourceUrl(standard) {
   if (publisher.includes("nist")) {
     return "https://www.nist.gov/";
   }
+  if (publisher.includes("nacha")) {
+    return "https://www.nacha.org/";
+  }
+  if (publisher.includes("european payments council")) {
+    return "https://www.europeanpaymentscouncil.eu/";
+  }
   if (id.includes("fapi") || publisher.includes("openid")) {
     return "https://openid.net/specs/";
   }
   if (id.includes("cpmi") || publisher.includes("iosco") || publisher.includes("bis")) {
     return "https://www.bis.org/cpmi/publ/";
+  }
+  if (publisher.includes("fatf")) {
+    return "https://www.fatf-gafi.org/";
+  }
+  if (publisher.includes("esma")) {
+    return "https://www.esma.europa.eu/";
+  }
+  if (publisher.includes("etsi")) {
+    return "https://www.etsi.org/";
+  }
+  if (publisher.includes("eiopa")) {
+    return "https://www.eiopa.europa.eu/";
+  }
+  if (publisher.includes("cdia")) {
+    return "https://www.cdiaonline.org/";
+  }
+  if (publisher.includes("gleif")) {
+    return "https://www.gleif.org/";
   }
   if (publisher.includes("emv")) {
     return "https://www.emvco.com/";
@@ -1444,6 +1468,11 @@ export class FinancialServicesRepository {
     const requirementRef = normalizeText(requirementRefInput);
     const controlId = normalizeText(controlIdInput);
     const parsedRequirement = parseRequirementRef(requirementRef);
+    const clauseQuery = normalizeText(parsedRequirement.clauseOrArticle);
+    const normalizedClauseQuery = clauseQuery
+      .replace(/\b(article|art|section|sec|clause|requirement)\b/g, "")
+      .replace(/\s+/g, " ")
+      .trim();
     const standards = this.db.prepare("SELECT * FROM technical_standards ORDER BY name").all().map(rowToStandard);
     const mappings = [];
     for (const standard of standards) {
@@ -1457,7 +1486,16 @@ export class FinancialServicesRepository {
             return regulationMatch;
           }
           const text = normalizeText(`${mapping.article ?? ""} ${mapping.section ?? ""} ${mapping.clause ?? ""}`);
-          return regulationMatch && text.includes(parsedRequirement.clauseOrArticle);
+          const textWithoutLabels = text
+            .replace(/\b(article|art|section|sec|clause|requirement|req)\b/g, "")
+            .replace(/\s+/g, " ")
+            .trim();
+          return (
+            regulationMatch &&
+            (text.includes(clauseQuery) ||
+              (normalizedClauseQuery &&
+                (text.includes(normalizedClauseQuery) || textWithoutLabels.includes(normalizedClauseQuery))))
+          );
         });
       const controlMatch =
         !controlId || controlMappings.some((mapping) => normalizeText(mapping.control_id) === normalizeText(controlId));
@@ -1745,12 +1783,16 @@ export class FinancialServicesRepository {
         evidence_items: evidenceItems
       },
       metadata: buildMetadata(this.datasetFingerprint, {
-        citations: evidenceItems.flatMap((item) =>
-          (item.regulation_basis ?? []).map((basis) => ({
-            type: basis.article ? "CELEX" : "CFR",
-            ref: `${basis.regulation_id}${basis.article ? ` Art. ${basis.article}` : ""}${basis.section ? ` Sec. ${basis.section}` : ""}`,
-            source_url: "https://eur-lex.europa.eu/"
-          }))
+        citations: uniqueCitationList(
+          evidenceItems.flatMap((item) =>
+            (item.regulation_basis ?? []).map((basis) => ({
+              type: regulationReferenceToCitationType(basis, basis.regulation_id),
+              ref: `${basis.regulation_id}${basis.article ? ` Art. ${basis.article}` : ""}${
+                basis.section ? ` Sec. ${basis.section}` : ""
+              }${basis.clause ? ` ${basis.clause}` : ""}`,
+              source_url: this.sourceUrlForRegulation(basis.regulation_id)
+            }))
+          )
         ),
         confidence: "authoritative"
       })

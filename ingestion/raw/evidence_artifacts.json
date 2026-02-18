@@ -86,7 +86,7 @@
     "description": "Access, change, and operations control evidence supporting SOX reporting controls.",
     "mandatory": true,
     "retention_period": "7 years",
-    "template_ref": "tmpl/sox-itgc-control-log.xlsx",
+    "template_ref": "tmpl/sox-itgc-control-log.csv",
     "regulation_basis": [
       {
         "regulation_id": "SOX",
@@ -255,6 +255,218 @@
       {
         "regulation_id": "NIS2",
         "article": "21"
+      }
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "ev-gdpr-security-processing-assurance",
+    "audit_type": "GDPR Financial Data Processing",
+    "artifact_name": "GDPR security of processing assurance pack",
+    "description": "Risk assessment, technical controls, and incident workflow evidence for protection of financial personal data.",
+    "mandatory": true,
+    "retention_period": "6 years",
+    "template_ref": "tmpl/gdpr-security-processing-assurance.md",
+    "regulation_basis": [
+      {
+        "regulation_id": "GDPR",
+        "article": "32"
+      }
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "ev-ccpa-consumer-rights-and-disclosures",
+    "audit_type": "CCPA Consumer Privacy",
+    "artifact_name": "CCPA consumer rights and disclosure handling evidence",
+    "description": "Evidence of notice, request fulfillment, and disclosure controls for covered California consumer financial information.",
+    "mandatory": true,
+    "retention_period": "4 years",
+    "template_ref": "tmpl/ccpa-consumer-rights-log.md",
+    "regulation_basis": [
+      {
+        "regulation_id": "CCPA",
+        "section": "1798.130"
+      }
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "ev-bafin-vait-ict-governance",
+    "audit_type": "BaFin VAIT",
+    "artifact_name": "VAIT ICT governance and control evidence",
+    "description": "Institution-level ICT governance evidence aligned to BaFin supervisory expectations for risk management and operations.",
+    "mandatory": true,
+    "retention_period": "6 years",
+    "template_ref": "tmpl/bafin-vait-ict-governance.md",
+    "regulation_basis": [
+      {
+        "regulation_id": "BaFin_VAIT",
+        "section": "ICT"
+      }
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "ev-solvency-ii-reporting-controls",
+    "audit_type": "Solvency II Reporting",
+    "artifact_name": "Solvency II prudential reporting controls evidence",
+    "description": "QRT production, validation, and governance evidence for insurer supervisory submissions.",
+    "mandatory": true,
+    "retention_period": "7 years",
+    "template_ref": "tmpl/solvency-ii-reporting-controls.md",
+    "regulation_basis": [
+      {
+        "regulation_id": "Solvency_II",
+        "article": "35"
+      }
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "ev-state-breach-notification-playbooks",
+    "audit_type": "US State Breach Notification",
+    "artifact_name": "State-specific breach notification playbooks",
+    "description": "Jurisdiction-specific notification decision trees, regulator thresholds, and template communications.",
+    "mandatory": true,
+    "retention_period": "5 years",
+    "template_ref": "tmpl/state-breach-notification-playbooks.md",
+    "regulation_basis": [
+      {
+        "regulation_id": "STATE_BREACH_NOTIFICATION",
+        "section": "state breach workflow"
+      }
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "ev-nydfs-cyber-certification",
+    "audit_type": "NYDFS Cybersecurity",
+    "artifact_name": "NYDFS annual certification and incident governance evidence",
+    "description": "Annual compliance certification package and incident reporting governance artifacts for NY-regulated entities.",
+    "mandatory": true,
+    "retention_period": "7 years",
+    "template_ref": "tmpl/nydfs-cyber-certification.md",
+    "regulation_basis": [
+      {
+        "regulation_id": "NYDFS_CYBER_500",
+        "section": "500.17"
+      }
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "ev-mica-casp-operating-controls",
+    "audit_type": "MiCA CASP Controls",
+    "artifact_name": "CASP operating controls and safeguarding evidence",
+    "description": "Governance, safeguarding, and monitoring evidence for crypto-asset service provider control operation.",
+    "mandatory": true,
+    "retention_period": "6 years",
+    "template_ref": "tmpl/mica-casp-operating-controls.md",
+    "regulation_basis": [
+      {
+        "regulation_id": "MiCA",
+        "article": "63"
+      }
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "ev-amld5-cdd-and-ongoing-monitoring",
+    "audit_type": "EU AML CDD",
+    "artifact_name": "AMLD5 CDD and ongoing monitoring evidence",
+    "description": "CDD policy artifacts, risk scoring evidence, and periodic review records for EU onboarding and payments.",
+    "mandatory": true,
+    "retention_period": "5 years",
+    "template_ref": "tmpl/amld5-cdd-and-monitoring.md",
+    "regulation_basis": [
+      {
+        "regulation_id": "AMLD5",
+        "article": "13"
+      }
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "ev-amld6-enhanced-financial-crime-controls",
+    "audit_type": "EU AMLD6",
+    "artifact_name": "AMLD6 enhanced financial-crime control evidence",
+    "description": "Control evidence for enhanced monitoring, escalation, and investigative response over higher-risk behaviors.",
+    "mandatory": true,
+    "retention_period": "5 years",
+    "template_ref": "tmpl/amld6-enhanced-controls.md",
+    "regulation_basis": [
+      {
+        "regulation_id": "AMLD6",
+        "article": "7"
+      },
+      {
+        "regulation_id": "AMLD6_BSA",
+        "section": "monitoring"
+      }
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "ev-mar-market-abuse-surveillance",
+    "audit_type": "EU Market Abuse Surveillance",
+    "artifact_name": "MAR surveillance and alert adjudication evidence",
+    "description": "End-to-end surveillance tuning, alert review, and suspicious transaction reporting evidence.",
+    "mandatory": true,
+    "retention_period": "5 years",
+    "template_ref": "tmpl/mar-market-abuse-surveillance.md",
+    "regulation_basis": [
+      {
+        "regulation_id": "MAR",
+        "article": "16"
+      }
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "ev-psr-payment-operations-assurance",
+    "audit_type": "EU Payment Services",
+    "artifact_name": "PSR payment operations assurance evidence",
+    "description": "Operational evidence for payment routing resilience, exception handling, and scheme compliance controls.",
+    "mandatory": true,
+    "retention_period": "5 years",
+    "template_ref": "tmpl/psr-payment-operations-assurance.md",
+    "regulation_basis": [
+      {
+        "regulation_id": "PSR",
+        "article": "payment service operation"
+      }
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "ev-eidas-qualified-trust-cert-lifecycle",
+    "audit_type": "eIDAS Trust Services",
+    "artifact_name": "Qualified certificate lifecycle and trust-service evidence",
+    "description": "Certificate issuance, revocation, and assurance records supporting qualified trust service usage in financial flows.",
+    "mandatory": true,
+    "retention_period": "6 years",
+    "template_ref": "tmpl/eidas-qualified-trust-cert-lifecycle.md",
+    "regulation_basis": [
+      {
+        "regulation_id": "eIDAS",
+        "article": "24"
+      }
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "ev-bipa-biometric-consent-controls",
+    "audit_type": "Biometric Privacy",
+    "artifact_name": "BIPA biometric consent and retention control evidence",
+    "description": "Signed consent evidence, retention schedule operation, and biometric deletion control attestations.",
+    "mandatory": true,
+    "retention_period": "5 years",
+    "template_ref": "tmpl/bipa-biometric-consent-controls.md",
+    "regulation_basis": [
+      {
+        "regulation_id": "BIPA",
+        "section": "15"
       }
     ],
     "last_updated": "2026-02-18T00:00:00Z"

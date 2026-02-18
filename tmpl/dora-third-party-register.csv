@@ -1,0 +1,2 @@
+provider_id,provider_name,service_description,criticality,service_owner,contract_start,contract_end,data_residency,subprocessors,bcp_rto_hours,bcp_rpo_hours,last_risk_assessment,last_exit_test,status,notes
+,, , , , , , , , , , , , ,
