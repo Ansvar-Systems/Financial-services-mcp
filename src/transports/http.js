@@ -146,7 +146,7 @@ export async function buildHealthPayload(handler) {
 }
 
 export function startHttpTransport(handler, options = {}) {
-  const host = options.host ?? process.env.MCP_HTTP_HOST ?? "127.0.0.1";
+  const host = options.host ?? process.env.MCP_HTTP_HOST ?? "0.0.0.0";
   const port = Number(options.port ?? process.env.MCP_HTTP_PORT ?? 3000);
 
   const server = http.createServer(async (req, res) => {
