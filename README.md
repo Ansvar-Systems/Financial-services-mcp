@@ -2,6 +2,33 @@
 
 Financial Services domain intelligence MCP for banking, insurance, trading, payments, AML/KYC, open banking, and digital assets.
 
+
+### Public Endpoint (Streamable HTTP)
+
+Connect from any MCP client (Claude Desktop, ChatGPT, Cursor, VS Code, GitHub Copilot):
+
+```
+https://mcp.ansvar.eu/financial-services/mcp
+```
+
+**Claude Code:**
+```bash
+claude mcp add financial-services --transport http https://mcp.ansvar.eu/financial-services/mcp
+```
+
+**Claude Desktop / Cursor** (`claude_desktop_config.json`):
+```json
+{
+  "mcpServers": {
+    "financial-services": {
+      "type": "url",
+      "url": "https://mcp.ansvar.eu/financial-services/mcp"
+    }
+  }
+}
+```
+
+No authentication required. See [all Ansvar MCP endpoints](https://github.com/Ansvar-Systems/Ansvar-Architecture-Documentation/blob/main/docs/mcp-remote-access.md).
 This implementation follows the shared domain MCP contract from `domain-mcp-specifications.md` and includes:
 
 - Universal domain tools (`about`, `classify_data`, `assess_applicability`, `build_control_baseline`, etc.)
