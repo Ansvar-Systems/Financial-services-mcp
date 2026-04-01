@@ -31,5 +31,5 @@ function buildFtsMatchExpr(input) {
   return tokens.length > 1 ? tokens.join(" OR ") : sanitized;
 }
 
-module.exports = { sanitizeFtsInput, buildFtsMatchExpr };
+export { sanitizeFtsInput, buildFtsMatchExpr };
 

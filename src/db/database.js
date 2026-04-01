@@ -1,4 +1,4 @@
-const { sanitizeFtsInput, buildFtsMatchExpr } = require("../utils/fts-sanitize.js");
+import { sanitizeFtsInput, buildFtsMatchExpr } from "../utils/fts-sanitize.js";
 import { mkdirSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { DatabaseSync } from "node:sqlite";
