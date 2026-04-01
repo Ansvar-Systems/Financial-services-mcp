@@ -1,3 +1,4 @@
+const { sanitizeFtsInput, buildFtsMatchExpr } = require("../utils/fts-sanitize.js");
 import { mkdirSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { DatabaseSync } from "node:sqlite";
@@ -1549,7 +1550,7 @@ export class FinancialServicesRepository {
     const limit = Math.max(1, Math.min(Number(limitInput ?? 10), 25));
     const offset = Math.max(0, Number(offsetInput ?? 0));
     const matchTokens = words(query);
-    const matchExpr = matchTokens.length > 1 ? matchTokens.join(" OR ") : query;
+    const matchExpr = matchTokens.length > 1 ? matchTokens.join(" OR ") : sanitizeFtsInput(query);
     const searchTargets = [
       { type: "architecture_patterns", table: "architecture_patterns_fts", idField: "id", textField: "description" },
       { type: "threat_scenarios", table: "threat_scenarios_fts", idField: "id", textField: "description" },
