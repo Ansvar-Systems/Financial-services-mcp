@@ -1,4 +1,5 @@
 import { sanitizeFtsInput, buildFtsMatchExpr } from "../utils/fts-sanitize.js";
+import { buildCitation } from "../utils/citation.js";
 import { mkdirSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { DatabaseSync } from "node:sqlite";
@@ -1091,7 +1092,13 @@ export class FinancialServicesRepository {
           { type: "URL", ref: "EBA DORA", source_url: "https://www.eba.europa.eu/" }
         ],
         confidence: "authoritative"
-      })
+      }),
+      _citation: buildCitation(
+        pattern.id,
+        `${pattern.name} (${pattern.category})`,
+        "get_architecture_pattern",
+        { pattern_id: patternId }
+      )
     };
   }
 
@@ -1257,7 +1264,16 @@ export class FinancialServicesRepository {
       metadata: buildMetadata(this.datasetFingerprint, {
         citations: uniqueCitationList(citations),
         foundation_mcp_calls: uniqueFoundationCalls(foundationCalls)
-      })
+      }),
+      _citation: buildCitation(
+        architecturePatternInput ? `FS threats: ${architecturePatternInput}` : "Financial services threats",
+        `Financial services threat scenarios${architecturePatternInput ? ` for ${architecturePatternInput}` : ""}`,
+        "get_domain_threats",
+        {
+          ...(architecturePatternInput ? { architecture_pattern: architecturePatternInput } : {}),
+          ...(dataTypesInput && dataTypesInput.length > 0 ? { data_types: String(dataTypesInput) } : {})
+        }
+      )
     };
   }
 
@@ -1461,7 +1477,16 @@ export class FinancialServicesRepository {
         ],
         confidence: "inferred",
         inference_rationale: "Obligation graph derived from applicability rules and breach profile mappings."
-      })
+      }),
+      _citation: buildCitation(
+        country ? `FS obligation graph: ${country}` : "Financial services obligation graph",
+        `Financial services obligation graph${country ? ` for ${country}` : ""}`,
+        "get_obligation_graph",
+        {
+          ...(country ? { country } : {}),
+          ...(asOfDate ? { as_of_date: asOfDate } : {})
+        }
+      )
     };
   }
 
