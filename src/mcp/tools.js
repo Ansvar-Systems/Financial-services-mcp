@@ -306,6 +306,11 @@ export const toolDefinitions = [
       },
       ["service_description", "asset_types", "jurisdictions"]
     )
+  },
+  {
+    name: "check_data_freshness",
+    description: "Check dataset freshness, source health, and staleness indicators for this MCP server.",
+    inputSchema: obj({})
   }
 ];
 
@@ -477,6 +482,9 @@ export async function dispatchTool(repo, name, args = {}, context = {}) {
       break;
     case "classify_digital_asset_service":
       payload = repo.classifyDigitalAssetService(toolArgs.service_description, toolArgs.asset_types, toolArgs.jurisdictions);
+      break;
+    case "check_data_freshness":
+      payload = repo.checkDataFreshness();
       break;
     default:
       throw new ToolInputError(`Unknown tool: ${name}`);
