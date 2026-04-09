@@ -1,4 +1,6 @@
 FROM node:24-alpine
+# Upgrade zlib to >= 1.3.2-r0 to remediate CVE-2026-27171 (CWE-1284)
+RUN apk upgrade --no-cache zlib
 WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci --omit=dev && npm cache clean --force
