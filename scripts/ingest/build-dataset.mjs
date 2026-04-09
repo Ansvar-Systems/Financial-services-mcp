@@ -21,6 +21,7 @@ import {
 const datasetFile = path.join(compiledDir, "domain-dataset.json");
 const hashesFile = path.join(compiledDir, "dataset-hashes.json");
 const coverageFile = path.join(compiledDir, "coverage-report.json");
+const coverageAliasFile = path.join(compiledDir, "coverage.json");
 
 async function main() {
   await ensureIngestionDirs();
@@ -68,11 +69,13 @@ async function main() {
   await writeJson(datasetFile, outputDataset);
   await writeJson(hashesFile, outputHashes);
   await writeJson(coverageFile, coverageReport);
+  await writeJson(coverageAliasFile, coverageReport);
   await writeSourcesYml(normalizedDataset.authoritativeSources);
 
   process.stdout.write(`Wrote ${datasetFile}\n`);
   process.stdout.write(`Wrote ${hashesFile}\n`);
   process.stdout.write(`Wrote ${coverageFile}\n`);
+  process.stdout.write(`Wrote ${coverageAliasFile}\n`);
   process.stdout.write(`Wrote ${path.join(projectRoot, "sources.yml")}\n`);
   process.stdout.write(`Dataset fingerprint: ${datasetFingerprint}\n`);
 }

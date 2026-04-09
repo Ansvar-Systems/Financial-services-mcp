@@ -1,4 +1,4 @@
-import { mkdirSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { DatabaseSync } from "node:sqlite";
 
@@ -979,6 +979,59 @@ export class FinancialServicesRepository {
       eu: { total: euCovered, covered: euCovered, missing: [], breach_covered: euCovered },
       us: { total: usCovered, covered: usCovered, missing: [], breach_covered: usCovered },
       regulatory_catalog: { eu: 0, us: 0 }
+    };
+  }
+
+  checkDataFreshness() {
+    const lastUpdated = this.db.prepare("SELECT value FROM db_metadata WHERE key = 'last_updated'").get()?.value ?? null;
+    const datasetVersion =
+      this.db.prepare("SELECT value FROM db_metadata WHERE key = 'dataset_version'").get()?.value ?? DATASET_VERSION;
+    const coverageReportRaw = this.db.prepare("SELECT value FROM db_metadata WHERE key = 'coverage_report'").get()?.value;
+    const coverageReport = fromJson(coverageReportRaw, null);
+
+    let ageDays = null;
+    if (lastUpdated) {
+      const parsed = new Date(lastUpdated);
+      if (!Number.isNaN(parsed.valueOf())) {
+        ageDays = Number(((Date.now() - parsed.valueOf()) / (1000 * 60 * 60 * 24)).toFixed(2));
+      }
+    }
+
+    const status = ageDays == null ? "unknown" : ageDays > 45 ? "stale" : "fresh";
+
+    let sourceHealth = null;
+    try {
+      const sourceHealthUrl = new URL("../../data/source-health.json", import.meta.url);
+      const sourceHealthPath = fileURLToPath(sourceHealthUrl);
+      if (existsSync(sourceHealthPath)) {
+        const raw = readFileSync(sourceHealthPath, "utf8");
+        const parsed = JSON.parse(raw);
+        sourceHealth = {
+          checked_at: parsed.checked_at ?? null,
+          sources_checked: parsed.sources_checked ?? null,
+          ok: parsed.ok ?? null,
+          failed: parsed.failed ?? null
+        };
+      }
+    } catch (_) {
+      // source-health.json not available or unreadable
+    }
+
+    return {
+      data: {
+        status,
+        dataset_version: datasetVersion,
+        last_updated: lastUpdated,
+        dataset_age_days: ageDays,
+        jurisdiction_coverage: coverageReport
+          ? { eu: coverageReport.eu, us: coverageReport.us }
+          : null,
+        source_health: sourceHealth
+      },
+      metadata: buildMetadata(this.datasetFingerprint, {
+        confidence: "authoritative",
+        inference_rationale: "Data freshness derived from Financial Services MCP metadata and source health records."
+      })
     };
   }
 
