@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-18T17:12:55.305Z",
+  "generated_at": "2026-04-11T16:27:24.478Z",
   "eu": {
     "total": 27,
     "covered": 27,
@@ -34,7 +34,7 @@
   },
   "obligation_graph": {
     "version": "1.0.0",
-    "nodes": 336,
-    "edges": 334
+    "nodes": 339,
+    "edges": 337
   }
 }

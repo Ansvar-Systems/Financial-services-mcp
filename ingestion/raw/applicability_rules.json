@@ -1447,5 +1447,131 @@
     },
     "rationale": "US wealth operations handling nonpublic personal financial information require durable governance, monitoring, and incident controls.",
     "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "app-us-nist-800-53-baseline",
+    "condition": {
+      "country": ["US", "US-NY"],
+      "role": ["bank", "financial-entity", "fintech", "investment-firm"],
+      "system_types": ["fs-core-banking", "fs-payments", "payments", "fs-wealth"],
+      "data_types": ["dc-account-data", "dc-npi", "dc-credit"]
+    },
+    "obligation": {
+      "regulation_id": "GLBA",
+      "section": "501(b)",
+      "standard_id": "std-nist-800-53-r5",
+      "confidence": "inferred",
+      "obligation_type": "control_baseline",
+      "priority": 88,
+      "conflict_group": "us-control-baseline",
+      "effective_from": "2020-09-23"
+    },
+    "rationale": "US financial institutions default to NIST SP 800-53 R5 as the comprehensive control library for GLBA Safeguards and NYDFS Part 500 risk-based programs.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "app-us-nist-800-171-cui",
+    "condition": {
+      "country": ["US"],
+      "role": ["financial-entity", "payment-institution", "ict-third-party"],
+      "system_types": ["fs-payments", "fs-treasury"],
+      "data_types": ["dc-account-data", "dc-npi"]
+    },
+    "obligation": {
+      "regulation_id": "GLBA",
+      "section": "501(b)",
+      "standard_id": "std-nist-800-171-r3",
+      "confidence": "inferred",
+      "obligation_type": "cui_protection",
+      "priority": 70,
+      "conflict_group": "us-control-baseline",
+      "effective_from": "2020-02-21"
+    },
+    "rationale": "US financial service providers that also process Controlled Unclassified Information (e.g., federal treasury services, government payment contracts) must apply NIST 800-171 R3 on top of the GLBA Safeguards baseline.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "app-us-ffiec-examination-baseline",
+    "condition": {
+      "country": ["US"],
+      "role": ["bank", "credit-union", "thrift", "financial-entity"],
+      "system_types": ["fs-core-banking", "fs-payments", "payments", "fs-treasury"],
+      "data_types": ["dc-account-data", "dc-npi"]
+    },
+    "obligation": {
+      "regulation_id": "GLBA",
+      "section": "501(b)",
+      "standard_id": "std-ffiec-it-handbook",
+      "confidence": "authoritative",
+      "obligation_type": "supervisory_expectation",
+      "priority": 92,
+      "conflict_group": "us-control-baseline",
+      "effective_from": "2016-09-01"
+    },
+    "rationale": "US federally regulated banks, credit unions, and thrifts are examined against the FFIEC IT Examination Handbook booklets by OCC, FRB, FDIC, and NCUA.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "app-us-cis-operational-baseline",
+    "condition": {
+      "country": ["US", "US-NY"],
+      "role": ["fintech", "financial-entity", "bank"],
+      "system_types": ["fs-payments", "fs-core-banking", "fs-wealth"],
+      "data_types": ["dc-account-data", "dc-npi", "dc-card-data"]
+    },
+    "obligation": {
+      "regulation_id": "NYDFS_CYBER_500",
+      "section": "500.09",
+      "standard_id": "std-cis-controls-8",
+      "confidence": "inferred",
+      "obligation_type": "operational_baseline",
+      "priority": 68,
+      "conflict_group": "us-control-baseline",
+      "effective_from": "2021-05-18"
+    },
+    "rationale": "CIS Critical Security Controls v8 IG1/IG2 supply a concrete, risk-prioritised operational baseline used to evidence NYDFS 500.09 risk-based control selection and GLBA Safeguards Rule operational controls.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "app-us-fedramp-cloud-tpsp",
+    "condition": {
+      "country": ["US", "US-NY"],
+      "role": ["ict-third-party", "financial-entity"],
+      "system_types": ["fs-cloud", "fs-treasury"],
+      "data_types": ["dc-account-data", "dc-npi"]
+    },
+    "obligation": {
+      "regulation_id": "NYDFS_CYBER_500",
+      "section": "500.11",
+      "standard_id": "std-fedramp-r5",
+      "confidence": "authoritative",
+      "obligation_type": "tpsp_assurance",
+      "priority": 85,
+      "conflict_group": "us-control-baseline",
+      "effective_from": "2023-05-30"
+    },
+    "rationale": "Cloud service providers hosting US financial workloads with nonpublic information commonly demonstrate third-party security adequacy through a FedRAMP Moderate or High authorisation.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "app-us-hitrust-multi-framework",
+    "condition": {
+      "country": ["US"],
+      "role": ["financial-entity", "insurance", "fintech"],
+      "system_types": ["fs-core-banking", "fs-payments", "fs-wealth"],
+      "data_types": ["dc-npi", "dc-insurance", "dc-account-data"]
+    },
+    "obligation": {
+      "regulation_id": "GLBA",
+      "section": "501(b)",
+      "standard_id": "std-hitrust-csf-v11",
+      "confidence": "inferred",
+      "obligation_type": "multi_framework_attestation",
+      "priority": 65,
+      "conflict_group": "us-control-baseline",
+      "effective_from": "2023-01-23"
+    },
+    "rationale": "US firms that need to demonstrate multi-framework assurance (SOC 2 + HIPAA + PCI DSS + GLBA) use HITRUST CSF v11 as the single assessable control set, especially in insurance / wealth / healthcare-adjacent fintech.",
+    "last_updated": "2026-02-18T00:00:00Z"
   }
 ]

@@ -356,6 +356,134 @@
     "last_updated": "2026-02-18T00:00:00Z"
   },
   {
+    "id": "ev-nydfs-risk-assessment",
+    "audit_type": "NYDFS Cybersecurity",
+    "artifact_name": "Periodic risk assessment (23 NYCRR 500.09)",
+    "description": "Written risk assessment covering confidentiality, integrity, and availability of information systems and nonpublic information, refreshed on a risk-based cadence and before material changes.",
+    "mandatory": true,
+    "retention_period": "7 years",
+    "template_ref": "tmpl/nydfs-risk-assessment.md",
+    "regulation_basis": [
+      {
+        "regulation_id": "NYDFS_CYBER_500",
+        "section": "500.09"
+      }
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "ev-nydfs-pen-test-vuln-assessment",
+    "audit_type": "NYDFS Cybersecurity",
+    "artifact_name": "Annual penetration test and continuous vulnerability assessment evidence (23 NYCRR 500.05)",
+    "description": "Annual penetration test reports plus continuous monitoring / automated vulnerability scan records, including remediation tracking.",
+    "mandatory": true,
+    "retention_period": "7 years",
+    "template_ref": "tmpl/nydfs-pen-test.md",
+    "regulation_basis": [
+      {
+        "regulation_id": "NYDFS_CYBER_500",
+        "section": "500.05"
+      }
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "ev-nydfs-audit-trail",
+    "audit_type": "NYDFS Cybersecurity",
+    "artifact_name": "Audit trails for material cybersecurity events (23 NYCRR 500.06)",
+    "description": "Protected audit trails that reconstruct material financial transactions and detect/respond to cybersecurity events, retained per 500.06 requirements.",
+    "mandatory": true,
+    "retention_period": "5 years for 500.06(a)(1); 3 years for 500.06(a)(2)",
+    "template_ref": "tmpl/nydfs-audit-trail.md",
+    "regulation_basis": [
+      {
+        "regulation_id": "NYDFS_CYBER_500",
+        "section": "500.06"
+      }
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "ev-nydfs-access-privileges",
+    "audit_type": "NYDFS Cybersecurity",
+    "artifact_name": "Access privileges and identity management records (23 NYCRR 500.07)",
+    "description": "Role definitions, periodic access reviews, privileged account management logs, and least-privilege enforcement artifacts.",
+    "mandatory": true,
+    "retention_period": "7 years",
+    "template_ref": "tmpl/nydfs-access-privileges.md",
+    "regulation_basis": [
+      {
+        "regulation_id": "NYDFS_CYBER_500",
+        "section": "500.07"
+      }
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "ev-nydfs-third-party-security",
+    "audit_type": "NYDFS Cybersecurity",
+    "artifact_name": "Third-party service provider security policy and due diligence (23 NYCRR 500.11)",
+    "description": "Written TPSP policy, due diligence questionnaires, contractual security addenda, and periodic reassessment records covering all third-party service providers with access to nonpublic information.",
+    "mandatory": true,
+    "retention_period": "7 years",
+    "template_ref": "tmpl/nydfs-third-party-security.md",
+    "regulation_basis": [
+      {
+        "regulation_id": "NYDFS_CYBER_500",
+        "section": "500.11"
+      }
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "ev-nydfs-mfa",
+    "audit_type": "NYDFS Cybersecurity",
+    "artifact_name": "Multi-factor authentication coverage evidence (23 NYCRR 500.12)",
+    "description": "Evidence of MFA for all remote access to internal networks, all remote access to third-party applications with nonpublic information, and all privileged accounts.",
+    "mandatory": true,
+    "retention_period": "7 years",
+    "template_ref": "tmpl/nydfs-mfa.md",
+    "regulation_basis": [
+      {
+        "regulation_id": "NYDFS_CYBER_500",
+        "section": "500.12"
+      }
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "ev-nydfs-training-monitoring",
+    "audit_type": "NYDFS Cybersecurity",
+    "artifact_name": "Cybersecurity awareness training and monitoring records (23 NYCRR 500.14)",
+    "description": "Annual cybersecurity awareness training completion records, phishing exercise results, and authorized-user activity monitoring logs.",
+    "mandatory": true,
+    "retention_period": "7 years",
+    "template_ref": "tmpl/nydfs-training-monitoring.md",
+    "regulation_basis": [
+      {
+        "regulation_id": "NYDFS_CYBER_500",
+        "section": "500.14"
+      }
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "ev-nydfs-incident-response-plan",
+    "audit_type": "NYDFS Cybersecurity",
+    "artifact_name": "Written incident response plan (23 NYCRR 500.16)",
+    "description": "Board-approved incident response plan covering internal processes, goals, roles, external communication, remediation steps, documentation, post-incident revision, and tabletop exercise records.",
+    "mandatory": true,
+    "retention_period": "7 years",
+    "template_ref": "tmpl/nydfs-incident-response-plan.md",
+    "regulation_basis": [
+      {
+        "regulation_id": "NYDFS_CYBER_500",
+        "section": "500.16"
+      }
+    ],
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
     "id": "ev-mica-casp-operating-controls",
     "audit_type": "MiCA CASP Controls",
     "artifact_name": "CASP operating controls and safeguarding evidence",
