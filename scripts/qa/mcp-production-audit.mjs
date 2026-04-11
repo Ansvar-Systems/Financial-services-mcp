@@ -165,11 +165,12 @@ async function checkDeployment() {
     }
   }
 
+  // codeql.yml and gitleaks.yml intentionally removed per ADR-011 (GitHub Advanced
+  // Security adoption). CodeQL default setup and GHAS Secret Protection now replace
+  // the per-repo workflow files, so the audit must not flag their absence.
   const securityWorkflows = [
-    ".github/workflows/codeql.yml",
     ".github/workflows/semgrep.yml",
     ".github/workflows/trivy.yml",
-    ".github/workflows/gitleaks.yml",
     ".github/workflows/socket-security.yml",
     ".github/workflows/scorecard.yml"
   ];
