@@ -473,15 +473,304 @@
     "regulation_mappings": [
       {
         "regulation_id": "GLBA",
-        "section": "501(b)"
+        "section": "501(b)",
+        "name": "Safeguards Rule",
+        "aliases": ["safeguards rule", "interagency guidelines establishing information security standards"]
       },
       {
         "regulation_id": "NYDFS_CYBER_500",
-        "section": "500.03"
+        "section": "500.02",
+        "name": "Cybersecurity program"
+      },
+      {
+        "regulation_id": "NYDFS_CYBER_500",
+        "section": "500.03",
+        "name": "Cybersecurity policy"
+      },
+      {
+        "regulation_id": "NYDFS_CYBER_500",
+        "section": "500.04",
+        "name": "CISO designation and reporting"
+      },
+      {
+        "regulation_id": "NYDFS_CYBER_500",
+        "section": "500.05",
+        "name": "Vulnerability management and penetration testing"
+      },
+      {
+        "regulation_id": "NYDFS_CYBER_500",
+        "section": "500.06",
+        "name": "Audit trails"
+      },
+      {
+        "regulation_id": "NYDFS_CYBER_500",
+        "section": "500.07",
+        "name": "Access privileges and management"
+      },
+      {
+        "regulation_id": "NYDFS_CYBER_500",
+        "section": "500.09",
+        "name": "Risk assessment"
+      },
+      {
+        "regulation_id": "NYDFS_CYBER_500",
+        "section": "500.11",
+        "name": "Third-party service provider security"
+      },
+      {
+        "regulation_id": "NYDFS_CYBER_500",
+        "section": "500.12",
+        "name": "Multi-factor authentication"
+      },
+      {
+        "regulation_id": "NYDFS_CYBER_500",
+        "section": "500.14",
+        "name": "Training and monitoring"
+      },
+      {
+        "regulation_id": "NYDFS_CYBER_500",
+        "section": "500.16",
+        "name": "Incident response plan"
+      },
+      {
+        "regulation_id": "NYDFS_CYBER_500",
+        "section": "500.17",
+        "name": "Notices to superintendent and annual certification"
       }
     ],
     "implementation_guidance": "Translate CSF outcomes into institution-level KRIs/KPIs and board reporting aligned to supervisory expectations.",
     "licensing_restrictions": "Public domain.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "std-nist-800-53-r5",
+    "name": "NIST SP 800-53 Rev 5",
+    "version": "Rev 5",
+    "publisher": "NIST",
+    "scope": "Security and privacy control baseline for US federal information systems; widely adopted by US financial institutions as the de facto control library for GLBA Safeguards, NYDFS Part 500, and SOX ITGC programs.",
+    "key_clauses": [
+      "AC (Access Control)",
+      "AU (Audit and Accountability)",
+      "CA (Assessment, Authorization, and Monitoring)",
+      "CM (Configuration Management)",
+      "CP (Contingency Planning)",
+      "IA (Identification and Authentication)",
+      "IR (Incident Response)",
+      "RA (Risk Assessment)",
+      "SC (System and Communications Protection)",
+      "SI (System and Information Integrity)",
+      "SR (Supply Chain Risk Management)"
+    ],
+    "control_mappings": [
+      { "framework": "scf", "control_id": "SCF.AC-01" },
+      { "framework": "scf", "control_id": "SCF.AU-02" },
+      { "framework": "scf", "control_id": "SCF.CR-03" },
+      { "framework": "scf", "control_id": "SCF.CM-05" },
+      { "framework": "scf", "control_id": "SCF.IR-03" },
+      { "framework": "scf", "control_id": "SCF.TV-01" },
+      { "framework": "scf", "control_id": "SCF.BC-02" },
+      { "framework": "scf", "control_id": "SCF.TP-02" }
+    ],
+    "regulation_mappings": [
+      {
+        "regulation_id": "GLBA",
+        "section": "501(b)",
+        "name": "Safeguards Rule",
+        "aliases": ["safeguards rule", "interagency guidelines"]
+      },
+      { "regulation_id": "NYDFS_CYBER_500", "section": "500.02", "name": "Cybersecurity program" },
+      { "regulation_id": "NYDFS_CYBER_500", "section": "500.05", "name": "Vulnerability management and penetration testing" },
+      { "regulation_id": "NYDFS_CYBER_500", "section": "500.06", "name": "Audit trails" },
+      { "regulation_id": "NYDFS_CYBER_500", "section": "500.07", "name": "Access privileges and management" },
+      { "regulation_id": "NYDFS_CYBER_500", "section": "500.09", "name": "Risk assessment" },
+      { "regulation_id": "NYDFS_CYBER_500", "section": "500.11", "name": "Third-party service provider security" },
+      { "regulation_id": "NYDFS_CYBER_500", "section": "500.12", "name": "Multi-factor authentication" },
+      { "regulation_id": "NYDFS_CYBER_500", "section": "500.16", "name": "Incident response plan" },
+      {
+        "regulation_id": "SOX",
+        "section": "Section 404",
+        "name": "ITGC baseline",
+        "aliases": ["itgc", "it general controls", "section 404"]
+      }
+    ],
+    "implementation_guidance": "Use NIST 800-53 R5 as the master control library for US financial institutions. Map it onto institution-specific baselines (NYDFS 500, GLBA Safeguards, FFIEC IT Handbook) rather than re-deriving controls. Reference NIST SP 800-53B for baselines (Low/Moderate/High) and the NIST CSF 2.0 informative references for outcome mapping.",
+    "licensing_restrictions": "Public domain.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "std-nist-800-171-r3",
+    "name": "NIST SP 800-171 Rev 3",
+    "version": "Rev 3",
+    "publisher": "NIST",
+    "scope": "Protecting Controlled Unclassified Information in nonfederal systems; used by US financial institutions handling federal data and by defense industrial base financial service providers.",
+    "key_clauses": [
+      "3.1 Access Control",
+      "3.3 Audit and Accountability",
+      "3.5 Identification and Authentication",
+      "3.6 Incident Response",
+      "3.11 Risk Assessment",
+      "3.13 System and Communications Protection",
+      "3.14 System and Information Integrity"
+    ],
+    "control_mappings": [
+      { "framework": "scf", "control_id": "SCF.AC-01" },
+      { "framework": "scf", "control_id": "SCF.AU-02" },
+      { "framework": "scf", "control_id": "SCF.CR-03" },
+      { "framework": "scf", "control_id": "SCF.IR-03" },
+      { "framework": "scf", "control_id": "SCF.TV-01" }
+    ],
+    "regulation_mappings": [
+      { "regulation_id": "GLBA", "section": "501(b)", "name": "Safeguards Rule", "aliases": ["safeguards rule"] },
+      { "regulation_id": "NYDFS_CYBER_500", "section": "500.12", "name": "Multi-factor authentication" },
+      { "regulation_id": "NYDFS_CYBER_500", "section": "500.15", "name": "Encryption of nonpublic information" }
+    ],
+    "implementation_guidance": "Apply NIST 800-171 R3 as the control baseline when the firm also handles US federal CUI (e.g., government payment contracts). Overlay it on top of NIST 800-53 R5 rather than treating as an alternative.",
+    "licensing_restrictions": "Public domain.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "std-ffiec-it-handbook",
+    "name": "FFIEC IT Examination Handbook",
+    "version": "2024 revisions",
+    "publisher": "Federal Financial Institutions Examination Council",
+    "scope": "Supervisory expectations for US federally regulated financial institutions across Information Security, Business Continuity Management, Architecture Infrastructure and Operations, Audit, Development and Acquisition, and Outsourcing Technology Services booklets.",
+    "key_clauses": [
+      "Information Security Booklet",
+      "Business Continuity Management Booklet",
+      "Architecture, Infrastructure, and Operations Booklet",
+      "Audit Booklet",
+      "Outsourcing Technology Services Booklet",
+      "Management Booklet"
+    ],
+    "control_mappings": [
+      { "framework": "scf", "control_id": "SCF.GV-04" },
+      { "framework": "scf", "control_id": "SCF.AC-01" },
+      { "framework": "scf", "control_id": "SCF.IR-03" },
+      { "framework": "scf", "control_id": "SCF.BC-02" },
+      { "framework": "scf", "control_id": "SCF.TP-02" },
+      { "framework": "scf", "control_id": "SCF.AU-02" }
+    ],
+    "regulation_mappings": [
+      {
+        "regulation_id": "GLBA",
+        "section": "501(b)",
+        "name": "Safeguards Rule",
+        "aliases": ["safeguards rule", "interagency guidelines establishing information security standards"]
+      },
+      { "regulation_id": "NYDFS_CYBER_500", "section": "500.03", "name": "Cybersecurity policy" },
+      { "regulation_id": "NYDFS_CYBER_500", "section": "500.11", "name": "Third-party service provider security" },
+      {
+        "regulation_id": "SOX",
+        "section": "Section 404",
+        "name": "ITGC baseline",
+        "aliases": ["itgc", "section 404"]
+      }
+    ],
+    "implementation_guidance": "FFIEC IT Handbook booklets are the primary supervisory lens for US banks, credit unions, and thrifts. Map internal controls to FFIEC booklet expectations during OCC/FRB/FDIC/NCUA exams; the Cybersecurity Assessment Tool (CAT) is being retired in favour of the NIST CSF 2.0 Profile for Financial Services.",
+    "licensing_restrictions": "Public domain. FFIEC content is US federal public work.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "std-cis-controls-8",
+    "name": "CIS Critical Security Controls v8",
+    "version": "8.0",
+    "publisher": "Center for Internet Security",
+    "scope": "Prioritised, defence-in-depth control set widely adopted by US financial institutions as a starting baseline for Safeguards Rule and NYDFS Part 500 operational controls.",
+    "key_clauses": [
+      "IG1 Implementation Group",
+      "IG2 Implementation Group",
+      "IG3 Implementation Group",
+      "Control 1 Inventory and Control of Enterprise Assets",
+      "Control 3 Data Protection",
+      "Control 5 Account Management",
+      "Control 6 Access Control Management",
+      "Control 8 Audit Log Management",
+      "Control 11 Data Recovery",
+      "Control 14 Security Awareness Training",
+      "Control 17 Incident Response Management",
+      "Control 18 Penetration Testing"
+    ],
+    "control_mappings": [
+      { "framework": "scf", "control_id": "SCF.AC-01" },
+      { "framework": "scf", "control_id": "SCF.AU-02" },
+      { "framework": "scf", "control_id": "SCF.DS-02" },
+      { "framework": "scf", "control_id": "SCF.CM-05" },
+      { "framework": "scf", "control_id": "SCF.IR-03" },
+      { "framework": "scf", "control_id": "SCF.TV-01" }
+    ],
+    "regulation_mappings": [
+      { "regulation_id": "GLBA", "section": "501(b)", "name": "Safeguards Rule", "aliases": ["safeguards rule"] },
+      { "regulation_id": "NYDFS_CYBER_500", "section": "500.05", "name": "Penetration testing and vulnerability assessments" },
+      { "regulation_id": "NYDFS_CYBER_500", "section": "500.07", "name": "Access privileges and management" },
+      { "regulation_id": "NYDFS_CYBER_500", "section": "500.14", "name": "Training and monitoring" }
+    ],
+    "implementation_guidance": "Start with Implementation Group 1 (IG1) for smaller institutions; graduate to IG2 as data sensitivity and staffing grow. Use CIS Safeguards as concrete operational proof points when demonstrating NYDFS 500.09 risk-based control selection.",
+    "licensing_restrictions": "Available under CIS Controls license; redistribution with attribution.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "std-fedramp-r5",
+    "name": "FedRAMP Rev 5 Baselines",
+    "version": "Rev 5",
+    "publisher": "FedRAMP PMO / GSA",
+    "scope": "Authorisation baselines for cloud service offerings used by US federal agencies; applicable to financial regulators and to FedRAMP-authorised providers delivering services to banks.",
+    "key_clauses": [
+      "Low baseline",
+      "Moderate baseline",
+      "High baseline",
+      "FedRAMP-specific control parameters (SC-7, SI-4, IR-4)"
+    ],
+    "control_mappings": [
+      { "framework": "scf", "control_id": "SCF.AC-01" },
+      { "framework": "scf", "control_id": "SCF.AU-02" },
+      { "framework": "scf", "control_id": "SCF.CR-03" },
+      { "framework": "scf", "control_id": "SCF.NW-06" },
+      { "framework": "scf", "control_id": "SCF.IR-03" },
+      { "framework": "scf", "control_id": "SCF.TV-01" }
+    ],
+    "regulation_mappings": [
+      { "regulation_id": "GLBA", "section": "501(b)", "name": "Safeguards Rule", "aliases": ["safeguards rule"] },
+      { "regulation_id": "NYDFS_CYBER_500", "section": "500.11", "name": "Third-party service provider security" },
+      { "regulation_id": "NYDFS_CYBER_500", "section": "500.15", "name": "Encryption of nonpublic information" }
+    ],
+    "implementation_guidance": "FedRAMP Moderate is the default for regulated cloud workloads hosting nonpublic customer information. Use the FedRAMP-tailored parameters for SC-7 (boundary protection) and IR-4 when demonstrating NYDFS 500.11 TPSP adequacy.",
+    "licensing_restrictions": "Public domain; baselines published by FedRAMP PMO.",
+    "last_updated": "2026-02-18T00:00:00Z"
+  },
+  {
+    "id": "std-hitrust-csf-v11",
+    "name": "HITRUST CSF v11",
+    "version": "11",
+    "publisher": "HITRUST Alliance",
+    "scope": "Cross-framework control set that harmonises NIST 800-53, NIST 800-171, ISO 27001/27002, HIPAA Security Rule, PCI DSS, GLBA Safeguards, and NYDFS Part 500 into a single assessable baseline.",
+    "key_clauses": [
+      "Information Protection Program",
+      "Access Control",
+      "Configuration Management",
+      "Incident Management",
+      "Third-Party Assurance",
+      "Business Continuity Management"
+    ],
+    "control_mappings": [
+      { "framework": "scf", "control_id": "SCF.GV-04" },
+      { "framework": "scf", "control_id": "SCF.AC-01" },
+      { "framework": "scf", "control_id": "SCF.AU-02" },
+      { "framework": "scf", "control_id": "SCF.IR-03" },
+      { "framework": "scf", "control_id": "SCF.TP-02" }
+    ],
+    "regulation_mappings": [
+      {
+        "regulation_id": "GLBA",
+        "section": "501(b)",
+        "name": "Safeguards Rule",
+        "aliases": ["safeguards rule", "interagency guidelines"]
+      },
+      { "regulation_id": "NYDFS_CYBER_500", "section": "500.02", "name": "Cybersecurity program" },
+      { "regulation_id": "NYDFS_CYBER_500", "section": "500.11", "name": "Third-party service provider security" },
+      { "regulation_id": "NYDFS_CYBER_500", "section": "500.14", "name": "Training and monitoring" }
+    ],
+    "implementation_guidance": "HITRUST CSF is attractive when a firm also handles PHI (HIPAA) or multi-framework attestations (SOC 2 + HIPAA + PCI DSS). Use i1 rapid assessment for initial readiness and r2 for validated assessment evidence.",
+    "licensing_restrictions": "Commercial license required for HITRUST assessment tooling; control text summaries only in this dataset.",
     "last_updated": "2026-02-18T00:00:00Z"
   },
   {
