@@ -1499,6 +1499,10 @@ export class FinancialServicesRepository {
       .replace(/\b(article|art|section|sec|clause|requirement)\b/g, "")
       .replace(/\s+/g, " ")
       .trim();
+    // Named sub-rules (e.g. "Safeguards Rule", "Security Rule") don't carry section-level
+    // anchors in the stored mappings, so they must match on regulation alone. A clause query
+    // with no digits is treated as a name, not a structural reference.
+    const clauseIsSectionReference = /\d/.test(normalizedClauseQuery);
     const standards = this.db.prepare("SELECT * FROM technical_standards ORDER BY name").all().map(rowToStandard);
     const mappings = [];
     for (const standard of standards) {
@@ -1508,9 +1512,12 @@ export class FinancialServicesRepository {
         !requirementRef ||
         regulationMappings.some((mapping) => {
           const regulationMatch = normalizeText(mapping.regulation_id) === normalizeText(parsedRequirement.regulation);
-          if (!parsedRequirement.clauseOrArticle) {
+          if (!parsedRequirement.clauseOrArticle || !clauseIsSectionReference) {
             return regulationMatch;
           }
+          const aliasText = normalizeText(
+            (mapping.aliases ?? []).concat(mapping.name ?? []).join(" ")
+          );
           const text = normalizeText(`${mapping.article ?? ""} ${mapping.section ?? ""} ${mapping.clause ?? ""}`);
           const textWithoutLabels = text
             .replace(/\b(article|art|section|sec|clause|requirement|req)\b/g, "")
@@ -1519,8 +1526,11 @@ export class FinancialServicesRepository {
           return (
             regulationMatch &&
             (text.includes(clauseQuery) ||
+              aliasText.includes(clauseQuery) ||
               (normalizedClauseQuery &&
-                (text.includes(normalizedClauseQuery) || textWithoutLabels.includes(normalizedClauseQuery))))
+                (text.includes(normalizedClauseQuery) ||
+                  textWithoutLabels.includes(normalizedClauseQuery) ||
+                  aliasText.includes(normalizedClauseQuery))))
           );
         });
       const controlMatch =
@@ -1632,15 +1642,58 @@ export class FinancialServicesRepository {
     );
     const selectedTopic = availableTopicKey ?? "breach notification";
     const matrixSource = jurisdictionComparisonTopics[selectedTopic];
-    const targets = jurisdictions.length > 0 ? jurisdictions : Object.keys(matrixSource);
+
+    // Default target list unions curated topic keys with every known state breach profile
+    // (for breach notification topics) so the fleet no longer silently omits 47 states.
+    let defaultTargets = Object.keys(matrixSource);
+    if (selectedTopic === "breach notification") {
+      const stateRows = this.db
+        .prepare("SELECT jurisdiction FROM us_state_breach_profiles ORDER BY jurisdiction")
+        .all();
+      const stateKeys = stateRows.map((row) => row.jurisdiction);
+      defaultTargets = [...new Set([...defaultTargets, ...stateKeys])];
+    }
+    const targets = jurisdictions.length > 0 ? jurisdictions : defaultTargets;
+
+    const stateProfileLookup = (jurisdiction) => {
+      const row = this.db
+        .prepare("SELECT profile_json FROM us_state_breach_profiles WHERE jurisdiction=?")
+        .get(jurisdiction);
+      return fromJson(row?.profile_json, null);
+    };
+
     const comparisonMatrix = {};
     for (const jurisdiction of targets) {
       const direct = matrixSource[jurisdiction];
       if (direct) {
-        comparisonMatrix[jurisdiction] = direct;
+        comparisonMatrix[jurisdiction] = { ...direct, source_tier: "curated" };
         continue;
       }
       if (selectedTopic === "breach notification") {
+        // Prefer richer us_state_breach_profiles data over the coarser
+        // breachObligationsByJurisdiction fallback. Profiles carry deadline,
+        // statute_ref, regulator_notice, consumer_notice, and confidence.
+        const stateProfile = stateProfileLookup(jurisdiction);
+        if (stateProfile) {
+          const consumerSegment = stateProfile.consumer_notice ? "consumers" : null;
+          const regulatorSegment = stateProfile.regulator_notice || null;
+          const obligationParts = [consumerSegment, regulatorSegment].filter(Boolean);
+          comparisonMatrix[jurisdiction] = {
+            obligation:
+              obligationParts.length > 0
+                ? `Notify ${obligationParts.join(" and ")}`
+                : "State breach notification obligation",
+            timeline: stateProfile.deadline ?? "without unreasonable delay",
+            trigger: stateProfile.ag_notice_threshold ?? "breach notification",
+            source: stateProfile.statute_ref ?? "state breach law",
+            source_url: stateProfile.source_url ?? null,
+            source_tier: "derived",
+            confidence: stateProfile.confidence ?? null,
+            profile_source: stateProfile.profile_source ?? null
+          };
+          continue;
+        }
+
         const breachEntry =
           breachObligationsByJurisdiction[jurisdiction] ??
           breachObligationsByJurisdiction[(jurisdiction || "").startsWith("US-") ? "US" : "EU"];
@@ -1652,7 +1705,10 @@ export class FinancialServicesRepository {
             timeline: first.deadline,
             trigger: breachEntry.topic ?? "breach notification",
             source: primaryCitation?.ref ?? "generated baseline",
-            source_url: primaryCitation?.source_url ?? null
+            source_url: primaryCitation?.source_url ?? null,
+            source_tier: "derived",
+            confidence: "estimated",
+            profile_source: "breach-obligations-fallback"
           };
           continue;
         }
@@ -1662,7 +1718,10 @@ export class FinancialServicesRepository {
         timeline: "unknown",
         trigger: "unknown",
         source: "not available",
-        source_url: null
+        source_url: null,
+        source_tier: "derived",
+        confidence: "estimated",
+        profile_source: "no-data"
       };
     }
     const citations = targets.map((jurisdiction) => {
@@ -1685,7 +1744,7 @@ export class FinancialServicesRepository {
       metadata: buildMetadata(this.datasetFingerprint, {
         citations,
         confidence: "inferred",
-        inference_rationale: "Jurisdiction comparison assembled from obligation comparison dataset and normalized topic matching."
+        inference_rationale: "Jurisdiction comparison assembled from curated topic matrix plus us_state_breach_profiles fallback; each entry carries source_tier so consumers can flag data drift."
       })
     };
   }
@@ -1780,7 +1839,42 @@ export class FinancialServicesRepository {
     const auditType = String(auditTypeInput ?? "").trim();
     let rows;
     if (auditType) {
-      rows = this.db.prepare("SELECT * FROM evidence_artifacts WHERE audit_type=? ORDER BY artifact_name").all(auditType);
+      // Tolerate casing drift and trailing qualifiers (e.g. "audit", "assessment", "review")
+      // so the LLM can pass "NYDFS Cybersecurity audit" and still match stored
+      // audit_type = "NYDFS Cybersecurity".
+      const strip = (value) =>
+        String(value ?? "")
+          .toLowerCase()
+          .replace(/\b(audit|assessment|review|compliance)\b/g, "")
+          .replace(/\s+/g, " ")
+          .trim();
+      const canonical = strip(auditType);
+      const allRows = this.db
+        .prepare("SELECT * FROM evidence_artifacts ORDER BY audit_type, artifact_name")
+        .all();
+      if (!canonical) {
+        // Query reduced to pure filler ("compliance", "audit", "compliance audit").
+        // Refuse to match anything so the caller refines — matching every row would
+        // silently bury the real answer under unrelated artifacts.
+        rows = [];
+      } else {
+        const tokens = canonical.split(" ").filter(Boolean);
+        rows = allRows.filter((row) => {
+          const rowCanonical = strip(row.audit_type);
+          if (!rowCanonical) {
+            return false;
+          }
+          if (rowCanonical === canonical) {
+            return true;
+          }
+          // Accept substring containment so "NYDFS CYBERSECURITY" matches "nydfs cybersecurity".
+          if (rowCanonical.includes(canonical) || canonical.includes(rowCanonical)) {
+            return true;
+          }
+          // Token-wise fallback: every significant token in the query must appear in the row.
+          return tokens.length > 0 && tokens.every((token) => rowCanonical.includes(token));
+        });
+      }
     } else {
       rows = this.db.prepare("SELECT * FROM evidence_artifacts ORDER BY audit_type, artifact_name").all();
     }
@@ -1846,6 +1940,7 @@ export class FinancialServicesRepository {
     const targets = jurisdictions.length ? jurisdictions : ["EU"];
     const notifications = [];
     const citations = [];
+    const dataGaps = [];
     for (const jurisdiction of targets) {
       const stateProfileRow = this.db
         .prepare("SELECT profile_json FROM us_state_breach_profiles WHERE jurisdiction=?")
@@ -1862,6 +1957,15 @@ export class FinancialServicesRepository {
       if (!profileInRange) {
         continue;
       }
+      const profileConfidence = stateProfile?.confidence ?? null;
+      const profileSource = stateProfile?.profile_source ?? null;
+      if (profileConfidence === "estimated") {
+        dataGaps.push({
+          jurisdiction,
+          profile_source: profileSource,
+          note: "State breach profile is NCSL-derived. Verify against primary statute before compliance decisions."
+        });
+      }
       for (const notification of item.notifications ?? []) {
         notifications.push({
           jurisdiction,
@@ -1869,7 +1973,9 @@ export class FinancialServicesRepository {
           deadline: notification.deadline,
           content_requirements: notification.content_requirements,
           penalties: notification.penalties,
-          statute_ref: stateProfile?.statute_ref ?? null
+          statute_ref: stateProfile?.statute_ref ?? null,
+          confidence: profileConfidence,
+          profile_source: profileSource
         });
       }
       citations.push(...(item.citations ?? []));
@@ -1890,6 +1996,12 @@ export class FinancialServicesRepository {
         penalties: "fines, increased assessments, or program restrictions"
       });
     }
+    const metadata = buildMetadata(this.datasetFingerprint, {
+      citations: uniqueCitationList(citations),
+      confidence: "inferred",
+      inference_rationale: "Notification obligations selected by jurisdiction map and incident context."
+    });
+    metadata.data_gaps = dataGaps;
     return {
       data: {
         incident_summary: incidentDescription,
@@ -1898,11 +2010,7 @@ export class FinancialServicesRepository {
         data_types: dataTypes,
         notifications
       },
-      metadata: buildMetadata(this.datasetFingerprint, {
-        citations: uniqueCitationList(citations),
-        confidence: "inferred",
-        inference_rationale: "Notification obligations selected by jurisdiction map and incident context."
-      })
+      metadata
     };
   }
 
@@ -2020,19 +2128,63 @@ export class FinancialServicesRepository {
     const paymentFlow = normalizeText(paymentFlowInput);
     const dataStored = parseArrayInput(dataStoredInput).map(normalizeText);
     const architecture = normalizeText(architectureInput);
+    const haystack = `${paymentFlow} ${architecture}`;
+
+    const containsAny = (text, needles) => needles.some((needle) => text.includes(needle));
 
     const storesPan = dataStored.some((item) => item.includes("pan") || item.includes("card"));
     const storesCvv = dataStored.some((item) => item.includes("cvv"));
-    const hostedRedirect = paymentFlow.includes("hosted payment page") || paymentFlow.includes("redirect");
-    const ecommerceTouchesCard = paymentFlow.includes("browser") || paymentFlow.includes("client-side") || paymentFlow.includes("javascript");
+
+    // SAQ A: merchant outsources all PAN handling to a PCI-DSS-validated third party.
+    // PCI SSC FAQ 1586 (2024) confirms merchant-origin iframes/hosted fields loading from a
+    // compliant provider qualify, alongside redirect/hosted-payment-page models.
+    const saqAKeywords = [
+      "iframe",
+      "hosted payment page",
+      "hosted field",
+      "hosted fields",
+      "payment element",
+      "redirect",
+      "tokeniz", // tokenize / tokenized / tokenization
+      "stripe elements",
+      "stripe.js",
+      "stripe element",
+      "stripe payment element",
+      "braintree hosted",
+      "adyen drop-in",
+      "adyen dropin",
+      "square web payments",
+      "shopify payments",
+      "paypal checkout"
+    ];
+
+    // SAQ A-EP: merchant page touches the card DOM path (direct post, client-side scripts)
+    // but never stores PAN. Named after "e-commerce partial".
+    const saqAEpKeywords = [
+      "direct post",
+      "client-side",
+      "client side",
+      "javascript",
+      "js sdk",
+      "merchant-hosted form",
+      "merchant hosted form"
+    ];
+
+    // SAQ B / B-IP: card-present terminal or IP-connected PIN entry device.
+    const saqBIpKeywords = ["terminal", "pin entry device", "ped"];
 
     let saqType = "D";
-    if (hostedRedirect && !storesPan) {
+    let rationale = "Default SAQ-D baseline: no recognised scoping signal matched.";
+
+    if (!storesPan && containsAny(haystack, saqAKeywords)) {
       saqType = "A";
-    } else if (ecommerceTouchesCard && !storesPan) {
+      rationale = "Outsourced cardholder data capture via PCI-DSS-validated third party (iframe, hosted fields, redirect, or tokenised flow) with no PAN retained.";
+    } else if (!storesPan && containsAny(haystack, saqAEpKeywords)) {
       saqType = "A-EP";
-    } else if (!ecommerceTouchesCard && !storesPan && architecture.includes("terminal")) {
+      rationale = "Merchant page influences card capture path via client-side code but does not store PAN.";
+    } else if (!storesPan && containsAny(haystack, saqBIpKeywords)) {
       saqType = "B-IP";
+      rationale = "Card-present acceptance through an IP-connected PED with no e-commerce exposure.";
     }
 
     const cdeBoundaries = [
@@ -2048,8 +2200,8 @@ export class FinancialServicesRepository {
     }
 
     const requirementsBySaq = {
-      A: ["Req 8 (access)", "Req 11 (testing for scoped systems)", "Req 12 (policies)"],
-      "A-EP": ["Req 1", "Req 6", "Req 8", "Req 10", "Req 11", "Req 12"],
+      A: ["Req 9 (physical)", "Req 12 (policies)", "Req 6.4.3 and 11.6.1 (script integrity for payment pages)"],
+      "A-EP": ["Req 1", "Req 6", "Req 8", "Req 10", "Req 11", "Req 12", "Req 6.4.3 / 11.6.1 script integrity"],
       "B-IP": ["Req 2", "Req 8", "Req 9", "Req 11", "Req 12"],
       D: ["Req 1-12 full baseline"]
     };
@@ -2058,10 +2210,16 @@ export class FinancialServicesRepository {
       data: {
         cde_boundaries: cdeBoundaries,
         saq_type: saqType,
-        applicable_requirements: requirementsBySaq[saqType] ?? requirementsBySaq.D
+        applicable_requirements: requirementsBySaq[saqType] ?? requirementsBySaq.D,
+        scoping_rationale: rationale
       },
       metadata: buildMetadata(this.datasetFingerprint, {
-        citations: [{ type: "PCI", ref: "PCI DSS 4.0", source_url: "https://www.pcisecuritystandards.org/" }],
+        citations: [
+          { type: "PCI", ref: "PCI DSS 4.0", source_url: "https://www.pcisecuritystandards.org/" },
+          { type: "PCI", ref: "PCI SSC FAQ 1586 (iframe / SAQ A eligibility)", source_url: "https://www.pcisecuritystandards.org/faq/" }
+        ],
+        confidence: "inferred",
+        inference_rationale: rationale,
         foundation_mcp_calls: [
           {
             mcp: "security-controls",

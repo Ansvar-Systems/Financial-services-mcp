@@ -2,10 +2,10 @@
   "_meta": {
     "domain": "financial-services",
     "dataset_version": "1.0.0",
-    "generated_at": "2026-02-18T17:12:55.309Z",
-    "fingerprint": "sha256:33ae67690e983e4cc08126f3a5811820dbcf5e3a40c96d0bf747036fe1fd9a06",
+    "generated_at": "2026-04-11T16:27:24.482Z",
+    "fingerprint": "sha256:8dd32e5e019c35e67d5b619362bac221641f18d354500ddd1320125617bc6bd6",
     "coverage": {
-      "generated_at": "2026-02-18T17:12:55.305Z",
+      "generated_at": "2026-04-11T16:27:24.478Z",
       "eu": {
         "total": 27,
         "covered": 27,
@@ -40,8 +40,8 @@
       },
       "obligation_graph": {
         "version": "1.0.0",
-        "nodes": 336,
-        "edges": 334
+        "nodes": 339,
+        "edges": 337
       }
     }
   },
@@ -2997,6 +2997,81 @@
       "last_updated": "2026-02-18T00:00:00Z"
     },
     {
+      "id": "std-cis-controls-8",
+      "name": "CIS Critical Security Controls v8",
+      "version": "8.0",
+      "publisher": "Center for Internet Security",
+      "scope": "Prioritised, defence-in-depth control set widely adopted by US financial institutions as a starting baseline for Safeguards Rule and NYDFS Part 500 operational controls.",
+      "key_clauses": [
+        "IG1 Implementation Group",
+        "IG2 Implementation Group",
+        "IG3 Implementation Group",
+        "Control 1 Inventory and Control of Enterprise Assets",
+        "Control 3 Data Protection",
+        "Control 5 Account Management",
+        "Control 6 Access Control Management",
+        "Control 8 Audit Log Management",
+        "Control 11 Data Recovery",
+        "Control 14 Security Awareness Training",
+        "Control 17 Incident Response Management",
+        "Control 18 Penetration Testing"
+      ],
+      "control_mappings": [
+        {
+          "framework": "scf",
+          "control_id": "SCF.AC-01"
+        },
+        {
+          "framework": "scf",
+          "control_id": "SCF.AU-02"
+        },
+        {
+          "framework": "scf",
+          "control_id": "SCF.DS-02"
+        },
+        {
+          "framework": "scf",
+          "control_id": "SCF.CM-05"
+        },
+        {
+          "framework": "scf",
+          "control_id": "SCF.IR-03"
+        },
+        {
+          "framework": "scf",
+          "control_id": "SCF.TV-01"
+        }
+      ],
+      "regulation_mappings": [
+        {
+          "regulation_id": "GLBA",
+          "section": "501(b)",
+          "name": "Safeguards Rule",
+          "aliases": [
+            "safeguards rule"
+          ]
+        },
+        {
+          "regulation_id": "NYDFS_CYBER_500",
+          "section": "500.05",
+          "name": "Penetration testing and vulnerability assessments"
+        },
+        {
+          "regulation_id": "NYDFS_CYBER_500",
+          "section": "500.07",
+          "name": "Access privileges and management"
+        },
+        {
+          "regulation_id": "NYDFS_CYBER_500",
+          "section": "500.14",
+          "name": "Training and monitoring"
+        }
+      ],
+      "implementation_guidance": "Start with Implementation Group 1 (IG1) for smaller institutions; graduate to IG2 as data sensitivity and staffing grow. Use CIS Safeguards as concrete operational proof points when demonstrating NYDFS 500.09 risk-based control selection.",
+      "licensing_restrictions": "Available under CIS Controls license; redistribution with attribution.",
+      "last_updated": "2026-02-18T00:00:00Z"
+    },
+    {
       "id": "std-cpmi-iosco-cyber",
       "name": "CPMI-IOSCO Cyber Guidance for FMIs",
       "version": "2016+",
@@ -3343,6 +3418,142 @@
       "last_updated": "2026-02-18T00:00:00Z"
     },
     {
+      "id": "std-fedramp-r5",
+      "name": "FedRAMP Rev 5 Baselines",
+      "version": "Rev 5",
+      "publisher": "FedRAMP PMO / GSA",
+      "scope": "Authorisation baselines for cloud service offerings used by US federal agencies; applicable to financial regulators and to FedRAMP-authorised providers delivering services to banks.",
+      "key_clauses": [
+        "Low baseline",
+        "Moderate baseline",
+        "High baseline",
+        "FedRAMP-specific control parameters (SC-7, SI-4, IR-4)"
+      ],
+      "control_mappings": [
+        {
+          "framework": "scf",
+          "control_id": "SCF.AC-01"
+        },
+        {
+          "framework": "scf",
+          "control_id": "SCF.AU-02"
+        },
+        {
+          "framework": "scf",
+          "control_id": "SCF.CR-03"
+        },
+        {
+          "framework": "scf",
+          "control_id": "SCF.NW-06"
+        },
+        {
+          "framework": "scf",
+          "control_id": "SCF.IR-03"
+        },
+        {
+          "framework": "scf",
+          "control_id": "SCF.TV-01"
+        }
+      ],
+      "regulation_mappings": [
+        {
+          "regulation_id": "GLBA",
+          "section": "501(b)",
+          "name": "Safeguards Rule",
+          "aliases": [
+            "safeguards rule"
+          ]
+        },
+        {
+          "regulation_id": "NYDFS_CYBER_500",
+          "section": "500.11",
+          "name": "Third-party service provider security"
+        },
+        {
+          "regulation_id": "NYDFS_CYBER_500",
+          "section": "500.15",
+          "name": "Encryption of nonpublic information"
+        }
+      ],
+      "implementation_guidance": "FedRAMP Moderate is the default for regulated cloud workloads hosting nonpublic customer information. Use the FedRAMP-tailored parameters for SC-7 (boundary protection) and IR-4 when demonstrating NYDFS 500.11 TPSP adequacy.",
+      "licensing_restrictions": "Public domain; baselines published by FedRAMP PMO.",
+      "last_updated": "2026-02-18T00:00:00Z"
+    },
+    {
+      "id": "std-ffiec-it-handbook",
+      "name": "FFIEC IT Examination Handbook",
+      "version": "2024 revisions",
+      "publisher": "Federal Financial Institutions Examination Council",
+      "scope": "Supervisory expectations for US federally regulated financial institutions across Information Security, Business Continuity Management, Architecture Infrastructure and Operations, Audit, Development and Acquisition, and Outsourcing Technology Services booklets.",
+      "key_clauses": [
+        "Information Security Booklet",
+        "Business Continuity Management Booklet",
+        "Architecture, Infrastructure, and Operations Booklet",
+        "Audit Booklet",
+        "Outsourcing Technology Services Booklet",
+        "Management Booklet"
+      ],
+      "control_mappings": [
+        {
+          "framework": "scf",
+          "control_id": "SCF.GV-04"
+        },
+        {
+          "framework": "scf",
+          "control_id": "SCF.AC-01"
+        },
+        {
+          "framework": "scf",
+          "control_id": "SCF.IR-03"
+        },
+        {
+          "framework": "scf",
+          "control_id": "SCF.BC-02"
+        },
+        {
+          "framework": "scf",
+          "control_id": "SCF.TP-02"
+        },
+        {
+          "framework": "scf",
+          "control_id": "SCF.AU-02"
+        }
+      ],
+      "regulation_mappings": [
+        {
+          "regulation_id": "GLBA",
+          "section": "501(b)",
+          "name": "Safeguards Rule",
+          "aliases": [
+            "safeguards rule",
+            "interagency guidelines establishing information security standards"
+          ]
+        },
+        {
+          "regulation_id": "NYDFS_CYBER_500",
+          "section": "500.03",
+          "name": "Cybersecurity policy"
+        },
+        {
+          "regulation_id": "NYDFS_CYBER_500",
+          "section": "500.11",
+          "name": "Third-party service provider security"
+        },
+        {
+          "regulation_id": "SOX",
+          "section": "Section 404",
+          "name": "ITGC baseline",
+          "aliases": [
+            "itgc",
+            "section 404"
+          ]
+        }
+      ],
+      "implementation_guidance": "FFIEC IT Handbook booklets are the primary supervisory lens for US banks, credit unions, and thrifts. Map internal controls to FFIEC booklet expectations during OCC/FRB/FDIC/NCUA exams; the Cybersecurity Assessment Tool (CAT) is being retired in favour of the NIST CSF 2.0 Profile for Financial Services.",
+      "licensing_restrictions": "Public domain. FFIEC content is US federal public work.",
+      "last_updated": "2026-02-18T00:00:00Z"
+    },
+    {
       "id": "std-fix-protocol",
       "name": "FIX Protocol",
       "version": "5.0 SP2",
@@ -3367,6 +3578,72 @@
       ],
       "implementation_guidance": "Enforce signed sessions and strict sequence/duplication handling.",
       "licensing_restrictions": "Use publicly available reference material.",
+      "last_updated": "2026-02-18T00:00:00Z"
+    },
+    {
+      "id": "std-hitrust-csf-v11",
+      "name": "HITRUST CSF v11",
+      "version": "11",
+      "publisher": "HITRUST Alliance",
+      "scope": "Cross-framework control set that harmonises NIST 800-53, NIST 800-171, ISO 27001/27002, HIPAA Security Rule, PCI DSS, GLBA Safeguards, and NYDFS Part 500 into a single assessable baseline.",
+      "key_clauses": [
+        "Information Protection Program",
+        "Access Control",
+        "Configuration Management",
+        "Incident Management",
+        "Third-Party Assurance",
+        "Business Continuity Management"
+      ],
+      "control_mappings": [
+        {
+          "framework": "scf",
+          "control_id": "SCF.GV-04"
+        },
+        {
+          "framework": "scf",
+          "control_id": "SCF.AC-01"
+        },
+        {
+          "framework": "scf",
+          "control_id": "SCF.AU-02"
+        },
+        {
+          "framework": "scf",
+          "control_id": "SCF.IR-03"
+        },
+        {
+          "framework": "scf",
+          "control_id": "SCF.TP-02"
+        }
+      ],
+      "regulation_mappings": [
+        {
+          "regulation_id": "GLBA",
+          "section": "501(b)",
+          "name": "Safeguards Rule",
+          "aliases": [
+            "safeguards rule",
+            "interagency guidelines"
+          ]
+        },
+        {
+          "regulation_id": "NYDFS_CYBER_500",
+          "section": "500.02",
+          "name": "Cybersecurity program"
+        },
+        {
+          "regulation_id": "NYDFS_CYBER_500",
+          "section": "500.11",
+          "name": "Third-party service provider security"
+        },
+        {
+          "regulation_id": "NYDFS_CYBER_500",
+          "section": "500.14",
+          "name": "Training and monitoring"
+        }
+      ],
+      "implementation_guidance": "HITRUST CSF is attractive when a firm also handles PHI (HIPAA) or multi-framework attestations (SOC 2 + HIPAA + PCI DSS). Use i1 rapid assessment for initial readiness and r2 for validated assessment evidence.",
+      "licensing_restrictions": "Commercial license required for HITRUST assessment tooling; control text summaries only in this dataset.",
       "last_updated": "2026-02-18T00:00:00Z"
     },
     {
@@ -3626,6 +3903,185 @@
       "last_updated": "2026-02-18T00:00:00Z"
     },
     {
+      "id": "std-nist-800-171-r3",
+      "name": "NIST SP 800-171 Rev 3",
+      "version": "Rev 3",
+      "publisher": "NIST",
+      "scope": "Protecting Controlled Unclassified Information in nonfederal systems; used by US financial institutions handling federal data and by defense industrial base financial service providers.",
+      "key_clauses": [
+        "3.1 Access Control",
+        "3.3 Audit and Accountability",
+        "3.5 Identification and Authentication",
+        "3.6 Incident Response",
+        "3.11 Risk Assessment",
+        "3.13 System and Communications Protection",
+        "3.14 System and Information Integrity"
+      ],
+      "control_mappings": [
+        {
+          "framework": "scf",
+          "control_id": "SCF.AC-01"
+        },
+        {
+          "framework": "scf",
+          "control_id": "SCF.AU-02"
+        },
+        {
+          "framework": "scf",
+          "control_id": "SCF.CR-03"
+        },
+        {
+          "framework": "scf",
+          "control_id": "SCF.IR-03"
+        },
+        {
+          "framework": "scf",
+          "control_id": "SCF.TV-01"
+        }
+      ],
+      "regulation_mappings": [
+        {
+          "regulation_id": "GLBA",
+          "section": "501(b)",
+          "name": "Safeguards Rule",
+          "aliases": [
+            "safeguards rule"
+          ]
+        },
+        {
+          "regulation_id": "NYDFS_CYBER_500",
+          "section": "500.12",
+          "name": "Multi-factor authentication"
+        },
+        {
+          "regulation_id": "NYDFS_CYBER_500",
+          "section": "500.15",
+          "name": "Encryption of nonpublic information"
+        }
+      ],
+      "implementation_guidance": "Apply NIST 800-171 R3 as the control baseline when the firm also handles US federal CUI (e.g., government payment contracts). Overlay it on top of NIST 800-53 R5 rather than treating as an alternative.",
+      "licensing_restrictions": "Public domain.",
+      "last_updated": "2026-02-18T00:00:00Z"
+    },
+    {
+      "id": "std-nist-800-53-r5",
+      "name": "NIST SP 800-53 Rev 5",
+      "version": "Rev 5",
+      "publisher": "NIST",
+      "scope": "Security and privacy control baseline for US federal information systems; widely adopted by US financial institutions as the de facto control library for GLBA Safeguards, NYDFS Part 500, and SOX ITGC programs.",
+      "key_clauses": [
+        "AC (Access Control)",
+        "AU (Audit and Accountability)",
+        "CA (Assessment, Authorization, and Monitoring)",
+        "CM (Configuration Management)",
+        "CP (Contingency Planning)",
+        "IA (Identification and Authentication)",
+        "IR (Incident Response)",
+        "RA (Risk Assessment)",
+        "SC (System and Communications Protection)",
+        "SI (System and Information Integrity)",
+        "SR (Supply Chain Risk Management)"
+      ],
+      "control_mappings": [
+        {
+          "framework": "scf",
+          "control_id": "SCF.AC-01"
+        },
+        {
+          "framework": "scf",
+          "control_id": "SCF.AU-02"
+        },
+        {
+          "framework": "scf",
+          "control_id": "SCF.CR-03"
+        },
+        {
+          "framework": "scf",
+          "control_id": "SCF.CM-05"
+        },
+        {
+          "framework": "scf",
+          "control_id": "SCF.IR-03"
+        },
+        {
+          "framework": "scf",
+          "control_id": "SCF.TV-01"
+        },
+        {
+          "framework": "scf",
+          "control_id": "SCF.BC-02"
+        },
+        {
+          "framework": "scf",
+          "control_id": "SCF.TP-02"
+        }
+      ],
+      "regulation_mappings": [
+        {
+          "regulation_id": "GLBA",
+          "section": "501(b)",
+          "name": "Safeguards Rule",
+          "aliases": [
+            "safeguards rule",
+            "interagency guidelines"
+          ]
+        },
+        {
+          "regulation_id": "NYDFS_CYBER_500",
+          "section": "500.02",
+          "name": "Cybersecurity program"
+        },
+        {
+          "regulation_id": "NYDFS_CYBER_500",
+          "section": "500.05",
+          "name": "Vulnerability management and penetration testing"
+        },
+        {
+          "regulation_id": "NYDFS_CYBER_500",
+          "section": "500.06",
+          "name": "Audit trails"
+        },
+        {
+          "regulation_id": "NYDFS_CYBER_500",
+          "section": "500.07",
+          "name": "Access privileges and management"
+        },
+        {
+          "regulation_id": "NYDFS_CYBER_500",
+          "section": "500.09",
+          "name": "Risk assessment"
+        },
+        {
+          "regulation_id": "NYDFS_CYBER_500",
+          "section": "500.11",
+          "name": "Third-party service provider security"
+        },
+        {
+          "regulation_id": "NYDFS_CYBER_500",
+          "section": "500.12",
+          "name": "Multi-factor authentication"
+        },
+        {
+          "regulation_id": "NYDFS_CYBER_500",
+          "section": "500.16",
+          "name": "Incident response plan"
+        },
+        {
+          "regulation_id": "SOX",
+          "section": "Section 404",
+          "name": "ITGC baseline",
+          "aliases": [
+            "itgc",
+            "it general controls",
+            "section 404"
+          ]
+        }
+      ],
+      "implementation_guidance": "Use NIST 800-53 R5 as the master control library for US financial institutions. Map it onto institution-specific baselines (NYDFS 500, GLBA Safeguards, FFIEC IT Handbook) rather than re-deriving controls. Reference NIST SP 800-53B for baselines (Low/Moderate/High) and the NIST CSF 2.0 informative references for outcome mapping.",
+      "licensing_restrictions": "Public domain.",
+      "last_updated": "2026-02-18T00:00:00Z"
+    },
+    {
       "id": "std-nist-800-86",
       "name": "NIST SP 800-86",
       "version": "1.0",
@@ -3696,11 +4152,72 @@
       "regulation_mappings": [
         {
           "regulation_id": "GLBA",
-          "section": "501(b)"
+          "section": "501(b)",
+          "name": "Safeguards Rule",
+          "aliases": [
+            "safeguards rule",
+            "interagency guidelines establishing information security standards"
+          ]
         },
         {
           "regulation_id": "NYDFS_CYBER_500",
-          "section": "500.03"
+          "section": "500.02",
+          "name": "Cybersecurity program"
+        },
+        {
+          "regulation_id": "NYDFS_CYBER_500",
+          "section": "500.03",
+          "name": "Cybersecurity policy"
+        },
+        {
+          "regulation_id": "NYDFS_CYBER_500",
+          "section": "500.04",
+          "name": "CISO designation and reporting"
+        },
+        {
+          "regulation_id": "NYDFS_CYBER_500",
+          "section": "500.05",
+          "name": "Vulnerability management and penetration testing"
+        },
+        {
+          "regulation_id": "NYDFS_CYBER_500",
+          "section": "500.06",
+          "name": "Audit trails"
+        },
+        {
+          "regulation_id": "NYDFS_CYBER_500",
+          "section": "500.07",
+          "name": "Access privileges and management"
+        },
+        {
+          "regulation_id": "NYDFS_CYBER_500",
+          "section": "500.09",
+          "name": "Risk assessment"
+        },
+        {
+          "regulation_id": "NYDFS_CYBER_500",
+          "section": "500.11",
+          "name": "Third-party service provider security"
+        },
+        {
+          "regulation_id": "NYDFS_CYBER_500",
+          "section": "500.12",
+          "name": "Multi-factor authentication"
+        },
+        {
+          "regulation_id": "NYDFS_CYBER_500",
+          "section": "500.14",
+          "name": "Training and monitoring"
+        },
+        {
+          "regulation_id": "NYDFS_CYBER_500",
+          "section": "500.16",
+          "name": "Incident response plan"
+        },
+        {
+          "regulation_id": "NYDFS_CYBER_500",
+          "section": "500.17",
+          "name": "Notices to superintendent and annual certification"
         }
       ],
       "implementation_guidance": "Translate CSF outcomes into institution-level KRIs/KPIs and board reporting aligned to supervisory expectations.",
@@ -7104,6 +7621,42 @@
       "last_updated": "2026-02-18T00:00:00Z"
     },
     {
+      "id": "app-us-cis-operational-baseline",
+      "condition": {
+        "country": [
+          "US",
+          "US-NY"
+        ],
+        "role": [
+          "fintech",
+          "financial-entity",
+          "bank"
+        ],
+        "system_types": [
+          "fs-payments",
+          "fs-core-banking",
+          "fs-wealth"
+        ],
+        "data_types": [
+          "dc-account-data",
+          "dc-npi",
+          "dc-card-data"
+        ]
+      },
+      "obligation": {
+        "regulation_id": "NYDFS_CYBER_500",
+        "section": "500.09",
+        "standard_id": "std-cis-controls-8",
+        "confidence": "inferred",
+        "obligation_type": "operational_baseline",
+        "priority": 68,
+        "conflict_group": "us-control-baseline",
+        "effective_from": "2021-05-18"
+      },
+      "rationale": "CIS Critical Security Controls v8 IG1/IG2 supply a concrete, risk-prioritised operational baseline used to evidence NYDFS 500.09 risk-based control selection and GLBA Safeguards Rule operational controls.",
+      "last_updated": "2026-02-18T00:00:00Z"
+    },
+    {
       "id": "app-us-ecoa-adverse-action",
       "condition": {
         "country": [
@@ -7214,6 +7767,75 @@
         "effective_from": "2018-01-01"
       },
       "rationale": "US open banking interfaces handling nonpublic personal information should enforce consent, token scope, and API security profiles.",
+      "last_updated": "2026-02-18T00:00:00Z"
+    },
+    {
+      "id": "app-us-fedramp-cloud-tpsp",
+      "condition": {
+        "country": [
+          "US",
+          "US-NY"
+        ],
+        "role": [
+          "ict-third-party",
+          "financial-entity"
+        ],
+        "system_types": [
+          "fs-cloud",
+          "fs-treasury"
+        ],
+        "data_types": [
+          "dc-account-data",
+          "dc-npi"
+        ]
+      },
+      "obligation": {
+        "regulation_id": "NYDFS_CYBER_500",
+        "section": "500.11",
+        "standard_id": "std-fedramp-r5",
+        "confidence": "authoritative",
+        "obligation_type": "tpsp_assurance",
+        "priority": 85,
+        "conflict_group": "us-control-baseline",
+        "effective_from": "2023-05-30"
+      },
+      "rationale": "Cloud service providers hosting US financial workloads with nonpublic information commonly demonstrate third-party security adequacy through a FedRAMP Moderate or High authorisation.",
+      "last_updated": "2026-02-18T00:00:00Z"
+    },
+    {
+      "id": "app-us-ffiec-examination-baseline",
+      "condition": {
+        "country": [
+          "US"
+        ],
+        "role": [
+          "bank",
+          "credit-union",
+          "thrift",
+          "financial-entity"
+        ],
+        "system_types": [
+          "fs-core-banking",
+          "fs-payments",
+          "payments",
+          "fs-treasury"
+        ],
+        "data_types": [
+          "dc-account-data",
+          "dc-npi"
+        ]
+      },
+      "obligation": {
+        "regulation_id": "GLBA",
+        "section": "501(b)",
+        "standard_id": "std-ffiec-it-handbook",
+        "confidence": "authoritative",
+        "obligation_type": "supervisory_expectation",
+        "priority": 92,
+        "conflict_group": "us-control-baseline",
+        "effective_from": "2016-09-01"
+      },
+      "rationale": "US federally regulated banks, credit unions, and thrifts are examined against the FFIEC IT Examination Handbook booklets by OCC, FRB, FDIC, and NCUA.",
       "last_updated": "2026-02-18T00:00:00Z"
     },
     {
@@ -9104,6 +9726,41 @@
       "last_updated": "2026-02-18T00:00:00Z"
     },
     {
+      "id": "app-us-hitrust-multi-framework",
+      "condition": {
+        "country": [
+          "US"
+        ],
+        "role": [
+          "financial-entity",
+          "insurance",
+          "fintech"
+        ],
+        "system_types": [
+          "fs-core-banking",
+          "fs-payments",
+          "fs-wealth"
+        ],
+        "data_types": [
+          "dc-npi",
+          "dc-insurance",
+          "dc-account-data"
+        ]
+      },
+      "obligation": {
+        "regulation_id": "GLBA",
+        "section": "501(b)",
+        "standard_id": "std-hitrust-csf-v11",
+        "confidence": "inferred",
+        "obligation_type": "multi_framework_attestation",
+        "priority": 65,
+        "conflict_group": "us-control-baseline",
+        "effective_from": "2023-01-23"
+      },
+      "rationale": "US firms that need to demonstrate multi-framework assurance (SOC 2 + HIPAA + PCI DSS + GLBA) use HITRUST CSF v11 as the single assessable control set, especially in insurance / wealth / healthcare-adjacent fintech.",
+      "last_updated": "2026-02-18T00:00:00Z"
+    },
+    {
       "id": "app-us-il-bipa-biometric-consent",
       "condition": {
         "country": [
@@ -9179,6 +9836,77 @@
         "effective_from": "2003-07-01"
       },
       "rationale": "US real-time payment services should maintain fraud prevention controls proportionate to transfer speed and irreversibility risk.",
+      "last_updated": "2026-02-18T00:00:00Z"
+    },
+    {
+      "id": "app-us-nist-800-171-cui",
+      "condition": {
+        "country": [
+          "US"
+        ],
+        "role": [
+          "financial-entity",
+          "payment-institution",
+          "ict-third-party"
+        ],
+        "system_types": [
+          "fs-payments",
+          "fs-treasury"
+        ],
+        "data_types": [
+          "dc-account-data",
+          "dc-npi"
+        ]
+      },
+      "obligation": {
+        "regulation_id": "GLBA",
+        "section": "501(b)",
+        "standard_id": "std-nist-800-171-r3",
+        "confidence": "inferred",
+        "obligation_type": "cui_protection",
+        "priority": 70,
+        "conflict_group": "us-control-baseline",
+        "effective_from": "2020-02-21"
+      },
+      "rationale": "US financial service providers that also process Controlled Unclassified Information (e.g., federal treasury services, government payment contracts) must apply NIST 800-171 R3 on top of the GLBA Safeguards baseline.",
+      "last_updated": "2026-02-18T00:00:00Z"
+    },
+    {
+      "id": "app-us-nist-800-53-baseline",
+      "condition": {
+        "country": [
+          "US",
+          "US-NY"
+        ],
+        "role": [
+          "bank",
+          "financial-entity",
+          "fintech",
+          "investment-firm"
+        ],
+        "system_types": [
+          "fs-core-banking",
+          "fs-payments",
+          "payments",
+          "fs-wealth"
+        ],
+        "data_types": [
+          "dc-account-data",
+          "dc-npi",
+          "dc-credit"
+        ]
+      },
+      "obligation": {
+        "regulation_id": "GLBA",
+        "section": "501(b)",
+        "standard_id": "std-nist-800-53-r5",
+        "confidence": "inferred",
+        "obligation_type": "control_baseline",
+        "priority": 88,
+        "conflict_group": "us-control-baseline",
+        "effective_from": "2020-09-23"
+      },
+      "rationale": "US financial institutions default to NIST SP 800-53 R5 as the comprehensive control library for GLBA Safeguards and NYDFS Part 500 risk-based programs.",
       "last_updated": "2026-02-18T00:00:00Z"
     },
     {
@@ -11551,6 +12279,38 @@
       "last_updated": "2026-02-18T00:00:00Z"
     },
     {
+      "id": "ev-nydfs-access-privileges",
+      "audit_type": "NYDFS Cybersecurity",
+      "artifact_name": "Access privileges and identity management records (23 NYCRR 500.07)",
+      "description": "Role definitions, periodic access reviews, privileged account management logs, and least-privilege enforcement artifacts.",
+      "mandatory": true,
+      "retention_period": "7 years",
+      "template_ref": "tmpl/nydfs-access-privileges.md",
+      "regulation_basis": [
+        {
+          "regulation_id": "NYDFS_CYBER_500",
+          "section": "500.07"
+        }
+      ],
+      "last_updated": "2026-02-18T00:00:00Z"
+    },
+    {
+      "id": "ev-nydfs-audit-trail",
+      "audit_type": "NYDFS Cybersecurity",
+      "artifact_name": "Audit trails for material cybersecurity events (23 NYCRR 500.06)",
+      "description": "Protected audit trails that reconstruct material financial transactions and detect/respond to cybersecurity events, retained per 500.06 requirements.",
+      "mandatory": true,
+      "retention_period": "5 years for 500.06(a)(1); 3 years for 500.06(a)(2)",
+      "template_ref": "tmpl/nydfs-audit-trail.md",
+      "regulation_basis": [
+        {
+          "regulation_id": "NYDFS_CYBER_500",
+          "section": "500.06"
+        }
+      ],
+      "last_updated": "2026-02-18T00:00:00Z"
+    },
+    {
       "id": "ev-nydfs-cyber-certification",
       "audit_type": "NYDFS Cybersecurity",
       "artifact_name": "NYDFS annual certification and incident governance evidence",
@@ -11562,6 +12322,102 @@
         {
           "regulation_id": "NYDFS_CYBER_500",
           "section": "500.17"
+        }
+      ],
+      "last_updated": "2026-02-18T00:00:00Z"
+    },
+    {
+      "id": "ev-nydfs-incident-response-plan",
+      "audit_type": "NYDFS Cybersecurity",
+      "artifact_name": "Written incident response plan (23 NYCRR 500.16)",
+      "description": "Board-approved incident response plan covering internal processes, goals, roles, external communication, remediation steps, documentation, post-incident revision, and tabletop exercise records.",
+      "mandatory": true,
+      "retention_period": "7 years",
+      "template_ref": "tmpl/nydfs-incident-response-plan.md",
+      "regulation_basis": [
+        {
+          "regulation_id": "NYDFS_CYBER_500",
+          "section": "500.16"
+        }
+      ],
+      "last_updated": "2026-02-18T00:00:00Z"
+    },
+    {
+      "id": "ev-nydfs-mfa",
+      "audit_type": "NYDFS Cybersecurity",
+      "artifact_name": "Multi-factor authentication coverage evidence (23 NYCRR 500.12)",
+      "description": "Evidence of MFA for all remote access to internal networks, all remote access to third-party applications with nonpublic information, and all privileged accounts.",
+      "mandatory": true,
+      "retention_period": "7 years",
+      "template_ref": "tmpl/nydfs-mfa.md",
+      "regulation_basis": [
+        {
+          "regulation_id": "NYDFS_CYBER_500",
+          "section": "500.12"
+        }
+      ],
+      "last_updated": "2026-02-18T00:00:00Z"
+    },
+    {
+      "id": "ev-nydfs-pen-test-vuln-assessment",
+      "audit_type": "NYDFS Cybersecurity",
+      "artifact_name": "Annual penetration test and continuous vulnerability assessment evidence (23 NYCRR 500.05)",
+      "description": "Annual penetration test reports plus continuous monitoring / automated vulnerability scan records, including remediation tracking.",
+      "mandatory": true,
+      "retention_period": "7 years",
+      "template_ref": "tmpl/nydfs-pen-test.md",
+      "regulation_basis": [
+        {
+          "regulation_id": "NYDFS_CYBER_500",
+          "section": "500.05"
+        }
+      ],
+      "last_updated": "2026-02-18T00:00:00Z"
+    },
+    {
+      "id": "ev-nydfs-risk-assessment",
+      "audit_type": "NYDFS Cybersecurity",
+      "artifact_name": "Periodic risk assessment (23 NYCRR 500.09)",
+      "description": "Written risk assessment covering confidentiality, integrity, and availability of information systems and nonpublic information, refreshed on a risk-based cadence and before material changes.",
+      "mandatory": true,
+      "retention_period": "7 years",
+      "template_ref": "tmpl/nydfs-risk-assessment.md",
+      "regulation_basis": [
+        {
+          "regulation_id": "NYDFS_CYBER_500",
+          "section": "500.09"
+        }
+      ],
+      "last_updated": "2026-02-18T00:00:00Z"
+    },
+    {
+      "id": "ev-nydfs-third-party-security",
+      "audit_type": "NYDFS Cybersecurity",
+      "artifact_name": "Third-party service provider security policy and due diligence (23 NYCRR 500.11)",
+      "description": "Written TPSP policy, due diligence questionnaires, contractual security addenda, and periodic reassessment records covering all third-party service providers with access to nonpublic information.",
+      "mandatory": true,
+      "retention_period": "7 years",
+      "template_ref": "tmpl/nydfs-third-party-security.md",
+      "regulation_basis": [
+        {
+          "regulation_id": "NYDFS_CYBER_500",
+          "section": "500.11"
+        }
+      ],
+      "last_updated": "2026-02-18T00:00:00Z"
+    },
+    {
+      "id": "ev-nydfs-training-monitoring",
+      "audit_type": "NYDFS Cybersecurity",
+      "artifact_name": "Cybersecurity awareness training and monitoring records (23 NYCRR 500.14)",
+      "description": "Annual cybersecurity awareness training completion records, phishing exercise results, and authorized-user activity monitoring logs.",
+      "mandatory": true,
+      "retention_period": "7 years",
+      "template_ref": "tmpl/nydfs-training-monitoring.md",
+      "regulation_basis": [
+        {
+          "regulation_id": "NYDFS_CYBER_500",
+          "section": "500.14"
         }
       ],
       "last_updated": "2026-02-18T00:00:00Z"
@@ -24421,6 +25277,86 @@
         "last_updated": "2026-02-18T00:00:00Z"
       },
       {
+        "id": "ob-node-app-us-cis-operational-baseline-us-ny",
+        "jurisdiction": "US-NY",
+        "obligation_type": "operational_baseline",
+        "regulation_id": "NYDFS_CYBER_500",
+        "standard_id": "std-cis-controls-8",
+        "trigger_json": {
+          "role": [
+            "fintech",
+            "financial-entity",
+            "bank"
+          ],
+          "system_types": [
+            "fs-payments",
+            "fs-core-banking",
+            "fs-wealth"
+          ],
+          "data_types": [
+            "dc-account-data",
+            "dc-npi",
+            "dc-card-data"
+          ]
+        },
+        "exceptions_json": [],
+        "deadline_json": null,
+        "penalties_json": null,
+        "evidence_refs_json": [
+          {
+            "artifact_id": "ev-nydfs-cyber-certification",
+            "artifact_name": "NYDFS annual certification and incident governance evidence",
+            "audit_type": "NYDFS Cybersecurity"
+          },
+          {
+            "artifact_id": "ev-nydfs-risk-assessment",
+            "artifact_name": "Periodic risk assessment (23 NYCRR 500.09)",
+            "audit_type": "NYDFS Cybersecurity"
+          },
+          {
+            "artifact_id": "ev-nydfs-pen-test-vuln-assessment",
+            "artifact_name": "Annual penetration test and continuous vulnerability assessment evidence (23 NYCRR 500.05)",
+            "audit_type": "NYDFS Cybersecurity"
+          },
+          {
+            "artifact_id": "ev-nydfs-audit-trail",
+            "artifact_name": "Audit trails for material cybersecurity events (23 NYCRR 500.06)",
+            "audit_type": "NYDFS Cybersecurity"
+          },
+          {
+            "artifact_id": "ev-nydfs-access-privileges",
+            "artifact_name": "Access privileges and identity management records (23 NYCRR 500.07)",
+            "audit_type": "NYDFS Cybersecurity"
+          },
+          {
+            "artifact_id": "ev-nydfs-third-party-security",
+            "artifact_name": "Third-party service provider security policy and due diligence (23 NYCRR 500.11)",
+            "audit_type": "NYDFS Cybersecurity"
+          },
+          {
+            "artifact_id": "ev-nydfs-mfa",
+            "artifact_name": "Multi-factor authentication coverage evidence (23 NYCRR 500.12)",
+            "audit_type": "NYDFS Cybersecurity"
+          },
+          {
+            "artifact_id": "ev-nydfs-training-monitoring",
+            "artifact_name": "Cybersecurity awareness training and monitoring records (23 NYCRR 500.14)",
+            "audit_type": "NYDFS Cybersecurity"
+          },
+          {
+            "artifact_id": "ev-nydfs-incident-response-plan",
+            "artifact_name": "Written incident response plan (23 NYCRR 500.16)",
+            "audit_type": "NYDFS Cybersecurity"
+          }
+        ],
+        "priority": 68,
+        "confidence": "inferred",
+        "effective_from": "2021-05-18",
+        "effective_to": null,
+        "source_rule_id": "app-us-cis-operational-baseline",
+        "last_updated": "2026-02-18T00:00:00Z"
+      },
+      {
         "id": "ob-node-app-us-ecoa-adverse-action-us-ca",
         "jurisdiction": "US-CA",
         "obligation_type": "adverse_action_explainability",
@@ -24672,6 +25608,83 @@
         "effective_from": "2018-01-01",
         "effective_to": null,
         "source_rule_id": "app-us-fdx-open-banking-security",
+        "last_updated": "2026-02-18T00:00:00Z"
+      },
+      {
+        "id": "ob-node-app-us-fedramp-cloud-tpsp-us-ny",
+        "jurisdiction": "US-NY",
+        "obligation_type": "tpsp_assurance",
+        "regulation_id": "NYDFS_CYBER_500",
+        "standard_id": "std-fedramp-r5",
+        "trigger_json": {
+          "role": [
+            "ict-third-party",
+            "financial-entity"
+          ],
+          "system_types": [
+            "fs-cloud",
+            "fs-treasury"
+          ],
+          "data_types": [
+            "dc-account-data",
+            "dc-npi"
+          ]
+        },
+        "exceptions_json": [],
+        "deadline_json": null,
+        "penalties_json": null,
+        "evidence_refs_json": [
+          {
+            "artifact_id": "ev-nydfs-cyber-certification",
+            "artifact_name": "NYDFS annual certification and incident governance evidence",
+            "audit_type": "NYDFS Cybersecurity"
+          },
+          {
+            "artifact_id": "ev-nydfs-risk-assessment",
+            "artifact_name": "Periodic risk assessment (23 NYCRR 500.09)",
+            "audit_type": "NYDFS Cybersecurity"
+          },
+          {
+            "artifact_id": "ev-nydfs-pen-test-vuln-assessment",
+            "artifact_name": "Annual penetration test and continuous vulnerability assessment evidence (23 NYCRR 500.05)",
+            "audit_type": "NYDFS Cybersecurity"
+          },
+          {
+            "artifact_id": "ev-nydfs-audit-trail",
+            "artifact_name": "Audit trails for material cybersecurity events (23 NYCRR 500.06)",
+            "audit_type": "NYDFS Cybersecurity"
+          },
+          {
+            "artifact_id": "ev-nydfs-access-privileges",
+            "artifact_name": "Access privileges and identity management records (23 NYCRR 500.07)",
+            "audit_type": "NYDFS Cybersecurity"
+          },
+          {
+            "artifact_id": "ev-nydfs-third-party-security",
+            "artifact_name": "Third-party service provider security policy and due diligence (23 NYCRR 500.11)",
+            "audit_type": "NYDFS Cybersecurity"
+          },
+          {
+            "artifact_id": "ev-nydfs-mfa",
+            "artifact_name": "Multi-factor authentication coverage evidence (23 NYCRR 500.12)",
+            "audit_type": "NYDFS Cybersecurity"
+          },
+          {
+            "artifact_id": "ev-nydfs-training-monitoring",
+            "artifact_name": "Cybersecurity awareness training and monitoring records (23 NYCRR 500.14)",
+            "audit_type": "NYDFS Cybersecurity"
+          },
+          {
+            "artifact_id": "ev-nydfs-incident-response-plan",
+            "artifact_name": "Written incident response plan (23 NYCRR 500.16)",
+            "audit_type": "NYDFS Cybersecurity"
+          }
+        ],
+        "priority": 85,
+        "confidence": "authoritative",
+        "effective_from": "2023-05-30",
+        "effective_to": null,
+        "source_rule_id": "app-us-fedramp-cloud-tpsp",
         "last_updated": "2026-02-18T00:00:00Z"
       },
       {
@@ -27208,6 +28221,53 @@
         "last_updated": "2026-02-18T00:00:00Z"
       },
       {
+        "id": "ob-node-app-us-nist-800-53-baseline-us-ny",
+        "jurisdiction": "US-NY",
+        "obligation_type": "control_baseline",
+        "regulation_id": "GLBA",
+        "standard_id": "std-nist-800-53-r5",
+        "trigger_json": {
+          "role": [
+            "bank",
+            "financial-entity",
+            "fintech",
+            "investment-firm"
+          ],
+          "system_types": [
+            "fs-core-banking",
+            "fs-payments",
+            "payments",
+            "fs-wealth"
+          ],
+          "data_types": [
+            "dc-account-data",
+            "dc-npi",
+            "dc-credit"
+          ]
+        },
+        "exceptions_json": [],
+        "deadline_json": null,
+        "penalties_json": null,
+        "evidence_refs_json": [
+          {
+            "artifact_id": "ev-glba-wisp",
+            "artifact_name": "Written information security program",
+            "audit_type": "GLBA Safeguards"
+          },
+          {
+            "artifact_id": "ev-instant-pay-fraud-scenarios",
+            "artifact_name": "Instant payment fraud scenario test evidence",
+            "audit_type": "Payments Fraud Controls"
+          }
+        ],
+        "priority": 88,
+        "confidence": "inferred",
+        "effective_from": "2020-09-23",
+        "effective_to": null,
+        "source_rule_id": "app-us-nist-800-53-baseline",
+        "last_updated": "2026-02-18T00:00:00Z"
+      },
+      {
         "id": "ob-node-app-us-ny-fintech-us-ny",
         "jurisdiction": "US-NY",
         "obligation_type": "compliance",
@@ -27281,6 +28341,46 @@
           {
             "artifact_id": "ev-nydfs-cyber-certification",
             "artifact_name": "NYDFS annual certification and incident governance evidence",
+            "audit_type": "NYDFS Cybersecurity"
+          },
+          {
+            "artifact_id": "ev-nydfs-risk-assessment",
+            "artifact_name": "Periodic risk assessment (23 NYCRR 500.09)",
+            "audit_type": "NYDFS Cybersecurity"
+          },
+          {
+            "artifact_id": "ev-nydfs-pen-test-vuln-assessment",
+            "artifact_name": "Annual penetration test and continuous vulnerability assessment evidence (23 NYCRR 500.05)",
+            "audit_type": "NYDFS Cybersecurity"
+          },
+          {
+            "artifact_id": "ev-nydfs-audit-trail",
+            "artifact_name": "Audit trails for material cybersecurity events (23 NYCRR 500.06)",
+            "audit_type": "NYDFS Cybersecurity"
+          },
+          {
+            "artifact_id": "ev-nydfs-access-privileges",
+            "artifact_name": "Access privileges and identity management records (23 NYCRR 500.07)",
+            "audit_type": "NYDFS Cybersecurity"
+          },
+          {
+            "artifact_id": "ev-nydfs-third-party-security",
+            "artifact_name": "Third-party service provider security policy and due diligence (23 NYCRR 500.11)",
+            "audit_type": "NYDFS Cybersecurity"
+          },
+          {
+            "artifact_id": "ev-nydfs-mfa",
+            "artifact_name": "Multi-factor authentication coverage evidence (23 NYCRR 500.12)",
+            "audit_type": "NYDFS Cybersecurity"
+          },
+          {
+            "artifact_id": "ev-nydfs-training-monitoring",
+            "artifact_name": "Cybersecurity awareness training and monitoring records (23 NYCRR 500.14)",
+            "audit_type": "NYDFS Cybersecurity"
+          },
+          {
+            "artifact_id": "ev-nydfs-incident-response-plan",
+            "artifact_name": "Written incident response plan (23 NYCRR 500.16)",
             "audit_type": "NYDFS Cybersecurity"
           }
         ],
@@ -31581,6 +32681,22 @@
       },
       {
         "id": "ob-edge-priority-us-ny-10",
+        "from_node_id": "ob-node-app-us-sox-financial-reporting-us-ny",
+        "to_node_id": "ob-node-app-us-ach-nacha-risk-controls-us-ny",
+        "relation_type": "precedes",
+        "rationale": "Higher-priority obligation should be evaluated first for this jurisdiction.",
+        "last_updated": "2026-02-18T00:00:00Z"
+      },
+      {
+        "id": "ob-edge-priority-us-ny-11",
+        "from_node_id": "ob-node-app-us-ach-nacha-risk-controls-us-ny",
+        "to_node_id": "ob-node-app-us-fdx-open-banking-security-us-ny",
+        "relation_type": "precedes",
+        "rationale": "Higher-priority obligation should be evaluated first for this jurisdiction.",
+        "last_updated": "2026-02-18T00:00:00Z"
+      },
+      {
+        "id": "ob-edge-priority-us-ny-12",
         "from_node_id": "ob-node-app-us-fdx-open-banking-security-us-ny",
         "to_node_id": "ob-node-app-us-wealth-customer-data-protection-us-ny",
         "relation_type": "precedes",
@@ -31588,15 +32704,23 @@
         "last_updated": "2026-02-18T00:00:00Z"
       },
       {
-        "id": "ob-edge-priority-us-ny-11",
+        "id": "ob-edge-priority-us-ny-13",
         "from_node_id": "ob-node-app-us-wealth-customer-data-protection-us-ny",
+        "to_node_id": "ob-node-app-us-cis-operational-baseline-us-ny",
+        "relation_type": "precedes",
+        "rationale": "Higher-priority obligation should be evaluated first for this jurisdiction.",
+        "last_updated": "2026-02-18T00:00:00Z"
+      },
+      {
+        "id": "ob-edge-priority-us-ny-14",
+        "from_node_id": "ob-node-app-us-cis-operational-baseline-us-ny",
         "to_node_id": "ob-node-app-us-glba-ny-us-ny",
         "relation_type": "precedes",
         "rationale": "Higher-priority obligation should be evaluated first for this jurisdiction.",
         "last_updated": "2026-02-18T00:00:00Z"
       },
       {
-        "id": "ob-edge-priority-us-ny-12",
+        "id": "ob-edge-priority-us-ny-15",
         "from_node_id": "ob-node-app-us-glba-ny-us-ny",
         "to_node_id": "ob-node-app-us-ny-fintech-us-ny",
         "relation_type": "precedes",
@@ -31604,7 +32728,7 @@
         "last_updated": "2026-02-18T00:00:00Z"
       },
       {
-        "id": "ob-edge-priority-us-ny-13",
+        "id": "ob-edge-priority-us-ny-16",
         "from_node_id": "ob-node-app-us-ny-fintech-us-ny",
         "to_node_id": "ob-node-app-us-nydfs-us-ny",
         "relation_type": "precedes",
@@ -31612,7 +32736,7 @@
         "last_updated": "2026-02-18T00:00:00Z"
       },
       {
-        "id": "ob-edge-priority-us-ny-14",
+        "id": "ob-edge-priority-us-ny-17",
         "from_node_id": "ob-node-app-us-nydfs-us-ny",
         "to_node_id": "ob-node-app-pci-any-us-ny",
         "relation_type": "precedes",
@@ -31620,7 +32744,7 @@
         "last_updated": "2026-02-18T00:00:00Z"
       },
       {
-        "id": "ob-edge-priority-us-ny-15",
+        "id": "ob-edge-priority-us-ny-18",
         "from_node_id": "ob-node-app-pci-any-us-ny",
         "to_node_id": "ob-node-app-swift-any-us-ny",
         "relation_type": "precedes",
@@ -31628,7 +32752,7 @@
         "last_updated": "2026-02-18T00:00:00Z"
       },
       {
-        "id": "ob-edge-priority-us-ny-16",
+        "id": "ob-edge-priority-us-ny-19",
         "from_node_id": "ob-node-app-swift-any-us-ny",
         "to_node_id": "ob-node-app-aml-any-us-ny",
         "relation_type": "precedes",
@@ -31646,21 +32770,37 @@
       {
         "id": "ob-edge-priority-us-ny-3",
         "from_node_id": "ob-breach-us-ny",
-        "to_node_id": "ob-node-app-us-state-breach-ny-us-ny",
+        "to_node_id": "ob-node-app-us-nist-800-53-baseline-us-ny",
         "relation_type": "precedes_incident_obligations",
         "rationale": "Higher-priority obligation should be evaluated first for this jurisdiction.",
         "last_updated": "2026-02-18T00:00:00Z"
       },
       {
         "id": "ob-edge-priority-us-ny-4",
-        "from_node_id": "ob-node-app-us-state-breach-ny-us-ny",
-        "to_node_id": "ob-node-app-us-instant-pay-fraud-us-ny",
-        "relation_type": "precedes_incident_obligations",
+        "from_node_id": "ob-node-app-us-nist-800-53-baseline-us-ny",
+        "to_node_id": "ob-node-app-us-state-breach-ny-us-ny",
+        "relation_type": "precedes",
         "rationale": "Higher-priority obligation should be evaluated first for this jurisdiction.",
         "last_updated": "2026-02-18T00:00:00Z"
       },
       {
         "id": "ob-edge-priority-us-ny-5",
+        "from_node_id": "ob-node-app-us-state-breach-ny-us-ny",
+        "to_node_id": "ob-node-app-us-fedramp-cloud-tpsp-us-ny",
+        "relation_type": "precedes_incident_obligations",
+        "rationale": "Higher-priority obligation should be evaluated first for this jurisdiction.",
+        "last_updated": "2026-02-18T00:00:00Z"
+      },
+      {
+        "id": "ob-edge-priority-us-ny-6",
+        "from_node_id": "ob-node-app-us-fedramp-cloud-tpsp-us-ny",
+        "to_node_id": "ob-node-app-us-instant-pay-fraud-us-ny",
+        "relation_type": "precedes",
+        "rationale": "Higher-priority obligation should be evaluated first for this jurisdiction.",
+        "last_updated": "2026-02-18T00:00:00Z"
+      },
+      {
+        "id": "ob-edge-priority-us-ny-7",
         "from_node_id": "ob-node-app-us-instant-pay-fraud-us-ny",
         "to_node_id": "ob-node-app-us-fcra-credit-reporting-us-ny",
         "relation_type": "precedes",
@@ -31668,7 +32808,7 @@
         "last_updated": "2026-02-18T00:00:00Z"
       },
       {
-        "id": "ob-edge-priority-us-ny-6",
+        "id": "ob-edge-priority-us-ny-8",
         "from_node_id": "ob-node-app-us-fcra-credit-reporting-us-ny",
         "to_node_id": "ob-node-app-us-ecoa-adverse-action-us-ny",
         "relation_type": "precedes",
@@ -31676,25 +32816,9 @@
         "last_updated": "2026-02-18T00:00:00Z"
       },
       {
-        "id": "ob-edge-priority-us-ny-7",
+        "id": "ob-edge-priority-us-ny-9",
         "from_node_id": "ob-node-app-us-ecoa-adverse-action-us-ny",
         "to_node_id": "ob-node-app-us-sox-financial-reporting-us-ny",
-        "relation_type": "precedes",
-        "rationale": "Higher-priority obligation should be evaluated first for this jurisdiction.",
-        "last_updated": "2026-02-18T00:00:00Z"
-      },
-      {
-        "id": "ob-edge-priority-us-ny-8",
-        "from_node_id": "ob-node-app-us-sox-financial-reporting-us-ny",
-        "to_node_id": "ob-node-app-us-ach-nacha-risk-controls-us-ny",
-        "relation_type": "precedes",
-        "rationale": "Higher-priority obligation should be evaluated first for this jurisdiction.",
-        "last_updated": "2026-02-18T00:00:00Z"
-      },
-      {
-        "id": "ob-edge-priority-us-ny-9",
-        "from_node_id": "ob-node-app-us-ach-nacha-risk-controls-us-ny",
-        "to_node_id": "ob-node-app-us-fdx-open-banking-security-us-ny",
         "relation_type": "precedes",
         "rationale": "Higher-priority obligation should be evaluated first for this jurisdiction.",
         "last_updated": "2026-02-18T00:00:00Z"
